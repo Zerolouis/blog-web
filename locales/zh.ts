@@ -1,3 +1,6 @@
+// 中文
 export const zh = {
-  welcome: "你好"
+  blogInfo: {
+    description: '记录学习，分享生活'
+  }
 }

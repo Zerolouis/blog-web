@@ -1,26 +1,25 @@
 // 字体
 @use "font.scss";
 
-// 控制滚动条
+// 引入滚动条
 @use "/assets/scss/scrollbar.scss";
 
 
 // 自定义 Markdown 渲染主题
 // @import 'vditor-preview.scss';
 
-// @include scrollbar.scrollbar_hover;
-
+// 全局滚动条
 @include scrollbar.scrollbar;
 @include scrollbar.scrollbar_hover;
 
-$theme-light-primary: #21467a;
-$theme-light-secondary: #1e477a;
-$theme-light-accent: #547690;
-$theme-light-error: #c71f2d;
-$theme-light-warning: #d45814;
-$theme-light-info: #607d8b;
-$theme-light-success: #4caf50;
-$theme-light-background: #edf1f2;
+$theme-light-primary: #079992;
+$theme-light-secondary: #4a69bd;
+$theme-light-accent: #0a3d62;
+$theme-light-error: #b71540;
+$theme-light-warning: #f6b93b;
+$theme-light-info: #60a3bc;
+$theme-light-success: #78e08f;
+$theme-light-background: #dfe4ea;
 $theme-light-title: #1f1f1f;
 $theme-light-content: #2f2f2f;
 $theme-light-text-secondary: #807e7e;
