@@ -1,11 +1,17 @@
 // 字体
-@import "font";
+@use "font.scss";
 
 // 控制滚动条
-@import 'scrollbar';
+@use "/assets/scss/scrollbar.scss";
+
 
 // 自定义 Markdown 渲染主题
-@import 'vditor-preview';
+// @import 'vditor-preview.scss';
+
+// @include scrollbar.scrollbar_hover;
+
+@include scrollbar.scrollbar;
+@include scrollbar.scrollbar_hover;
 
 $theme-light-primary: #21467a;
 $theme-light-secondary: #1e477a;

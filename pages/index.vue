@@ -1,21 +1,20 @@
 <template>
-<NuxtLayout>
-  <v-app>
-    <div>{{ $t('welcome') }}</div>
-    <v-btn @click="setLocale('zh')">中文</v-btn>
-    <v-btn @click="setLocale('en')">English</v-btn>
-  </v-app>
-</NuxtLayout>
+  <div>
+    Hello world!
+  </div>
 </template>
 
 <script setup lang="ts">
 const { setLocale } = useI18n()
+definePageMeta({
+  layout: 'desktop-home'
+})
+
+useHead({
+  title: '摸鱼Blog - 首页'
+})
 </script>
 
 <style lang="scss" scoped>
 
-</style>
-
-<style lang="scss">
-@include scrollbar;
 </style>

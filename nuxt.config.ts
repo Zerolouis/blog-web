@@ -29,13 +29,16 @@ export default defineNuxtConfig({
       },
     },
     css: {
-      preprocessorOptions:{
-        scss:{
-          additionalData: "@import '~/assets/scss/_variable.scss';"
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler' // or "modern"
         }
       }
     }
   },
+  css: [
+    '~/assets/scss/_variable.scss'
+  ],
   runtimeConfig: {
     api: 'http://localhost:9001/v1'
   }
