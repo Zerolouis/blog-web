@@ -1,0 +1,21 @@
+// 字体
+@import "font";
+
+// 控制滚动条
+@import 'scrollbar';
+
+// 自定义 Markdown 渲染主题
+@import 'vditor-preview';
+
+$theme-light-primary: #21467a;
+$theme-light-secondary: #1e477a;
+$theme-light-accent: #547690;
+$theme-light-error: #c71f2d;
+$theme-light-warning: #d45814;
+$theme-light-info: #607d8b;
+$theme-light-success: #4caf50;
+$theme-light-background: #edf1f2;
+$theme-light-title: #1f1f1f;
+$theme-light-content: #2f2f2f;
+$theme-light-text-secondary: #807e7e;
+$theme-light-background-gery: #c7c7c7;
