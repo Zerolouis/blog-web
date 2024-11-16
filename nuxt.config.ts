@@ -3,6 +3,26 @@ import vuetify, {transformAssetUrls} from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
+  app:{
+    head:{
+      link:[{
+        rel: 'preload',
+        href: '/fonts/MiSans-Regular.woff2',
+        type: 'font/woff2',
+        as: 'font'
+      },{
+        rel: 'preload',
+        href: '/fonts/临海隶书.ttf',
+        type: 'font/ttf',
+        as: 'font'
+      },{
+        rel: 'preload',
+        href: '/fonts/Pacifico-Regular.ttf',
+        type: 'font/ttf',
+        as: 'font'
+      }]
+    }
+  },
   devtools: {enabled: true},
   build: {
     transpile: ['vuetify'],
@@ -10,16 +30,17 @@ export default defineNuxtConfig({
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error vuetify配置文件问题
+        // @ts-expect-error 禁用vuetify配置文件报错提示
         config.plugins.push(vuetify({autoImport: true}))
       })
     },
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/i18n',
-    '@nuxt/eslint'
+    '@nuxt/eslint',
+    'dayjs-nuxt'
   ],
-  i18n:{
+  i18n: {
     vueI18n: './i18n.config.ts'
   },
   vite: {
@@ -41,5 +62,11 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     api: 'http://localhost:9001/v1'
-  }
+  },
+  dayjs: {
+    locales: ['zh','en'],
+    plugins: ['relativeTime','utc','timezone'],
+    defaultLocale: 'zh',
+    defaultTimezone: 'Asia/Shanghai'
+  },
 })

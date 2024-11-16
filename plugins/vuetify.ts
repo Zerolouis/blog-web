@@ -1,6 +1,3 @@
-import '@mdi/font/css/materialdesignicons.css'
-
-import 'vuetify/styles'
 import {createVuetify} from 'vuetify'
 import type {ThemeDefinition} from 'vuetify'
 import {zhHans} from "vuetify/locale";
@@ -16,7 +13,7 @@ export default defineNuxtPlugin((app) => {
       accent: '#0a3d62',
       error: '#b71540',
       warning: '#f6b93b',
-      info: '#60a3bc',
+      info: '#6a89cc',
       success: '#78e08f',
       background: '#dfe4ea'
     }
@@ -31,7 +28,7 @@ export default defineNuxtPlugin((app) => {
       accent: '#0a3d62',
       error: '#b71540',
       warning: '#f6b93b',
-      info: '#60a3bc',
+      info: '#6a89cc',
       success: '#78e08f',
       background: '#2f3542'
     }

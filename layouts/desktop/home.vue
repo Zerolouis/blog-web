@@ -7,8 +7,8 @@
     </v-app-bar>
     <v-main v-scroll="onScroll" >
       <slot/>
-      <div style="height: 10000px"/>
     </v-main>
+    <SiteFooter />
   </v-app>
 </template>
 
