@@ -2,15 +2,15 @@
   <div class="info-container">
     <SiteLogo class="bar-logo"/>
     <div class="btn-container">
-      <v-btn variant="text" class="btn">博客</v-btn>
+      <v-btn variant="text" class="btn" @click="router.push('/')">博客</v-btn>
       <v-btn variant="text" class="btn">游记</v-btn>
       <v-btn variant="text" class="btn">简历</v-btn>
       <v-btn variant="text" class="btn">工具站</v-btn>
-      <v-btn variant="text" class="btn">管理</v-btn>
-      <v-btn icon @click="toggleTheme">
+      <v-btn variant="text" class="btn" >管理</v-btn>
+      <v-btn icon @click="changeTheme">
         <v-icon :icon="themeIcon"/>
       </v-btn>
-      <v-btn icon @click="toggleTheme">
+      <v-btn icon>
         <v-icon icon="mdi-github"/>
       </v-btn>
     </div>
@@ -18,16 +18,17 @@
 </template>
 
 <script lang="ts" setup>
-import {useTheme} from "vuetify";
 
-const theme = useTheme();
-const  toggleTheme =  () => {
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-}
-//console.log(name.value)
+const router = useRouter()
 const themeIcon = computed(()=>{
-  return theme.global.name.value === 'dark' ? 'mdi-white-balance-sunny': 'mdi-weather-night'
+  //return theme.isDark ? 'mdi-white-balance-sunny': 'mdi-weather-night'
+  return 'mdi-weather-night'
 })
+
+const changeTheme = () => {
+
+}
+
 </script>
 
 <style lang="scss" scoped>

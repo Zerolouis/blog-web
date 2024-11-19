@@ -1,34 +1,45 @@
 <template>
-  <v-app class="container">
+  <v-app :theme="theme">
     <v-app-bar
         density="compact" elevation="0" class="bar text-white" :color="offsetHeight > 180? '#0a3d62' : 'transparent'"
     >
-      <SiteNavigation />
+      <SiteNavigation/>
     </v-app-bar>
-    <v-main v-scroll="onScroll" >
+    <v-main v-scroll="onScroll">
       <slot/>
     </v-main>
-    <SiteFooter />
+    <client-only>
+      <SiteMessage/>
+    </client-only>
+    <SiteFooter/>
   </v-app>
 </template>
 
 <script lang="ts" setup>
+import {useCustomTheme} from "~/composables/useCustomTheme";
+
 const offsetHeight = ref(0) // 页面偏移高度
+
+const {theme} =  useCustomTheme()
+
+//const color = ref('customLightTheme')
+//const cookie = useCookie('color-scheme')
+//if (cookie) {
+//  color.value = String(cookie.value)
+//}
+
 // 页面滚动事件，用于计算顶栏效果
-const onScroll = (e:any) => {
+const onScroll = (e: any) => {
   offsetHeight.value = e.target.documentElement.scrollTop
 }
 
 </script>
 
 <style lang="scss" scoped>
-.bar{
+@use '/assets/scss/color';
+
+.bar {
   transition: all 0.5s linear;
 }
-
-.container {
-  font-family: MiSans-Regular, sans-serif;
-}
-
 
 </style>

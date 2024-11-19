@@ -45,22 +45,13 @@ import type {ArticleCardInfo} from "~/ts/interface/home.interface";
 import {useDayjs} from "#imports";
 
 const dayjs = useDayjs();
-const props = withDefaults(defineProps<ArticleCardInfo>(), {
-  id: '1',
-  title: '文章标题',
-  description: '文章描述',
-  account: 'Zerolouis',
-  image: 'https://img.home.zeroh.top:12443/i/2024/11/15/fog-4436636-673637e8d717a.jpg',
-  upload: '2018-04-04T16:00:00.000Z',
-  comment: 0
-})
-console.log()
+defineProps<ArticleCardInfo>()
 
 const uploadTime = (time:string) => computed(()=>{
-  if (dayjs(new Date()).diff(props.upload,'days') > 5){
-    return dayjs(props.upload).format('YYYY-MM-DD')
+  if (dayjs(new Date()).diff(time,'days') > 5){
+    return dayjs(time).format('YYYY-MM-DD')
   } else {
-    return dayjs(props.upload).fromNow()
+    return dayjs(time).fromNow()
   }
 })
 
@@ -75,12 +66,10 @@ const uploadTime = (time:string) => computed(()=>{
 
   .title {
     font-size: 2rem;
-    color: color.$theme-light-title
   }
 
   .description {
     margin-top: 10px;
-    color: color.$theme-light-content;
   }
 }
 
@@ -90,8 +79,8 @@ const uploadTime = (time:string) => computed(()=>{
   justify-content: space-around;
   font-size: 0.8rem;
   align-items: center;
-  background-color: #e8eaf6;
-  color: color.$theme-light-info;
+  background-color: rgb(var(--v-theme-background-secondary));
+  color: rgb(var(--v-theme-info));
 
   .info-container {
     display: flex;

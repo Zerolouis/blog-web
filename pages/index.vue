@@ -8,7 +8,7 @@
       <div class="d-flex flex-column fill-height justify-center align-center text-white">
         <SiteLogo class="blog-logo"/>
         <div class="blog-description">
-          {{ t('blogInfo.description') }}
+          总结学习，分享生活
         </div>
       </div>
     </v-parallax>
@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-const {setLocale, t} = useI18n()
 definePageMeta({
   layout: 'desktop-home'
 })
@@ -41,7 +40,6 @@ useHead({
 })
 
 const {data} = useFetch('/api/config/site')
-console.log(data)
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import vuetify, {transformAssetUrls} from 'vite-plugin-vuetify'
+import {transformAssetUrls} from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
@@ -9,17 +9,20 @@ export default defineNuxtConfig({
         rel: 'preload',
         href: '/fonts/MiSans-Regular.woff2',
         type: 'font/woff2',
-        as: 'font'
+        as: 'font',
+        crossorigin: 'anonymous'
       },{
         rel: 'preload',
         href: '/fonts/临海隶书.ttf',
         type: 'font/ttf',
-        as: 'font'
+        as: 'font',
+        crossorigin: 'anonymous'
       },{
         rel: 'preload',
         href: '/fonts/Pacifico-Regular.ttf',
         type: 'font/ttf',
-        as: 'font'
+        as: 'font',
+        crossorigin: 'anonymous'
       }]
     }
   },
@@ -28,21 +31,18 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
   modules: [
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error 禁用vuetify配置文件报错提示
-        config.plugins.push(vuetify({autoImport: true}))
-      })
-    },
+    //(_options, nuxt) => {
+    //  nuxt.hooks.hook('vite:extendConfig', (config) => {
+    //    // @ts-expect-error 禁用vuetify配置文件报错提示
+    //    config.plugins.push(vuetify({autoImport: true}))
+    //  })
+    //},
     '@pinia/nuxt',
-    '@pinia-plugin-persistedstate/nuxt',
-    '@nuxtjs/i18n',
+    'pinia-plugin-persistedstate/nuxt',
     '@nuxt/eslint',
-    'dayjs-nuxt'
+    'dayjs-nuxt',
+    'vuetify-nuxt-module',
   ],
-  i18n: {
-    vueI18n: './i18n.config.ts'
-  },
   vite: {
     vue: {
       template: {
@@ -69,4 +69,21 @@ export default defineNuxtConfig({
     defaultLocale: 'zh',
     defaultTimezone: 'Asia/Shanghai'
   },
+  vuetify:{
+    moduleOptions:{
+      ssrClientHints:{
+        prefersColorScheme: true,
+        prefersColorSchemeOptions:{
+          darkThemeName: 'customDarkTheme',
+          lightThemeName: 'customLightTheme',
+        }
+      }
+    },
+    vuetifyOptions: './vuetify.config.ts'
+  },
+  routeRules: {
+    '/': { prerender: true },
+    '/auth/**': { ssr: false },
+    '/manager/**': { ssr: false }
+  }
 })

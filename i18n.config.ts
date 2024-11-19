@@ -1,10 +1,11 @@
-import {en} from "~/locales/en";
-import {zh} from "~/locales/zh";
+import zhHans from "~/locales/zhHans";
+import en from "~/locales/en";
 
-export default defineI18nConfig(()=>({
-  locale: 'zh',
+export default defineI18nConfig(() => ({
+  legacy: false,
   messages: {
-    zh: zh,
-    en: en
-  }
+    zhHans,
+    en
+  },
+  locale: "zhHans",
 }))

@@ -13,18 +13,58 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <v-card>
-          <div>
-            面包屑
+        <v-card :class="'article-container-'+currentTheme" elevation="12">
+          <div class="article-info">
+            <div>
+              <v-breadcrumbs class="breadcrumbs" density="compact" :items="['Foo', 'Bar', 'Fizz']">
+                <template #divider>
+                  <v-icon icon="mdi-chevron-right" />
+                </template>
+              </v-breadcrumbs>
+            </div>
+            <div class="info">
+              <div class="info-container">
+                <v-icon class="info-icon">
+                  mdi-account-circle-outline
+                </v-icon>
+                Zerolouis
+              </div>
+              <div class="info-container">
+                <v-icon class="info-icon">
+                  mdi-clock-time-eight-outline
+                </v-icon>
+                time
+              </div>
+              <div class="info-container">
+                <v-icon class="info-icon">
+                  mdi-clock-time-eight-outline
+                </v-icon>
+                time
+              </div>
+              <div class="info-container">
+                <v-icon class="info-icon">
+                  mdi-book-open-variant-outline
+                </v-icon>
+                约3分钟
+              </div>
+            </div>
           </div>
-          <div>
-            时间信息
+
+          <div class="article-content">
+            <client-only>
+              <ArticleMarkdownPreview  :content="article?.content" />
+            </client-only>
           </div>
-        </v-card>
-      </v-col>
-      <v-col cols="12">
-        <v-card class="article-container">
-          <ArticleMarkdownPreview :content="article?.content" />
+
+          <div class="article-info">
+            <div>
+              转载方式
+            </div>
+            <div class="info">
+              <ArticleCopyright copyright="CB"/>
+            </div>
+          </div>
+
         </v-card>
       </v-col>
     </v-row>
@@ -33,16 +73,57 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
+import {useCustomTheme} from "~/composables/useCustomTheme";
+const {currentTheme} = useCustomTheme()
 
 definePageMeta({
   layout: 'desktop-home'
 })
 
+useHead({
+  title: '文章'
+})
+
 const {data:article} = useFetch('/api/blog/article')
+
 </script>
 
 <style scoped lang="scss">
+@use '/assets/scss/color';
+
+@mixin article-info{
+  .article-content{
+    padding: 0 20px 20px 20px;
+  }
+
+  .article-info{
+
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    align-items: center;
+
+    .info{
+      display: flex;
+      .info-container{
+        margin: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .info-icon{
+        margin-right: 5px;
+      }
+    }
+
+    .breadcrumbs{
+      padding: 0;
+    }
+
+  }
+}
+
 .article-title-pic {
   margin-top: -50px;
   :deep(.v-img__img){
@@ -56,8 +137,21 @@ const {data:article} = useFetch('/api/blog/article')
   }
 }
 
-.article-container{
-  padding: 10px 20px;
-
+.article-container-light{
+  @include article-info;
+  .article-info{
+    background-color: #e8eaf6;
+    color: color.$theme-light-info;
+  }
 }
+
+.article-container-dark{
+  @include article-info;
+  .article-info{
+    background-color: #616269;
+    color: #d9d9d9;
+  }
+}
+
+
 </style>
