@@ -20,13 +20,12 @@ import {useCustomTheme} from "~/composables/useCustomTheme";
 
 const offsetHeight = ref(0) // 页面偏移高度
 
-const {theme} =  useCustomTheme()
+const {theme,vuetifyTheme} =  useCustomTheme()
 
-//const color = ref('customLightTheme')
-//const cookie = useCookie('color-scheme')
-//if (cookie) {
-//  color.value = String(cookie.value)
-//}
+watch(vuetifyTheme,(newValue)=>{
+  console.log('主题改变',newValue)
+  theme.value = newValue
+})
 
 // 页面滚动事件，用于计算顶栏效果
 const onScroll = (e: any) => {

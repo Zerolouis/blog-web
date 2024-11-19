@@ -50,6 +50,7 @@ export interface ArticleDetailInfo {
   // 文章内容
   content: string,
   // 上传者
-  uploader: UserInfo
+  uploader: UserInfo,
+  // 分类
+  category: Array<ArticleCategoryInfo>
 }
-

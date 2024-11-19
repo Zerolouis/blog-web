@@ -25,7 +25,7 @@ const customDarkTheme: ThemeDefinition = {
     accent: '#0a3d62',
     error: '#b71540',
     warning: '#f6b93b',
-    info: '#ffffff',
+    info: '#6a89cc',
     success: '#78e08f',
     background: '#212121',
     surface: '#252a34',

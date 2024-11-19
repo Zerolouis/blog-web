@@ -18,17 +18,15 @@
 </template>
 
 <script lang="ts" setup>
-
+import {useCustomTheme} from "~/composables/useCustomTheme";
+const siteConfig = useSiteConfig()
+const {darkMode} = storeToRefs(siteConfig)
 const router = useRouter()
+
+const {changeTheme} = useCustomTheme()
 const themeIcon = computed(()=>{
-  //return theme.isDark ? 'mdi-white-balance-sunny': 'mdi-weather-night'
-  return 'mdi-weather-night'
+  return darkMode.value ? 'mdi-white-balance-sunny': 'mdi-weather-night'
 })
-
-const changeTheme = () => {
-
-}
-
 </script>
 
 <style lang="scss" scoped>

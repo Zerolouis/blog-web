@@ -1,10 +1,7 @@
+import type {ArticleDetailInfo} from "~/ts/interface/home.interface";
+
 export interface SiteConfig {
     siteName: string
 }
 
-export interface ArticleInfo {
-    id: string,
-    title: string,
-    description: string | null
-    content: string
-}
+export type ArticleGet = ArticleDetailInfo

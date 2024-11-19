@@ -16,30 +16,33 @@
         <v-card :class="'article-container-'+currentTheme" elevation="12">
           <div class="article-info">
             <div>
-              <v-breadcrumbs class="breadcrumbs" density="compact" :items="['Foo', 'Bar', 'Fizz']">
+
+                <v-breadcrumbs class="breadcrumbs" density="compact" :items="article?.category">
                 <template #divider>
                   <v-icon icon="mdi-chevron-right" />
                 </template>
               </v-breadcrumbs>
+
+
             </div>
             <div class="info">
               <div class="info-container">
                 <v-icon class="info-icon">
                   mdi-account-circle-outline
                 </v-icon>
-                Zerolouis
+                {{article?.uploader.nickname}}
               </div>
               <div class="info-container">
                 <v-icon class="info-icon">
-                  mdi-clock-time-eight-outline
+                  mdi-cloud-upload-outline
                 </v-icon>
-                time
+                {{ $dayjs(article?.createTime).format('YYYY-MM-DD HH:mm:ss') }}
               </div>
               <div class="info-container">
                 <v-icon class="info-icon">
-                  mdi-clock-time-eight-outline
+                  mdi-clock-edit-outline
                 </v-icon>
-                time
+                {{ $dayjs(article?.updateTime).format('YYYY-MM-DD HH:mm:ss') }}
               </div>
               <div class="info-container">
                 <v-icon class="info-icon">
@@ -51,9 +54,9 @@
           </div>
 
           <div class="article-content">
-            <client-only>
-              <ArticleMarkdownPreview  :content="article?.content" />
-            </client-only>
+            <!--<client-only>-->
+              <ArticleMarkdownPreview :content="String(article?.content)"  @ready="getReady" />
+            <!--</client-only>-->
           </div>
 
           <div class="article-info">
@@ -68,14 +71,40 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <div class="side-tools" :style="{right: right+'px'}">
+      <div>
+        <v-btn color="background-secondary" elevation="2" size="default" class="tool-switch" @click="changeShowTools">
+          <v-icon size="24" >
+            {{ showTools ? 'mdi-menu-close' : 'mdi-menu-open'}}
+          </v-icon>
+        </v-btn>
+
+      </div>
+      <div>
+        <div>
+          <v-card color="background-secondary" class="catalog" :style="{height:height+'px'}" elevation="2">
+            <div class="title">
+              目录
+            </div>
+            <div>
+              <client-only>
+                <ArticleCatalog :ready="showCatalog" @catalog-height="getHeight" />
+              </client-only>
+            </div>
+          </v-card>
+        </div>
+      </div>
+    </div>
+
   </v-container>
 </div>
 </template>
 
 <script setup lang="ts">
-import {useCustomTheme} from "~/composables/useCustomTheme";
-const {currentTheme} = useCustomTheme()
-
+import type {ArticleGet} from "~/ts/interface/api.interface";
+const siteConfig = useSiteConfig()
+const {currentTheme} = storeToRefs(siteConfig)
 definePageMeta({
   layout: 'desktop-home'
 })
@@ -84,7 +113,30 @@ useHead({
   title: '文章'
 })
 
-const {data:article} = useFetch('/api/blog/article')
+const {data:article} = await useFetch<ArticleGet>('/api/blog/article')
+
+// 侧边工具栏
+// 显示目录
+const showCatalog = ref(false)
+// 显示工具栏
+const showTools = ref(false)
+// 工具栏高度
+const height = ref(200)
+// 显示/隐藏控制
+const right = ref(-300)
+// 从 Catalog组件 获取高度
+function getHeight(catalogHeight:number){
+  height.value = catalogHeight / 2
+}
+// 文章就绪
+function getReady(show:boolean){
+  showCatalog.value = show
+}
+
+const changeShowTools =() => {
+  showTools.value = !showTools.value
+  right.value = showTools.value ? 0 : -300
+}
 
 </script>
 
@@ -153,5 +205,29 @@ const {data:article} = useFetch('/api/blog/article')
   }
 }
 
+.side-tools{
+  position: fixed;
+  top: 25%;
+  transition: all 0.5s ease-in-out;
+  display: flex;
 
+
+
+  :deep(.v-btn){
+    border-radius: 4px 0 0 4px;
+  }
+
+  .catalog{
+    width: 300px;
+    border-radius: 0 4px 4px 4px;
+
+    .title{
+      font-size: 1.2rem;
+      height: 36px;
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
 </style>

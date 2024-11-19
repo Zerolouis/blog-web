@@ -1,8 +1,33 @@
-import type {ArticleInfo} from "~/ts/interface/api.interface";
+import type {ArticleGet} from "~/ts/interface/api.interface";
 
 export default defineEventHandler(async () => {
 
-  const demo: ArticleInfo = {
+  const demo: ArticleGet = {
+    category: [{
+      id: '1',
+      // 类型名称
+      title: '文章',
+      // 是否启用
+      disabled: false,
+      // 链接
+      href: '/'
+    },{
+      id: '2',
+      // 类型名称
+      title: '学习',
+      // 是否启用
+      disabled: false,
+      // 链接
+      href: '/'
+    }],
+    createTime: "2018-04-04T16:00:00.000Z",
+    updateTime: "2024-11-15T16:00:00.000Z",
+    uploader: {
+      id: '123123',
+      name: 'Zerolouis',
+      nickname: 'Zerolouis',
+      avatar: "https://img.home.zeroh.top:12443/i/2024/11/16/94219763_p0-6738317874562.jpg"
+    },
     id: '123123' ,
     title: '测试标题',
     description: null,
@@ -592,56 +617,7 @@ https://v.qq.com/x/cover/zf2z0xpqcculhcz/y0016tj0qvh.html
 
     还有其他行级排版语法，比如**加粗**和[链接](https://b3log.org)。
 \`\`\`
-
-## 快捷键
-
-我们的编辑器支持很多快捷键，具体请参考 [键盘快捷键](https://ld246.com/article/1474030007391)（或者按 "\`?\` "😼）
-
-### 甘特图
-
-### 图表
-
-### 五线谱
-
-### Graphviz
-
-### 多媒体
-
-支持 v.qq.com，youtube.com，youku.com，coub.com，facebook.com/video，dailymotion.com，.mp4，.m4v，.ogg，.ogv，.webm，.mp3，.wav 链接解析
-
-### 脚注
-
-这里是一个脚注引用<sup>[1](https://b3log.org/vditor/demo/preview.html#footnotes-def-1)</sup>，这里是另一个脚注引用<sup>[2](https://b3log.org/vditor/demo/preview.html#footnotes-def-2)</sup>。
-
-\`\`\`undefined
-这里是一个脚注引用[^1]，这里是另一个脚注引用[^bignote]。
-[^1]: 第一个脚注定义。
-[^bignote]: 脚注定义可使用多段内容。
-
-    缩进对齐的段落包含在这个脚注定义内。
-
-    ‍‍\`\`\`
-    可以使用代码块。
-    ‍‍\`\`\`
-
-    还有其他行级排版语法，比如**加粗**和[链接](https://b3log.org)。
-\`\`\`
-
-## 快捷键
-
-我们的编辑器支持很多快捷键，具体请参考 [键盘快捷键](https://ld246.com/article/1582778815353)
-
----
-
-1. 第一个脚注定义。 [↩](https://b3log.org/vditor/demo/preview.html#footnotes-ref-1)
-2. 脚注定义可使用多段内容。
-    缩进对齐的段落包含在这个脚注定义内。
-
-    \`\`\`undefined
-    可以使用代码块。
-    \`\`\`
-
-    还有其他行级排版语法，比如**加粗**和[链接](https://b3log.org/)。 [↩](https://b3log.org/vditor/demo/preview.html#footnotes-ref-2)`
+`
   }
 
   return demo

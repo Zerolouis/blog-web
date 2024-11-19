@@ -14,16 +14,13 @@ const props = defineProps<{
   content: string
 }>()
 
-const siteConfig = useSiteConfig()
-const {$vuetify} = useNuxtApp()
-const {currentTheme} = storeToRefs(siteConfig)
 
 const vditorPreview = ref(null)
 // 渲染完成回调
-const emits = defineEmits(['ready'])
-const articleReady = () => {
-  emits('ready', false)
-}
+const emits = defineEmits<{
+  (e: 'ready',show: boolean):void
+}>()
+
 
 const renderLight = () => {
 
@@ -49,7 +46,7 @@ const renderLight = () => {
       position: 'right'
     }
   }).then(() => {
-    articleReady()
+    emits('ready', true)
     // articleStore.finish = !articleStore.finish
   })
 }
@@ -78,12 +75,12 @@ const renderDark = () => {
       position: 'right'
     }
   }).then(() => {
-    articleReady()
+    emits('ready', true)
     // articleStore.finish = !articleStore.finish
   })
 
 }
-
+// 选择渲染样式
 const renderTheme = (isDark: boolean) => {
   if (isDark){
     renderDark()
@@ -92,19 +89,25 @@ const renderTheme = (isDark: boolean) => {
   }
 }
 
-const {vuetifyDark} = useCustomTheme()
+const siteConfig = useSiteConfig()
+const {currentTheme} =storeToRefs(siteConfig)
+
+const {vuetifyTheme,vuetifyDark,theme} = useCustomTheme()
 
 onMounted(()=>{
+  console.log(vuetifyDark);
   renderTheme(vuetifyDark)
 })
 
-watch($vuetify.theme.global.name, (newValue) => {
+watch(vuetifyTheme, (newValue) => {
   if (newValue === 'customDarkTheme') {
+    emits('ready', false)
     renderDark()
-    currentTheme.value = 'dark'
+    theme.value = 'customDarkTheme'
   } else {
+    emits('ready', false)
     renderLight()
-    currentTheme.value = 'light'
+    theme.value = 'customLightTheme'
   }
 })
 </script>

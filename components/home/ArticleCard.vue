@@ -55,7 +55,6 @@ const uploadTime = (time:string) => computed(()=>{
   }
 })
 
-
 </script>
 
 <style scoped lang="scss">
