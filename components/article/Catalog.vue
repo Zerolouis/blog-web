@@ -92,7 +92,7 @@ const calcCatalog = (elements:any) => {
       offsetTop: item.offsetTop + 250
     })
   }
-  console.log('目录节点',nodes.value)
+  //console.log('目录节点',nodes.value)
 }
 
 const toPosition = (item:CatalogItem) => {

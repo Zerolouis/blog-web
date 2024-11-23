@@ -1,3 +1,5 @@
+import type {UserInfo} from "~/ts/interface/home.interface";
+
 export interface ToastState {
   /** 通知内容 */
   msg: string;
@@ -16,4 +18,15 @@ export interface ToastState {
 export interface SiteConfigState {
   currentTheme: string,
   darkMode: boolean
+}
+
+export interface UserState{
+  // 用户信息
+  userInfo?: UserInfo,
+  // 是否登录
+  isLogin: boolean,
+  // access_token
+  accessToken?: string,
+  // freshToken
+  refreshToken?: string
 }
