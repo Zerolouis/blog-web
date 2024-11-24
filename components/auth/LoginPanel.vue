@@ -105,6 +105,9 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { checkUsername } from '~/composables/useVerify'
+import {rsaEncode} from "~/composables/useSecurity";
+
+const userStore = useUserStore()
 
 const tab: Ref<string> = ref('name')
 /** 用户名登录表格 */
@@ -114,8 +117,13 @@ const loginForm = ref({
   password: ''
 })
 
-const userLogin = () => {
-
+const userLogin = async () => {
+  const username: string = await rsaEncode(loginForm.value.username)
+  const password: string = await rsaEncode(loginForm.value.password)
+  await userStore.userLogin(
+      username,
+      password,
+  )
 }
 
 //const auth = useAuthStore()
@@ -131,7 +139,7 @@ const handleLogin = async () => {
   console.log(loginForm.value)
   const { valid } = await usernameForm.value.validate()
   if (valid) {
-    //await auth.usernameLogin(loginForm.value.username, loginForm.value.password)
+    await userLogin()
   } else {
     toast.error('请输入正确的登录信息')
   }

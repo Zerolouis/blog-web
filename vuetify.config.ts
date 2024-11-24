@@ -10,7 +10,7 @@ const customLightTheme: ThemeDefinition = {
     error: '#b71540',
     warning: '#f6b93b',
     info: '#6a89cc',
-    success: '#78e08f',
+    success: '#00dc82',
     background: '#dfe4ea',
     'background-secondary': '#e8eaf6'
   }
@@ -26,7 +26,7 @@ const customDarkTheme: ThemeDefinition = {
     error: '#b71540',
     warning: '#f6b93b',
     info: '#6a89cc',
-    success: '#78e08f',
+    success: '#00dc82',
     background: '#212121',
     surface: '#252a34',
     'background-secondary': '#616269'

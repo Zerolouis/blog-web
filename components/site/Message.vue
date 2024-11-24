@@ -1,17 +1,17 @@
 <template>
   <v-snackbar
-      v-model="toast.visible"
-      :color="toast.color"
+      v-model="visible"
+      :color="color"
       min-width="300"
       rounded="pill"
       timeout="-1"
   >
-    {{ toast.msg }}
+    <span class="text-white">{{ msg }}</span>
     <template #actions>
       <v-btn
           color="white"
           icon="mdi-close"
-          @click="toast.visible = false"
+          @click="visible = false"
       />
     </template>
   </v-snackbar>
@@ -21,6 +21,7 @@
 import { useToastStore } from '~/stores/toast'
 
 const toast = useToastStore()
+const {visible,color,msg} = storeToRefs(toast)
 </script>
 
 <style scoped lang="scss">

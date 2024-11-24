@@ -39,7 +39,7 @@ export const useToastStore = defineStore('toastStore', {
      * 成功通知
      * @param msg 消息
      */
-    success (msg: string) {
+    success (msg: string = '成功') {
       this.open({
         msg,
         color: 'success'
@@ -49,7 +49,7 @@ export const useToastStore = defineStore('toastStore', {
      * 错误通知
      * @param msg 消息
      */
-    error (msg: string) {
+    error (msg: string = '发生错误') {
       this.open({
         msg,
         color: 'error'
@@ -59,7 +59,7 @@ export const useToastStore = defineStore('toastStore', {
      * info通知
      * @param msg 消息
      */
-    info (msg: string) {
+    info (msg: string = '提示') {
       this.open({
         msg,
         color: 'info'
@@ -69,7 +69,7 @@ export const useToastStore = defineStore('toastStore', {
      * 警告通知
      * @param msg 消息
      */
-    warning (msg: string) {
+    warning (msg: string = '提示') {
       this.open({
         msg,
         color: 'warning'

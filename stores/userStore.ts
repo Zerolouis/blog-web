@@ -1,31 +1,85 @@
 import type {UserState} from "~/ts/interface/stores.interface";
-import { stringify, parse } from 'zipson';
+import {stringify, parse} from 'zipson';
 import type {Ref} from "vue";
+import type {LoginResult} from "~/ts/types/api.type";
+import { LoginResultSchema } from "~/ts/types/api.type";
+import {checkMessage} from "~/composables/useVerify";
 
-export const useUserStore = defineStore('userStore',()=>{
+export const useUserStore = defineStore('userStore', () => {
+
+  const toast = useToastStore()
+
   const user:UserState = reactive({
-    accessToken: "123",
-    isLogin: false,
-    refreshToken: "123123123",
-    userInfo: {
-      id: '123123',
-      name: 'Zerolouis',
-      nickname: 'Zerolouis',
-      avatar: "https://img.home.zeroh.top:12443/i/2024/11/16/94219763_p0-6738317874562.jpg"
-    }
+    userInfo: undefined,
+    isLogin: false
+  })
+  const token:LoginResult = reactive({
+    accessTime: "", accessToken: "", refreshTime: "", refreshToken: ""
   })
 
-  
+  const siteConfig = useSiteConfig()
+  const {isLogin} = storeToRefs(siteConfig)
 
-  const test: Ref<string> = ref('set')
+  /**
+   * 用户登录
+   * @param username 用户名
+   * @param password 密码
+   */
+  const userLogin = async (username: string, password: string) => {
+    await $fetch('/api/auth/login', {
+      method: 'POST',
+      body: {
+        username,
+        password
+      }
+    }).then(async (res) => {
+      const {data} = await checkMessage(res)
+      console.log('获取登录数据',data)
+      const {data: loginInfo, success} = await LoginResultSchema.safeParseAsync(data?.data)
+      console.log('登录数据校验', success)
+      if (success && loginInfo) {
+        token.accessToken = loginInfo?.accessToken
+        token.accessTime = loginInfo?.accessTime
+        token.refreshToken = loginInfo?.refreshToken
+        token.refreshTime = loginInfo?.refreshTime
+        isLogin.value = true
+        await getUserInfo()
+      }
 
-  return {user,test}
-},{
+    })
+  }
+
+  /**
+   * 获取用户信息
+   */
+  const getUserInfo = async () => {
+    await $fetch('/api/auth/info', {
+      method: "POST",
+      headers:{
+        Authorization: token.accessToken
+      }
+    }).then(async (res)=>{
+      console.log('获取用户数据',res)
+      const {data} = await checkMessage(res)
+      if (data?.code !== '200'){
+        toast.error(data?.msg)
+
+      }
+    })
+  }
+
+  return {user, token, isLogin, userLogin,getUserInfo}
+}, {
   persist: {
-    storage: piniaPluginPersistedstate.localStorage(),
-    serializer:{
+    storage: piniaPluginPersistedstate.cookies({
+      maxAge: 24 * 60 * 60 * 3
+    }),
+    serializer: {
       deserialize: parse,
       serialize: stringify
-    }
-  }
+    },
+    // 只需要保存token和登录状态
+    pick: ['token','isLogin']
+  },
+
 })

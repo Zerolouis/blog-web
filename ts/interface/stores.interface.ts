@@ -25,8 +25,4 @@ export interface UserState{
   userInfo?: UserInfo,
   // 是否登录
   isLogin: boolean,
-  // access_token
-  accessToken?: string,
-  // freshToken
-  refreshToken?: string
 }

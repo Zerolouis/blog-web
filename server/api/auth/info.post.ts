@@ -1,7 +1,8 @@
 export default defineEventHandler(async (event)=>{
   let data:any = null
   const body = await readBody(event)
-  await $fetch(useRuntimeConfig().api+'/user/login',{
+  await $fetch(useRuntimeConfig().api+'/user/info',{
+    headers: event.headers,
     method: 'POST',
     body
   }).then((r) => {
