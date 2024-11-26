@@ -6,7 +6,8 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: "desktop-home"
+  layout: "desktop-home",
+  middleware: ['user']
 })
 </script>
 

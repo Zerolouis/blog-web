@@ -10,27 +10,21 @@ export default defineNuxtRouteMiddleware((to,from)=>{
 
   // 如果获取过信息就跳过
   if (isLogin && user.value.isLogin){
+    toast.info('已经登录')
     return
   }
 
   if (isLogin && token.value.accessToken ){
     toast.info('恢复登录')
-
+    userStore.getUserInfo()
     // 请求用户信息
-
-    return
-  }
-
-  // token丢失，重置登录状态
-  if (isLogin && !token.value.accessToken){
-    toast.warning('登录已过期，请重新登录')
-    isLogin.value = false
     return
   }
 
   // 没有token直接通过
   if (!token.value.accessToken){
     isLogin.value = false
+    user.value.isLogin = false
     return
   }
 

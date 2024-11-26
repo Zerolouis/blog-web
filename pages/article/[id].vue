@@ -106,7 +106,8 @@ import type {ArticleGet} from "~/ts/interface/api.interface";
 const siteConfig = useSiteConfig()
 const {currentTheme} = storeToRefs(siteConfig)
 definePageMeta({
-  layout: 'desktop-home'
+  layout: 'desktop-home',
+  middleware: ['user']
 })
 
 useHead({

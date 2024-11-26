@@ -33,6 +33,7 @@
     color: white;
     text-align: center;
     width: 100%;
+    font-size: 0.8rem;
   }
 
 }

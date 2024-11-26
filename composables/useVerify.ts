@@ -46,7 +46,6 @@ async function checkMessage(res: any) {
   if (data?.code && data?.msg){
     if (data?.code === '200'){
       console.log(data.msg)
-      toast.success(data.msg)
     }else{
       toast.error(data.msg)
     }

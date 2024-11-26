@@ -1,17 +1,15 @@
 <template>
 <div>
-  test
+  概览
 </div>
 </template>
 
 <script setup lang="ts">
-
 definePageMeta({
-  layout: 'desktop-home'
+  layout: 'desktop-manager',
+  middleware: 'auth',
+  title: '概览'
 })
-
-const toast = useToastStore()
-toast.success('错误')
 </script>
 
 <style scoped lang="scss">

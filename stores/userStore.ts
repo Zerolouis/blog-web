@@ -62,13 +62,55 @@ export const useUserStore = defineStore('userStore', () => {
       console.log('获取用户数据',res)
       const {data} = await checkMessage(res)
       if (data?.code !== '200'){
-        toast.error(data?.msg)
+        // 尝试刷新token
+        await refreshToken().then(()=>{
+          if (user.isLogin) {
+            getUserInfo()
+          }
+        })
+      } else{
+        user.userInfo = data?.data
+        user.isLogin = true
+      }
+    }).catch((e)=>{
+      toast.error(e)
+    })
+  }
 
+  const refreshToken = async () => {
+    await $fetch('api/auth/refresh', {
+      method: 'POST',
+      headers: {
+        Authorization: token.refreshToken
+      },
+    }).then(async (res) => {
+      const {data} = await checkMessage(res)
+      if (data?.code === '200'){
+        const {data: loginInfo, success} = await LoginResultSchema.safeParseAsync(data?.data)
+        if (success && loginInfo) {
+          token.accessToken = loginInfo?.accessToken
+          token.accessTime = loginInfo?.accessTime
+          token.refreshToken = loginInfo?.refreshToken
+          token.refreshTime = loginInfo?.refreshTime
+          isLogin.value = true
+          user.isLogin = true
+          return true
+        }
+        return false
+      } else {
+        toast.error('登录过期，请重新登录')
+        token.accessToken = ''
+        token.refreshToken = ''
+        token.refreshTime = ''
+        token.accessTime = ''
+        isLogin.value = false
+        user.isLogin = false
+        return false
       }
     })
   }
 
-  return {user, token, isLogin, userLogin,getUserInfo}
+  return {user, token, isLogin, userLogin,getUserInfo,refreshToken}
 }, {
   persist: {
     storage: piniaPluginPersistedstate.cookies({
