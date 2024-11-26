@@ -41,8 +41,11 @@ export default defineVuetifyConfiguration({
       customDarkTheme
     }
   },
-  localeMessages: ['zhHans'],
   icons: {
     defaultSet: 'mdi'
   },
+  date:{
+    adapter: 'dayjs',
+  },
+  labComponents: true
 })

@@ -1,6 +1,9 @@
 <template>
 <v-app>
-  <v-app-bar color="secondary" elevation="2" density="compact">
+  <ClientOnly >
+    <SiteMessage />
+  </ClientOnly>
+  <v-app-bar order="0" color="secondary" elevation="2" density="compact">
     <v-app-bar-nav-icon @click="drawer = !drawer"/>
     <v-app-bar-title>
       {{route?.meta.title}}
@@ -39,9 +42,6 @@
     <slot/>
   </v-main>
   <SiteFooter/>
-  <ClientOnly >
-    <SiteMessage />
-  </ClientOnly>
 </v-app>
 </template>
 

@@ -1,5 +1,5 @@
-import zhHans from "~/locales/zhHans";
-import en from "~/locales/en";
+import {zhHans} from "~/locales/zh";
+import {en} from "~/locales/en";
 
 export default defineI18nConfig(() => ({
   legacy: false,
