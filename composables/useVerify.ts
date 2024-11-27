@@ -37,6 +37,10 @@ function checkUsername(username: string): boolean {
   return userReg.test(username)
 }
 
+function checkEmpty(value:string){
+  if (value?.length > 0){ return true}
+  else return '不能为空'
+}
 
 
 async function checkMessage(res: any) {
@@ -45,7 +49,7 @@ async function checkMessage(res: any) {
   const {success, data, error} = await messageSchema.safeParseAsync(res)
   if (data?.code && data?.msg){
     if (data?.code === '200'){
-      console.log(data.msg)
+      console.log('通用消息格式校验',data.msg)
     }else{
       toast.error(data.msg)
     }
@@ -58,5 +62,6 @@ export {
   checkPassword,
   checkTel,
   checkUsername,
-  checkMessage
+  checkMessage,
+    checkEmpty
 }

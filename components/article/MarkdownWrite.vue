@@ -4,7 +4,7 @@
  * @Date: 2024/4/22 14:22
  -->
 <template>
-  <div>
+  <div class="vditor-container">
     <div id="writer" ref="writer"/>
     <v-dialog v-model="imageUploadDialog" width="600">
       <!--<ArticleUploadImg />-->
@@ -40,6 +40,7 @@ onMounted(() => {
 
     vditor.value = new Vditor('writer', {
       minHeight: 600,
+      height: 1000,
       placeholder: '想要说些什么？',
       theme: 'classic',
       counter: {
@@ -126,9 +127,14 @@ const getText = () => {
   return vditor.value.getValue();
 }
 
+const setText = (text: string) => {
+  vditor.value.setValue(text);
+}
+
 defineExpose({
   vditor,
   getText,
+  setText,
   ImageUploadDialog: imageUploadDialog
 })
 
@@ -136,5 +142,7 @@ defineExpose({
 </script>
 
 <style scoped lang="scss">
-
+.vditor-container{
+  height: 1000px;
+}
 </style>

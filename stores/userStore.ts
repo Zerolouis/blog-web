@@ -110,7 +110,11 @@ export const useUserStore = defineStore('userStore', () => {
     })
   }
 
-  return {user, token, isLogin, userLogin,getUserInfo,refreshToken}
+  const getToken = computed(()=> {
+    return token.accessToken
+  })
+
+  return {user, token, isLogin, userLogin,getUserInfo,refreshToken,getToken}
 }, {
   persist: {
     storage: piniaPluginPersistedstate.cookies({

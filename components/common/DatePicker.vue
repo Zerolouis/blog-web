@@ -20,7 +20,14 @@
             </v-col>
           </v-row>
         </v-container>
-
+        <v-card-actions>
+          <v-btn @click="reset" color="info">
+            使用当前时间
+          </v-btn>
+          <v-btn color="primary" @click="confirm">
+            确认
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -61,6 +68,16 @@ function showPicker() {
 // 获取ISO格式时间
 const getTime = () => {
   return time.value
+}
+
+const confirm = () => {
+  isShowPicker.value = false
+}
+
+const reset = () => {
+  dateSelected.value = new Date()
+  timeSelected.value = date.format(new Date(), 'fullTime24h')
+  isShowPicker.value = false
 }
 
 defineExpose({
