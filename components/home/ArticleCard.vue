@@ -1,11 +1,8 @@
 <template>
   <div>
     <v-hover v-slot="{ isHovering, props }">
-      <v-card
-          v-bind="props"
-          :elevation="isHovering ? 12 : 3"
-      >
-        <v-img class="article-image" height="200" cover :src="image"/>
+      <v-card v-bind="props" :elevation="isHovering ? 12 : 3">
+        <v-img class="article-image" height="200" cover :src="image" />
         <div class="article-info">
           <div class="title">
             {{ title }}
@@ -40,25 +37,25 @@
 </template>
 
 <script setup lang="ts">
-import type {ArticleCardInfo} from "~/ts/interface/home.interface";
+import type { ArticleCardInfo } from "~/ts/interface/home.interface";
 
-import {useDayjs} from "#imports";
+import { useDayjs } from "#imports";
 
 const dayjs = useDayjs();
-defineProps<ArticleCardInfo>()
+defineProps<ArticleCardInfo>();
 
-const uploadTime = (time:string) => computed(()=>{
-  if (dayjs(new Date()).diff(time,'days') > 5){
-    return dayjs(time).format('YYYY-MM-DD')
-  } else {
-    return dayjs(time).fromNow()
-  }
-})
-
+const uploadTime = (time: string) =>
+  computed(() => {
+    if (dayjs(new Date()).diff(time, "days") > 5) {
+      return dayjs(time).format("YYYY-MM-DD");
+    } else {
+      return dayjs(time).fromNow();
+    }
+  });
 </script>
 
 <style scoped lang="scss">
-@use '/assets/scss/color';
+@use "/assets/scss/color";
 
 .article-info {
   margin: 20px;
@@ -88,7 +85,6 @@ const uploadTime = (time:string) => computed(()=>{
     .info-icon {
       margin-right: 5px;
     }
-
   }
 }
 </style>

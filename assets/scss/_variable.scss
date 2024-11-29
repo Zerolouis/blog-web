@@ -3,9 +3,9 @@
 
 // 引入滚动条
 @use "/assets/scss/scrollbar.scss";
-@use '@mdi/font/css/materialdesignicons.css';
-@use 'vuetify' with (
-  $body-font-family: MiSans-Regular,
+@use "@mdi/font/css/materialdesignicons.css";
+@use "vuetify" with (
+  $body-font-family: MiSans-Regular
 );
 // 自定义 Markdown 渲染主题
 // @import 'vditor-preview.scss';

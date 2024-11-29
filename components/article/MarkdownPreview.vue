@@ -1,130 +1,134 @@
 <template>
-  <div :class="'markdown-'+currentTheme">
-    <div id="vditor" ref="vditorPreview"/>
+  <div :class="'markdown-' + currentTheme">
+    <div id="vditor" ref="vditorPreview" />
   </div>
 </template>
 
 <script setup lang="ts">
-import Vditor from 'vditor'
-import 'vditor/dist/index.css'
-import hljs from 'highlight.js'
-import {useCustomTheme} from "~/composables/useCustomTheme";
+import Vditor from "vditor";
+import "vditor/dist/index.css";
+import hljs from "highlight.js";
+import { useCustomTheme } from "~/composables/useCustomTheme";
 
 const props = defineProps<{
-  content: string
-}>()
+  content: string;
+}>();
 
-
-const vditorPreview = ref(null)
+const vditorPreview = ref(null);
 // 渲染完成回调
 const emits = defineEmits<{
-  (e: 'ready',show: boolean):void
-}>()
-
+  (e: "ready", show: boolean): void;
+}>();
 
 const renderLight = () => {
-
   Vditor.preview(vditorPreview.value, props.content, {
-    mode: 'light',
+    mode: "light",
     theme: {
-      current: 'light',
-      list: {"ant-design": "Ant Design", dark: "Dark", light: "Light", wechat: "WeChat"}
+      current: "light",
+      list: {
+        "ant-design": "Ant Design",
+        dark: "Dark",
+        light: "Light",
+        wechat: "WeChat",
+      },
     },
     preview: {
       delay: 0,
     },
     hljs: {
-      style: 'monokai',
-      lineNumber: true
+      style: "monokai",
+      lineNumber: true,
     },
     anchor: 2,
     speech: {
-      enable: true
+      enable: true,
     },
     outline: {
       enable: true,
-      position: 'right'
-    }
+      position: "right",
+    },
   }).then(() => {
-    emits('ready', true)
+    emits("ready", true);
     // articleStore.finish = !articleStore.finish
-  })
-}
+  });
+};
 
 const renderDark = () => {
-
   Vditor.preview(vditorPreview.value, props.content, {
-    mode: 'dark',
+    mode: "dark",
     theme: {
-      current: 'dark',
-      list: {"ant-design": "Ant Design", dark: "Dark", light: "Light", wechat: "WeChat"}
+      current: "dark",
+      list: {
+        "ant-design": "Ant Design",
+        dark: "Dark",
+        light: "Light",
+        wechat: "WeChat",
+      },
     },
     preview: {
       delay: 0,
     },
     hljs: {
-      style: 'monokai',
-      lineNumber: true
+      style: "monokai",
+      lineNumber: true,
     },
     anchor: 2,
     speech: {
-      enable: true
+      enable: true,
     },
     outline: {
       enable: true,
-      position: 'right'
-    }
+      position: "right",
+    },
   }).then(() => {
-    emits('ready', true)
+    emits("ready", true);
     // articleStore.finish = !articleStore.finish
-  })
-
-}
+  });
+};
 // 选择渲染样式
 const renderTheme = (isDark: boolean) => {
-  if (isDark){
-    renderDark()
-  }else{
-    renderLight()
+  if (isDark) {
+    renderDark();
+  } else {
+    renderLight();
   }
-}
+};
 
-const siteConfig = useSiteConfig()
-const {currentTheme} =storeToRefs(siteConfig)
+const siteConfig = useSiteConfig();
+const { currentTheme } = storeToRefs(siteConfig);
 
-const {vuetifyTheme,vuetifyDark,theme} = useCustomTheme()
+const { vuetifyTheme, vuetifyDark, theme } = useCustomTheme();
 
-onMounted(()=>{
+onMounted(() => {
   console.log(vuetifyDark);
-  renderTheme(vuetifyDark)
-})
+  renderTheme(vuetifyDark);
+});
 
 watch(vuetifyTheme, (newValue) => {
-  if (newValue === 'customDarkTheme') {
-    emits('ready', false)
-    renderDark()
-    theme.value = 'customDarkTheme'
+  if (newValue === "customDarkTheme") {
+    emits("ready", false);
+    renderDark();
+    theme.value = "customDarkTheme";
   } else {
-    emits('ready', false)
-    renderLight()
-    theme.value = 'customLightTheme'
+    emits("ready", false);
+    renderLight();
+    theme.value = "customLightTheme";
   }
-})
+});
 </script>
 
 <style scoped lang="scss">
-@use 'assets/scss/vditor-preview';
+@use "assets/scss/vditor-preview";
 
 .markdown-light {
   :deep(#vditor) {
-    @include vditor-preview.markdown-light
+    @include vditor-preview.markdown-light;
   }
 }
 
 .markdown-dark {
   :deep(#vditor) {
-    @include vditor-preview.markdown-dark
+    @include vditor-preview.markdown-dark;
   }
 }
-
 </style>

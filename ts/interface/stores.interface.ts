@@ -1,4 +1,4 @@
-import type {UserInfo} from "~/ts/interface/home.interface";
+import type { UserInfo } from "~/ts/interface/home.interface";
 
 export interface ToastState {
   /** 通知内容 */
@@ -12,17 +12,17 @@ export interface ToastState {
   /** 超时时间 */
   timeout?: number;
   /** 防抖计时器 */
-  debounceTimer?: NodeJS.Timeout | null
+  debounceTimer?: NodeJS.Timeout | null;
 }
 
 export interface SiteConfigState {
-  currentTheme: string,
-  darkMode: boolean
+  currentTheme: string;
+  darkMode: boolean;
 }
 
-export interface UserState{
+export interface UserState {
   // 用户信息
-  userInfo?: UserInfo,
+  userInfo?: UserInfo;
   // 是否登录
-  isLogin: boolean,
+  isLogin: boolean;
 }

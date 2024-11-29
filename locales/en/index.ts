@@ -1,7 +1,6 @@
-import { en as $vuetify } from 'vuetify/locale'
+import { en as $vuetify } from "vuetify/locale";
 export const en = {
   //...welcome,
-  someKey: 'Some message',
+  someKey: "Some message",
   $vuetify,
-}
-
+};

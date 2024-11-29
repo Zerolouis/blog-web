@@ -1,67 +1,69 @@
 <template>
-  <v-app :theme="theme" :class="{'bar-transparent':offsetHeight <= 180,'bar-color':offsetHeight > 180}">
-    <v-app-bar
-        density="compact" elevation="0" class="bar text-white"
-    >
-      <SiteNavigation/>
+  <v-app
+    :theme="theme"
+    :class="{
+      'bar-transparent': offsetHeight <= 180,
+      'bar-color': offsetHeight > 180,
+    }"
+  >
+    <v-app-bar density="compact" elevation="0" class="bar text-white">
+      <SiteNavigation />
     </v-app-bar>
     <v-main v-scroll="onScroll">
-      <slot/>
+      <slot />
     </v-main>
     <client-only>
-      <SiteMessage/>
+      <SiteMessage />
     </client-only>
-    <SiteFooter/>
+    <SiteFooter />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-import {useCustomTheme} from "~/composables/useCustomTheme";
-import {useUserStore} from "~/stores/userStore";
+import { useCustomTheme } from "~/composables/useCustomTheme";
+import { useUserStore } from "~/stores/userStore";
 
-const offsetHeight = ref(0) // 页面偏移高度
-const userStore = useUserStore()
-const {user} = storeToRefs(userStore)
+const offsetHeight = ref(0); // 页面偏移高度
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 //console.log(user)
-const {theme,vuetifyTheme} =  useCustomTheme()
+const { theme, vuetifyTheme } = useCustomTheme();
 
-watch(vuetifyTheme,(newValue)=>{
-  console.log('主题改变',newValue)
-  theme.value = newValue
-})
+watch(vuetifyTheme, (newValue) => {
+  console.log("主题改变", newValue);
+  theme.value = newValue;
+});
 
 // 页面滚动事件，用于计算顶栏效果
 
 const onScroll = (e: any) => {
-  offsetHeight.value = e.target.documentElement.scrollTop
-}
+  offsetHeight.value = e.target.documentElement.scrollTop;
+};
 
-onUnmounted(()=>{
+onUnmounted(() => {
   if (import.meta.client) {
-    window.removeEventListener('scroll', onScroll)
+    window.removeEventListener("scroll", onScroll);
   }
-})
-
-
+});
 </script>
 
 <style lang="scss" scoped>
-@use '/assets/scss/color';
+@use "/assets/scss/color";
 
 .bar {
   transition: all 0.5s linear;
 }
 
-.bar-transparent{
+.bar-transparent {
   :deep(.v-app-bar.v-toolbar) {
-    background: transparent linear-gradient(to bottom, rgba(0, 0, 0, 0.53), rgba(0, 0, 0, 0));
+    background: transparent
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.53), rgba(0, 0, 0, 0));
   }
 }
 
-.bar-color{
+.bar-color {
   :deep(.v-app-bar.v-toolbar) {
     background: #0a3d62;
   }
 }
-
 </style>

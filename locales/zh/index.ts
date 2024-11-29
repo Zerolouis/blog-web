@@ -1,7 +1,7 @@
-import { zhHans as $vuetify } from 'vuetify/locale'
+import { zhHans as $vuetify } from "vuetify/locale";
 
 export const zhHans = {
   //...welcome,
-  someKey: 'Some message',
+  someKey: "Some message",
   $vuetify,
-}
+};

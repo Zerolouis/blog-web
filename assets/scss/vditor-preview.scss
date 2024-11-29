@@ -1,5 +1,4 @@
 :root {
-
 }
 // 亮色主题
 @mixin markdown-light {
@@ -9,7 +8,7 @@
   --meta-content-color: var(--text-color);
   --active-file-border-color: var(--drake-accent);
   --rawblock-edit-panel-bd: var(--code-block-bg-color);
-  --item-hover-bg-color: #E5E5E596;
+  --item-hover-bg-color: #e5e5e596;
   --active-file-bg-color: var(--item-hover-bg-color);
 
   --blur-text-color: rgba(51, 51, 51, 0.5);
@@ -19,7 +18,7 @@
   --variable-color: var(--drake-highlight);
   --outline-active-color: var(--a-color);
   --code-block-bg-color: #2b2b2b;
-  --code-block-color: #A9B7C6;
+  --code-block-color: #a9b7c6;
   --title-color: #21467a;
   --blockquote-border-color: #b2aec5;
   --blockquote-color: #595959;
@@ -32,7 +31,7 @@
   --yaml-color: #777777;
   --yaml-bg-color: #f7f7f7;
   --footnotes-bg-color: #3c3d3e;
-  --footnotes-highlight: #FFD760;
+  --footnotes-highlight: #ffd760;
   --table-border-color: #dfe2e5;
   --table-header-bg-color: #f6f8fa;
   --table-bg-color: var(--bg-color);
@@ -41,7 +40,8 @@
   --btn-hover-bg-color: var(--item-hover-bg-color);
   --checkbox-checked: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M425.984 726.016l384-384-59.99-61.995-324.01 324.011-152.021-152.021L213.973 512zm384-598.016q36.01 0 61.013 25.984T896 213.974v596.01q0 34.005-25.003 59.99t-61.013 25.983h-596.01q-36.011 0-61.014-25.984t-25.003-59.989v-596.01q0-34.006 25.003-59.99T213.973 128h596.011z' fill='%2365b73b'/%3E%3C/svg%3E");
   --checkbox-unchecked: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M810.667 213.333v597.334H213.333V213.333h597.334m0-85.333H213.333C166.4 128 128 166.4 128 213.333v597.334C128 857.6 166.4 896 213.333 896h597.334C857.6 896 896 857.6 896 810.667V213.333C896 166.4 857.6 128 810.667 128z' fill='%23333333'/%3E%3C/svg%3E");
-  --monospace: "MiSans-Regular", "JetBrainsMonoNL", "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, "Ubuntu Mono", Consolas, HYZhengYuan; /*代码字体*/
+  --monospace: "MiSans-Regular", "JetBrainsMonoNL", "JetBrains Mono",
+    "Fira Code", "Cascadia Code", Menlo, "Ubuntu Mono", Consolas, HYZhengYuan; /*代码字体*/
   --text-font: var(--monospace); /*正文字体*/
   --title-font: var(--monospace); /*标题字体*/
   --text-line-height: 1.6; /*正文行间距*/
@@ -59,7 +59,7 @@
   --meta-content-color: var(--text-color);
   --active-file-border-color: var(--drake-accent);
   --rawblock-edit-panel-bd: var(--code-block-bg-color);
-  --item-hover-bg-color: #E5E5E596;
+  --item-hover-bg-color: #e5e5e596;
   --active-file-bg-color: var(--item-hover-bg-color);
 
   --blur-text-color: rgba(51, 51, 51, 0.5);
@@ -69,7 +69,7 @@
   --variable-color: var(--drake-highlight);
   --outline-active-color: var(--a-color);
   --code-block-bg-color: #2b2b2b;
-  --code-block-color: #A9B7C6;
+  --code-block-color: #a9b7c6;
   --title-color: #82ccdd;
   --blockquote-border-color: #8a7ccc;
   --blockquote-color: #fff9f9;
@@ -82,7 +82,7 @@
   --yaml-color: #777777;
   --yaml-bg-color: #f7f7f7;
   --footnotes-bg-color: #3c3d3e;
-  --footnotes-highlight: #FFD760;
+  --footnotes-highlight: #ffd760;
   --table-border-color: #dfe2e5;
   --table-header-bg-color: #f6f8fa;
   --table-bg-color: var(--bg-color);
@@ -91,7 +91,8 @@
   --btn-hover-bg-color: var(--item-hover-bg-color);
   --checkbox-checked: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M425.984 726.016l384-384-59.99-61.995-324.01 324.011-152.021-152.021L213.973 512zm384-598.016q36.01 0 61.013 25.984T896 213.974v596.01q0 34.005-25.003 59.99t-61.013 25.983h-596.01q-36.011 0-61.014-25.984t-25.003-59.989v-596.01q0-34.006 25.003-59.99T213.973 128h596.011z' fill='%2365b73b'/%3E%3C/svg%3E");
   --checkbox-unchecked: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M810.667 213.333v597.334H213.333V213.333h597.334m0-85.333H213.333C166.4 128 128 166.4 128 213.333v597.334C128 857.6 166.4 896 213.333 896h597.334C857.6 896 896 857.6 896 810.667V213.333C896 166.4 857.6 128 810.667 128z' fill='%23333333'/%3E%3C/svg%3E");
-  --monospace: "MiSans-Regular", "JetBrainsMonoNL", "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, "Ubuntu Mono", Consolas, HYZhengYuan; /*代码字体*/
+  --monospace: "MiSans-Regular", "JetBrainsMonoNL", "JetBrains Mono",
+    "Fira Code", "Cascadia Code", Menlo, "Ubuntu Mono", Consolas, HYZhengYuan; /*代码字体*/
   --text-font: var(--monospace); /*正文字体*/
   --title-font: var(--monospace); /*标题字体*/
   --text-line-height: 1.6; /*正文行间距*/
@@ -104,12 +105,13 @@
 
 // Vditor自定义主题
 @mixin markdown-preview {
-
   background-color: transparent;
   font-size: var(--text-size);
   font-family: var(--text-font) !important;
   color: var(--text-color);
-  -webkit-font-feature-settings: "liga" on, "calt" on;
+  -webkit-font-feature-settings:
+    "liga" on,
+    "calt" on;
   -webkit-font-smoothing: subpixel-antialiased;
   text-rendering: optimizeLegibility;
   letter-spacing: 0;
@@ -119,7 +121,6 @@
   p {
     line-height: var(--text-line-height);
   }
-
 
   /*code block*/
   .md-fences {
@@ -133,9 +134,17 @@
     line-height: var(--code-block-line-height);
   }
   .on-focus-mode .CodeMirror.cm-s-inner:not(.CodeMirror-focused) *,
-  .on-focus-mode .md-fences.md-focus .CodeMirror-code > :not(.CodeMirror-activeline) *,
-  .on-focus-mode .md-htmlblock.md-focus .CodeMirror-code > :not(.CodeMirror-activeline) * {
-    color: #909090 !important
+  .on-focus-mode
+    .md-fences.md-focus
+    .CodeMirror-code
+    > :not(.CodeMirror-activeline)
+    *,
+  .on-focus-mode
+    .md-htmlblock.md-focus
+    .CodeMirror-code
+    > :not(.CodeMirror-activeline)
+    * {
+    color: #909090 !important;
   }
 
   /*inline latex*/
@@ -148,99 +157,119 @@
   }
 
   /*mermaid*/
-  [id^=mermaidChart] {
+  [id^="mermaidChart"] {
     fill: var(--text-color) !important;
   }
-  [id^=mermaidChart] rect.rect {
+  [id^="mermaidChart"] rect.rect {
     fill: rgba(175, 255, 212, 0.3) !important;
   }
-  .md-diagram-panel-preview text.actor > tspan { /*方块文字*/
+  .md-diagram-panel-preview text.actor > tspan {
+    /*方块文字*/
     fill: var(--code-block-color) !important;
     stroke: none !important;
     font-family: var(--text-font) !important;
     font-size: 1rem !important;
   }
-  .md-diagram-panel-preview .actor { /*方块*/
+  .md-diagram-panel-preview .actor {
+    /*方块*/
     stroke: var(--table-border-color) !important;
     fill: var(--code-block-bg-color) !important;
   }
-  .md-diagram-panel-preview .actor-line { /*竖线*/
+  .md-diagram-panel-preview .actor-line {
+    /*竖线*/
     stroke: var(--text-color) !important;
     stroke-width: 1px;
   }
-  .md-diagram-panel-preview .messageLine0 { /*横线*/
+  .md-diagram-panel-preview .messageLine0 {
+    /*横线*/
     stroke-width: 1.5;
     stroke-dasharray: none;
     stroke: var(--text-color) !important;
   }
-  .md-diagram-panel-preview .messageLine1 { /*虚线*/
+  .md-diagram-panel-preview .messageLine1 {
+    /*虚线*/
     stroke-width: 1.5 !important;
     stroke-dasharray: 2, 2 !important;
     stroke: var(--text-color) !important;
   }
-  .md-diagram-panel-preview .messageText { /*描述文字*/
+  .md-diagram-panel-preview .messageText {
+    /*描述文字*/
     fill: var(--text-color) !important;
     font-family: var(--text-font) !important;
     font-size: 1rem !important;
   }
-  .md-diagram-panel-preview .activation0 { /*长方形*/
+  .md-diagram-panel-preview .activation0 {
+    /*长方形*/
     fill: #e6e6e6 !important;
     stroke: var(--text-color) !important;
   }
-  .md-diagram-panel-preview .labelText, .md-diagram-panel-preview .labelText > tspan { /*循环标记*/
+  .md-diagram-panel-preview .labelText,
+  .md-diagram-panel-preview .labelText > tspan {
+    /*循环标记*/
     fill: var(--code-block-color) !important;
     font-family: var(--text-font) !important;
     font-size: 1rem !important;
     dominant-baseline: unset;
     alignment-baseline: unset;
   }
-  .md-diagram-panel-preview .labelBox { /*循环标记背景*/
+  .md-diagram-panel-preview .labelBox {
+    /*循环标记背景*/
     stroke: var(--table-border-color) !important;
     fill: var(--code-block-bg-color) !important;
   }
-  .md-diagram-panel-preview .loopLine { /*循环标记虚线*/
+  .md-diagram-panel-preview .loopLine {
+    /*循环标记虚线*/
     stroke: var(--text-color) !important;
   }
-  .md-diagram-panel-preview .loopText, .md-diagram-panel-preview .loopText > tspan { /*循环名称*/
+  .md-diagram-panel-preview .loopText,
+  .md-diagram-panel-preview .loopText > tspan {
+    /*循环名称*/
     fill: var(--text-color) !important;
     font-size: 1rem !important;
   }
-  .md-diagram-panel-preview .sequenceNumber { /*序号*/
+  .md-diagram-panel-preview .sequenceNumber {
+    /*序号*/
     fill: var(--bg-color) !important;
   }
   pre.md-fences-advanced.md-focus .md-fences-adv-panel {
     border: none;
   }
-  .md-diagram-panel-preview .edgePath .path { /*箭头*/
+  .md-diagram-panel-preview .edgePath .path {
+    /*箭头*/
     stroke: var(--text-color) !important;
   }
-  .md-diagram-panel-preview .edgeLabel rect { /*条件文字背景*/
+  .md-diagram-panel-preview .edgeLabel rect {
+    /*条件文字背景*/
     fill: var(--bg-color) !important;
   }
-  .md-diagram-panel-preview .edgeLabel span { /*条件文字*/
+  .md-diagram-panel-preview .edgeLabel span {
+    /*条件文字*/
     color: var(--text-color);
   }
   .md-diagram-panel-preview .node rect,
   .md-diagram-panel-preview .node circle,
   .md-diagram-panel-preview .node ellipse,
   .md-diagram-panel-preview .node polygon,
-  .md-diagram-panel-preview .node path { /*形状*/
+  .md-diagram-panel-preview .node path {
+    /*形状*/
     stroke: var(--table-border-color) !important;
     fill: var(--code-block-bg-color) !important;
   }
-  #write .md-diagram-panel .md-diagram-panel-preview div { /*形状内文字*/
+  #write .md-diagram-panel .md-diagram-panel-preview div {
+    /*形状内文字*/
     color: var(--code-block-color) !important;
     font-family: var(--text-font) !important;
     font-size: 1rem !important;
   }
 
   /*code snippet*/
-  #write code, tt {
+  #write code,
+  tt {
     margin: 0 2px;
     border-radius: 2px;
     color: var(--drake-highlight);
     background-color: #fff5f5;
-    padding: .065em .4em;
+    padding: 0.065em 0.4em;
   }
 
   /*variable*/
@@ -280,7 +309,7 @@
   blockquote:before {
     display: block;
     position: absolute;
-    content: '';
+    content: "";
     width: 4px;
     left: 0;
     top: 0;
@@ -312,17 +341,20 @@
     text-decoration: none;
   }
   h2 a .md-plain {
-    border-bottom: .2rem solid var(--a-color);
+    border-bottom: 0.2rem solid var(--a-color);
   }
-  .on-focus-mode #write a .md-plain, .on-focus-mode .md-htmlblock-container a:hover {
-    border-bottom: .1rem solid var(--blur-text-color);
+  .on-focus-mode #write a .md-plain,
+  .on-focus-mode .md-htmlblock-container a:hover {
+    border-bottom: 0.1rem solid var(--blur-text-color);
   }
-  a .md-plain, .md-htmlblock-container a:hover,
-  .on-focus-mode #write .md-focus a .md-plain, .md-focus .md-htmlblock-container a:hover {
-    border-bottom: .1rem solid var(--a-color);
+  a .md-plain,
+  .md-htmlblock-container a:hover,
+  .on-focus-mode #write .md-focus a .md-plain,
+  .md-focus .md-htmlblock-container a:hover {
+    border-bottom: 0.1rem solid var(--a-color);
   }
-  [md-inline=link] a {
-    margin: 0 .2rem;
+  [md-inline="link"] a {
+    margin: 0 0.2rem;
   }
   a:any-link {
     color: var(--a-color);
@@ -376,7 +408,10 @@
     color: var(--title-color);
   }
 
-  h3.md-focus:before, h4.md-focus:before, h5.md-focus:before, h6.md-focus:before {
+  h3.md-focus:before,
+  h4.md-focus:before,
+  h5.md-focus:before,
+  h6.md-focus:before {
     visibility: hidden;
   }
 
@@ -389,15 +424,16 @@
 
   h2 {
     font-size: 1.8rem;
-    border-bottom: .1rem solid var(--h2-underline-color);
+    border-bottom: 0.1rem solid var(--h2-underline-color);
     margin-bottom: 1.5rem;
   }
   h2 .md-plain {
-    padding-bottom: .3rem;
-    border-bottom: .2rem solid var(--h2-underline-color);
+    padding-bottom: 0.3rem;
+    border-bottom: 0.2rem solid var(--h2-underline-color);
     line-height: 3rem;
   }
-  .on-focus-mode h2.md-end-block.md-heading:not(.md-focus):not(.md-focus-container):after {
+  .on-focus-mode
+    h2.md-end-block.md-heading:not(.md-focus):not(.md-focus-container):after {
     background-color: var(--blur-text-color) !important;
   }
 
@@ -456,7 +492,12 @@
     font-size: inherit !important;
   }
 
-  p, blockquote, ul, ol, dl, table {
+  p,
+  blockquote,
+  ul,
+  ol,
+  dl,
+  table {
     margin: var(--p-spacing) 0;
   }
 
@@ -524,7 +565,8 @@
     display: inline-block;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-inline-start: 2em;
   }
 
@@ -542,24 +584,24 @@
     margin-top: -1rem !important;
   }
   #write table {
-    margin-top: 1rem ;
+    margin-top: 1rem;
     word-break: initial;
     background-color: var(--table-bg-color);
   }
   table tr {
-    border-top: .1em solid var(--table-border-color);
+    border-top: 0.1em solid var(--table-border-color);
     margin: 0;
     padding: 0;
   }
   table th {
     font-weight: bold;
-    border: .1em solid var(--table-border-color);
+    border: 0.1em solid var(--table-border-color);
     border-bottom: 0;
     margin: 0;
     padding: 6px 13px;
   }
   table td {
-    border: .1em solid var(--table-border-color);
+    border: 0.1em solid var(--table-border-color);
     margin: 0;
     padding: 6px 13px;
   }
@@ -584,26 +626,26 @@
 
   /* height light */
   mark {
-    border: .1em solid var(--height-light-border-color);
+    border: 0.1em solid var(--height-light-border-color);
     color: var(--height-light-color);
     background-color: transparent;
-    padding: .1rem .5rem;
+    padding: 0.1rem 0.5rem;
     border-radius: 2rem;
-    margin: 0 .2rem;
-    font-size: .95rem;
+    margin: 0 0.2rem;
+    font-size: 0.95rem;
   }
 
   /*shortcut*/
   kbd {
-    border: .1em solid #5b5b5e;
+    border: 0.1em solid #5b5b5e;
     background: transparent;
     color: var(--text-color);
-    margin: 0 .4rem;
+    margin: 0 0.4rem;
     font-family: var(--text-font) !important;
-    font-size: .95rem;
-    padding: .3em .4em;
-    border-radius: .4em;
-    box-shadow: .1em .1em .2em rgba(0, 0, 0, 0.3);
+    font-size: 0.95rem;
+    padding: 0.3em 0.4em;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.3);
   }
 
   del {
@@ -642,27 +684,27 @@
   }
 
   .mathjax-block > .code-tooltip {
-    bottom: .375rem;
+    bottom: 0.375rem;
   }
 
   h3.md-focus:before {
     left: -1.5625rem;
-    top: .375rem;
+    top: 0.375rem;
   }
 
   h4.md-focus:before {
     left: -1.5625rem;
-    top: .285714286rem;
+    top: 0.285714286rem;
   }
 
   h5.md-focus:before {
     left: -1.5625rem;
-    top: .285714286rem;
+    top: 0.285714286rem;
   }
 
   h6.md-focus:before {
     left: -1.5625rem;
-    top: .285714286rem;
+    top: 0.285714286rem;
   }
 
   .md-image > .md-meta {
@@ -721,7 +763,7 @@
 
   .ty-quick-open-category-title {
     padding-left: 8px;
-    color: #BEBEBE;
+    color: #bebebe;
     font-size: 0.8rem;
     margin-bottom: 4px;
   }
@@ -800,10 +842,10 @@
     align-items: center;
   }
   .file-node-open-state {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
   .file-node-icon {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 
   #typora-sidebar {
@@ -815,7 +857,10 @@
     border-bottom: none;
   }
 
-  .file-list-item-summary, .file-list-item-parent-loc, .file-list-item-time, .file-list-item-summary {
+  .file-list-item-summary,
+  .file-list-item-parent-loc,
+  .file-list-item-time,
+  .file-list-item-summary {
     font-size: 0.9rem !important;
     font-family: var(--text-font);
   }
@@ -909,9 +954,10 @@
     position: absolute;
   }
 
-  .md-content.md-url, .md-def-content.md-def-url.md-auto-disp {
+  .md-content.md-url,
+  .md-def-content.md-def-url.md-auto-disp {
     text-decoration: none;
-    border-bottom: .1rem solid var(--text-color);
+    border-bottom: 0.1rem solid var(--text-color);
   }
 
   .CodeMirror-scroll::-webkit-scrollbar {
@@ -922,7 +968,8 @@
     font-size: 1em;
   }
 
-  .pin-outline #outline-content .outline-active strong, .pin-outline .outline-active {
+  .pin-outline #outline-content .outline-active strong,
+  .pin-outline .outline-active {
     font-weight: 500;
     color: var(--outline-active-color);
   }
@@ -937,7 +984,7 @@
   }
 
   /*checkbox*/
-  #write input[type=checkbox] {
+  #write input[type="checkbox"] {
     opacity: 0;
     height: 1.6rem;
     width: 1.6rem;
@@ -979,7 +1026,8 @@
     border-radius: 8px;
   }
 
-  .btn-primary:hover, .btn-primary:active {
+  .btn-primary:hover,
+  .btn-primary:active {
     background-color: var(--btn-hover-bg-color);
     color: var(--drake-highlight);
   }
@@ -1002,7 +1050,8 @@
     border-top: none;
   }
 
-  #table-insert-col, #table-insert-row {
+  #table-insert-col,
+  #table-insert-row {
     background: var(--input-bg-color);
     border-radius: 2px;
   }
@@ -1030,7 +1079,8 @@
     margin-bottom: 3rem;
     text-align: left;
   }
-  .megamenu-menu-panel h1, .megamenu-menu-panel h2 {
+  .megamenu-menu-panel h1,
+  .megamenu-menu-panel h2 {
     font-weight: normal;
   }
   #recent-file-panel-search-input {
@@ -1041,7 +1091,7 @@
   }
   #recent-file-panel-search-input::placeholder {
     color: var(--text-color);
-    opacity: .5;
+    opacity: 0.5;
   }
   .megamenu-menu-header {
     border-bottom: none;
@@ -1054,7 +1104,8 @@
     float: none;
     display: inline-block;
   }
-  #top-titlebar .toolbar-icon.btn.hover, #top-titlebar .toolbar-icon.btn:hover {
+  #top-titlebar .toolbar-icon.btn.hover,
+  #top-titlebar .toolbar-icon.btn:hover {
     background-color: var(--btn-hover-bg-color);
     color: var(--text-color);
   }
@@ -1077,7 +1128,10 @@
   .megamenu-menu-header #megamenu-menu-header-title {
     color: var(--text-color);
   }
-  header, .context-menu, .megamenu-content, footer {
+  header,
+  .context-menu,
+  .megamenu-content,
+  footer {
     font-family: var(--text-font);
   }
   .ty-preferences select {
@@ -1088,7 +1142,7 @@
   }
   a.ty-link {
     color: var(--a-color);
-    margin: 0 .2rem;
+    margin: 0 0.2rem;
   }
 
   /**
@@ -1101,16 +1155,16 @@
     color: var(--code-block-color);
   }
   .cm-s-inner span.cm-meta {
-    color: #BBB529;
+    color: #bbb529;
   }
   .cm-s-inner span.cm-number {
-    color: #6897BB;
+    color: #6897bb;
   }
   .cm-s-inner span.cm-keyword {
-    color: #CC7832;
+    color: #cc7832;
   }
   .cm-s-inner span.cm-def {
-    color: #FFD760;
+    color: #ffd760;
   }
   .cm-s-inner span.cm-variable {
     color: var(--code-block-color);
@@ -1119,64 +1173,64 @@
     color: var(--code-block-color);
   }
   .cm-s-inner span.cm-variable-3 {
-    color: #9876AA;
+    color: #9876aa;
   }
   .cm-s-inner span.cm-type {
-    color: #AABBCC;
+    color: #aabbcc;
   }
   .cm-s-inner span.cm-property {
-    color: #FFC66D;
+    color: #ffc66d;
   }
   .cm-s-inner span.cm-operator {
     color: var(--code-block-color);
   }
   .cm-s-inner span.cm-string {
-    color: #6A8759;
+    color: #6a8759;
   }
   .cm-s-inner span.cm-string-2 {
-    color: #6A8759;
+    color: #6a8759;
   }
   .cm-s-inner span.cm-comment {
     color: #787878;
   }
   .cm-s-inner span.cm-link {
-    color: #CC7832;
+    color: #cc7832;
   }
   .cm-s-inner span.cm-atom {
-    color: #CC7832;
+    color: #cc7832;
   }
   .cm-s-inner span.cm-error {
-    color: #BC3F3C;
+    color: #bc3f3c;
   }
   .cm-s-inner span.cm-tag {
-    color: #E8BF6A;
+    color: #e8bf6a;
   }
   .cm-s-inner span.cm-quote {
     color: #a6e22e;
   }
   .cm-s-inner span.cm-attribute {
-    color: #9876AA;
+    color: #9876aa;
   }
   .cm-s-inner span.cm-qualifier {
-    color: #6A8759;
+    color: #6a8759;
   }
   .cm-s-inner span.cm-bracket {
-    color: #E8BF6A;
+    color: #e8bf6a;
   }
   .cm-s-inner span.cm-builtin {
-    color: #FF9E59;
+    color: #ff9e59;
   }
   .cm-s-inner span.cm-special {
-    color: #FF9E59;
+    color: #ff9e59;
   }
   .cm-s-inner span.cm-matchhighlight {
-    color: #FFFFFF;
-    background-color: rgba(50, 89, 48, .7);
+    color: #ffffff;
+    background-color: rgba(50, 89, 48, 0.7);
     font-weight: normal;
   }
   .cm-s-inner span.cm-searching {
-    color: #FFFFFF;
-    background-color: rgba(61, 115, 59, .7);
+    color: #ffffff;
+    background-color: rgba(61, 115, 59, 0.7);
     font-weight: normal;
   }
   .cm-s-inner .CodeMirror-gutters {
@@ -1186,8 +1240,8 @@
     color: #585b5d;
   }
   .cm-s-inner .CodeMirror-matchingbracket {
-    background-color: #3B514D;
-    color: #FFEF28 !important;
+    background-color: #3b514d;
+    color: #ffef28 !important;
   }
   .cm-s-inner .CodeMirror-selected {
     background: #214283 !important;
