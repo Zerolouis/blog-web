@@ -24,7 +24,7 @@ export interface FileShareItem {
  * 文件分享列表 Item
  */
 export interface FileShareListItem {
-  method: string;
+  method: FileShareItem;
   url: string;
   description: string;
 }

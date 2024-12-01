@@ -53,11 +53,13 @@
                 <v-text-field
                   label="头图版权说明"
                   :messages="['版权信息将显示在头图下方，留空则不显示']"
+                  append-inner-icon="mdi-copyright"
                 />
                 <v-textarea
                   label="手动指定摘要内容"
                   counter
                   messages="留空则默认截取文章内容"
+                  append-inner-icon="mdi-format-list-text"
                 />
                 <v-switch label="文件分享功能" color="primary" />
               </v-form>
