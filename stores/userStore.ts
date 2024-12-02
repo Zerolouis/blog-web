@@ -1,6 +1,5 @@
 import type { UserState } from "~/ts/interface/stores.interface";
 import { stringify, parse } from "zipson";
-import type { Ref } from "vue";
 import type { LoginResult } from "~/ts/types/api.type";
 import { LoginResultSchema } from "~/ts/types/api.type";
 import { checkMessage } from "~/composables/useVerify";
@@ -122,6 +121,10 @@ export const useUserStore = defineStore(
       return token.accessToken;
     });
 
+    const getUID = (): string => {
+      return user.userInfo?.id || "0";
+    };
+
     return {
       user,
       token,
@@ -130,6 +133,7 @@ export const useUserStore = defineStore(
       getUserInfo,
       refreshToken,
       getToken,
+      getUID,
     };
   },
   {

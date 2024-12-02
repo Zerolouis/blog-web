@@ -4,8 +4,8 @@
       v-model="dateTotal"
       :label="labelName"
       append-inner-icon="mdi-clock"
-      @click="showPicker"
       color="info"
+      @click="showPicker"
     />
 
     <v-dialog v-model="isShowPicker" width="700">
@@ -75,11 +75,6 @@ function showPicker() {
   isShowPicker.value = true;
 }
 
-// 获取ISO格式时间
-const getTime = () => {
-  return time.value;
-};
-
 const confirm = () => {
   isShowPicker.value = false;
 };
@@ -91,7 +86,7 @@ const reset = () => {
 };
 
 defineExpose({
-  getTime,
+  time,
 });
 </script>
 

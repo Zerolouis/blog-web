@@ -230,12 +230,7 @@ const btnDelete = (index: number) => {
 };
 
 defineExpose({
-  /**
-   * 返回文件资源列表
-   */
-  getFileList() {
-    return fileList.value;
-  },
+  fileList,
 });
 </script>
 

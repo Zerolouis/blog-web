@@ -1,4 +1,3 @@
-import { z } from "zod";
 import type { ArticleDetailInfo } from "~/ts/interface/home.interface";
 import type { CommonMessage } from "~/ts/types/api.type";
 
@@ -70,3 +69,20 @@ export const shareCategory: Array<FileShareItem> = [
 ];
 
 export type ArticleGet = ArticleDetailInfo;
+
+/**
+ * 文章存储请求格式
+ */
+export interface ArticleSaveQuery {
+  title: string;
+  description?: string;
+  uid: string;
+  content: string;
+  copyright: number;
+  picture?: string;
+  pictureCopyright?: string;
+  tags: string[];
+  category: string[];
+  share: FileShareListItem[];
+  createTime: string;
+}

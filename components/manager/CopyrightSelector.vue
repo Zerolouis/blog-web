@@ -26,7 +26,7 @@
               />
             </div>
           </v-form>
-          {{ copyright }}
+          {{ ccShow }}
         </v-container>
         <v-card-actions>
           <v-btn color="warning" @click="btnCancel"> 取消 </v-btn>
@@ -93,19 +93,19 @@ const btnConfirm = () => {
   showDialog.value = false;
 };
 
-onMounted(() => {
-  showDialog.value = true;
-});
-
-const copyright = computed(() => {
+const copyright = computed((): number => {
   if (A0.value === CopyrightEnum.CC) {
-    return CCMap.get(A1.value + A2.value);
+    return CCMap.get(A1.value + A2.value) || 3;
   } else {
     return A0.value;
   }
 });
 const ccShow = computed(() => {
-  return CopyrightMap.get(copyright.value);
+  if (Number(copyright.value) >= 0) {
+    return CopyrightMap.get(copyright.value);
+  } else {
+    return "尚未选择";
+  }
 });
 
 defineExpose({
