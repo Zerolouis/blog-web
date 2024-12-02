@@ -9,7 +9,7 @@
             variant="tonal"
             icon
             v-bind="props"
-            @click="showDialog = !showDialog"
+            @click="btnShowDialog"
           >
             <v-icon> mdi-plus </v-icon>
           </v-btn>
@@ -21,17 +21,29 @@
       :items="fileList"
       density="compact"
     >
-      <template #[`item.actions`]>
+      <template #[`item.actions`]="{ item, index }">
         <v-tooltip location="top" text="编辑">
           <template #activator="{ props }">
-            <v-btn v-bind="props" density="compact" icon variant="flat">
+            <v-btn
+              v-bind="props"
+              density="compact"
+              icon
+              variant="flat"
+              @click="btnEdit(item, index)"
+            >
               <v-icon size="small" color="info"> mdi-pencil </v-icon>
             </v-btn>
           </template>
         </v-tooltip>
         <v-tooltip location="top" text="删除">
           <template #activator="{ props }"
-            ><v-btn v-bind="props" density="compact" icon variant="flat">
+            ><v-btn
+              v-bind="props"
+              density="compact"
+              icon
+              variant="flat"
+              @click="btnDelete(index)"
+            >
               <v-icon size="small" color="error"> mdi-delete </v-icon>
             </v-btn>
           </template>
@@ -70,7 +82,8 @@
     </v-data-table>
   </v-card>
 
-  <v-dialog v-model="showDialog" width="500">
+  <!--添加文件对话框-->
+  <v-dialog v-model="showDialog" persistent width="500">
     <v-card>
       <v-card-title class="bg-info"> 添加文件 </v-card-title>
       <v-container>
@@ -83,6 +96,7 @@
             item-value="id"
             item-title="title"
             color="info"
+            return-object
           />
           <v-text-field
             v-model="url"
@@ -104,8 +118,21 @@
       </v-container>
       <v-card-actions>
         <v-spacer />
-        <v-btn color="warning"> 取消 </v-btn>
-        <v-btn color="primary" @click="addFile"> 确定 </v-btn>
+        <v-btn color="warning" @click="btnCancel"> 取消 </v-btn>
+        <v-btn
+          v-if="editIndex !== undefined"
+          color="primary"
+          @click="btnConfirmEdit"
+        >
+          修改
+        </v-btn>
+        <v-btn
+          v-if="editIndex == undefined"
+          color="primary"
+          @click="btnConfirmAdd"
+        >
+          新增
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -116,6 +143,7 @@ import {
   type FileShareListItem,
   shareCategory,
 } from "~/ts/interface/api.interface";
+import type { Ref } from "vue";
 
 const showDialog = ref(false);
 const shareMethods = reactive(shareCategory);
@@ -124,14 +152,9 @@ const url = ref();
 const description = ref();
 const form: any = ref(null);
 const toast = useToastStore();
+const editIndex = ref();
 
-const fileList: Ref<Array<FileShareListItem>> = ref([
-  {
-    method: { method: "baidu", title: "百度网盘" },
-    url: "测试",
-    description: "cesium",
-  },
-]);
+const fileList: Ref<Array<FileShareListItem>> = ref([]);
 const shareListHeaders = [
   {
     title: "分享方式",
@@ -148,15 +171,23 @@ const shareListHeaders = [
     title: "操作",
     value: "actions",
     key: "actions",
-    width: 200,
+    width: 100,
   },
 ];
 
-onMounted(() => {
+const btnShowDialog = () => {
   showDialog.value = true;
-});
+  method.value = undefined;
+  url.value = undefined;
+  description.value = undefined;
+};
 
-const addFile = async () => {
+const btnCancel = () => {
+  showDialog.value = false;
+  editIndex.value = undefined;
+};
+
+const btnConfirmAdd = async () => {
   const { valid } = await form.value.validate();
   if (valid) {
     console.log(method.value, url.value, description.value);
@@ -165,10 +196,47 @@ const addFile = async () => {
       url: url.value,
       description: description.value,
     });
+    showDialog.value = false;
+    editIndex.value = undefined;
   } else {
     toast.error("请填写正确的信息");
   }
 };
+
+const btnConfirmEdit = async () => {
+  const { valid } = await form.value.validate();
+  if (valid) {
+    fileList.value[editIndex.value] = {
+      method: method.value,
+      url: url.value,
+      description: description.value,
+    };
+  } else {
+    toast.error("请填写正确的信息");
+  }
+};
+
+const btnEdit = (item: FileShareListItem, index: number) => {
+  console.log(item, index);
+  editIndex.value = index;
+  method.value = item.method;
+  url.value = item.url;
+  description.value = item.description;
+  showDialog.value = true;
+};
+
+const btnDelete = (index: number) => {
+  fileList.value.splice(index, 1);
+};
+
+defineExpose({
+  /**
+   * 返回文件资源列表
+   */
+  getFileList() {
+    return fileList.value;
+  },
+});
 </script>
 
 <style scoped lang="scss">

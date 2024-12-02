@@ -49,6 +49,7 @@
               :value="item"
               color="primary"
               density="compact"
+              :disabled="item.disable"
             >
               <template #prepend>
                 <v-icon :icon="item.icon" />
@@ -81,28 +82,32 @@ const themeIcon = computed(() => {
   return darkMode.value ? "mdi-white-balance-sunny" : "mdi-weather-night";
 });
 // 头像卡片
-const userItems = [
+const userItems = reactive([
   {
     text: "个人中心",
     icon: "mdi-cog",
     path: "/person/index",
+    disable: true,
   },
   {
     text: "私信",
     icon: "mdi-message",
     path: "/user/message",
+    disable: true,
   },
   {
-    text: "文章管理",
+    text: "管理",
     icon: "mdi-cog",
-    path: "/person/",
+    path: "/manager/dashboard",
+    disable: false,
   },
   {
     text: "退出登录",
     icon: "mdi-logout",
     path: "/login",
+    disable: false,
   },
-];
+]);
 </script>
 
 <style lang="scss" scoped>

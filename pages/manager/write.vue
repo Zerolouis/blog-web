@@ -28,7 +28,7 @@
                 @submit.prevent
               >
                 <CommonDatePicker ref="datePicker" label-name="发布时间" />
-                <CommonCategorySelecter />
+                <CommonCategorySelector />
                 <v-text-field
                   append-inner-icon="mdi-panorama-outline"
                   :messages="['留空则使用随机默认头图']"
@@ -50,18 +50,23 @@
                   append-inner-icon="mdi-label"
                   :items="tagList"
                 />
-                <v-text-field
-                  label="头图版权说明"
-                  :messages="['版权信息将显示在头图下方，留空则不显示']"
-                  append-inner-icon="mdi-copyright"
-                />
+                <!--<v-text-field-->
+                <!--  label="头图版权说明"-->
+                <!--  :messages="['版权信息将显示在头图下方，留空则不显示']"-->
+                <!--  append-inner-icon="mdi-copyright"-->
+                <!--/>-->
+                <ManagerCopyrightSelector ref="copyrightSelector" />
                 <v-textarea
                   label="手动指定摘要内容"
                   counter
                   messages="留空则默认截取文章内容"
                   append-inner-icon="mdi-format-list-text"
                 />
-                <v-switch label="文件分享功能" color="primary" />
+                <v-switch
+                  v-model="showSharePanel"
+                  label="文件分享功能"
+                  color="primary"
+                />
               </v-form>
             </v-container>
             <v-card-actions>
@@ -71,8 +76,7 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-
-          <ManagerSharePanel />
+          <ManagerSharePanel v-if="showSharePanel" ref="sharePanel" />
         </v-col>
       </v-row>
     </v-container>
@@ -81,7 +85,12 @@
 
 <script setup lang="ts">
 import type { Ref } from "vue";
-import { type ArticleMarkdownWrite, CommonDatePicker } from "#components";
+import {
+  type ArticleMarkdownWrite,
+  CommonDatePicker,
+  ManagerCopyrightSelector,
+  ManagerSharePanel,
+} from "#components";
 import { checkMessage, useUserStore } from "#imports";
 import { checkHttpsAndHttp } from "~/composables/useVerify";
 import type { VForm } from "vuetify/components";
@@ -99,6 +108,11 @@ const title = ref("");
 const writer: Ref<InstanceType<typeof ArticleMarkdownWrite> | null> = ref(null);
 // 发布时间选择器
 const datePicker: Ref<InstanceType<typeof CommonDatePicker> | null> = ref(null);
+const sharePanel: Ref<InstanceType<typeof ManagerSharePanel> | null> =
+  ref(null);
+const copyrightSelector: Ref<InstanceType<typeof ManagerCopyrightSelector>> =
+  ref(null);
+const showSharePanel: Ref<boolean> = ref(false);
 // 标签
 const tagSelected = ref([]);
 const tagList: Ref<Array<string>> = ref(["test1"]);
@@ -109,7 +123,7 @@ const description: Ref<string | undefined> = ref();
 // 表单
 const titleForm: any = ref(null);
 const configForm: any = ref(null);
-
+const toast = useToastStore();
 /**
  * 获取编辑器文本
  */
@@ -130,7 +144,7 @@ const getTagList = async () => {
   for (const key in message?.data) {
     map.set(key, message?.data[key]);
   }
-  console.log(map.keys());
+  //console.log(map.keys());
   tagList.value = [];
 
   for (const key of map.keys()) {
@@ -140,8 +154,13 @@ const getTagList = async () => {
 
 // 发布文章
 const submitArticle = async () => {
-  await titleForm?.value.validate();
-  await configForm?.value.validate();
+  const { valid: titleValid } = await titleForm.value.validate();
+  const { valid: configValid } = await configForm.value.validate();
+  if (titleValid && configValid) {
+    console.log("提交");
+  } else {
+    toast.error("请填写正确的信息");
+  }
 };
 
 onMounted(() => {
