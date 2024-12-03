@@ -82,7 +82,7 @@ export interface ArticleSaveQuery {
   picture?: string;
   pictureCopyright?: string;
   tags: string[];
-  category: string[];
+  categories: string[];
   share: FileShareListItem[];
   createTime: string;
 }

@@ -53,7 +53,7 @@
                   messages="将显示在头图下方"
                   color="info"
                 />
-                <v-combobox
+                <v-select
                   v-model="tagSelected"
                   multiple
                   chips
@@ -61,12 +61,10 @@
                   color="info"
                   append-inner-icon="mdi-label"
                   :items="tagList"
+                  item-value="id"
+                  item-title="name"
+                  return-object
                 />
-                <!--<v-text-field-->
-                <!--  label="头图版权说明"-->
-                <!--  :messages="['版权信息将显示在头图下方，留空则不显示']"-->
-                <!--  append-inner-icon="mdi-copyright"-->
-                <!--/>-->
                 <ManagerCopyrightSelector ref="copyrightSelector" />
                 <v-textarea
                   v-model="description"
@@ -137,7 +135,7 @@ const categorySelector: Ref<InstanceType<
 > | null> = ref(null);
 const showSharePanel: Ref<boolean> = ref(false);
 // 标签
-const tagSelected = ref([]);
+const tagSelected: any = ref([]);
 const tagList: Ref<Array<string>> = ref(["test1"]);
 const loading: Ref<boolean> = ref(false);
 const picture: Ref<string> = ref("");
@@ -152,9 +150,7 @@ const toast = useToastStore();
 const { $dayjs } = useNuxtApp();
 const user = useUserStore();
 
-/**
- * 获取编辑器文本
- */
+// 获取Markdown编辑器文本
 const getWriterText = (): string => {
   return writer.value?.getText();
 };
@@ -168,16 +164,15 @@ const getTagList = async () => {
     },
   });
   const { data: message } = await checkMessage(res.value);
-  const map = new Map<string, string>();
-  for (const key in message?.data) {
-    map.set(key, message?.data[key]);
-  }
-  //console.log(map.keys());
-  tagList.value = [];
+  tagList.value = message?.data;
+};
 
-  for (const key of map.keys()) {
-    tagList.value.push(key);
+const getTagSelected = () => {
+  const result = [];
+  for (const item of tagSelected.value) {
+    result.push(item.id);
   }
+  return result;
 };
 
 // 发布文章
@@ -187,27 +182,29 @@ const submitArticle = async () => {
   const { valid: titleValid } = await titleForm.value.validate();
   const { valid: configValid } = await configForm.value.validate();
   if (titleValid && configValid) {
-    loading.value = true;
+    //loading.value = true;
     const body: ArticleSaveQuery = {
       createTime: datePicker.value?.time || $dayjs(new Date()).toISOString(),
       share: sharePanel.value?.fileList || [],
-      category: getCategoryIds(),
+      categories: getCategoryIds(),
       content: getWriterText(),
       copyright: copyrightSelector.value?.copyright || CopyrightEnum.Deny,
       description: description.value || "",
       picture: picture.value || "",
       pictureCopyright: picCopyright.value || "",
-      tags: tagSelected.value || [],
+      tags: getTagSelected() || [],
       title: title.value,
       uid: user.getUID(),
     };
-    // await $fetch("/api/manager/article", {
-    //   method: "post",
-    //   headers: {
-    //     Authorization: userStore.getToken,
-    //   },
-    //   body,
-    // }).then((r) => {});
+    await $fetch("/api/manager/article", {
+      method: "post",
+      headers: {
+        Authorization: userStore.getToken,
+      },
+      body,
+    }).then((r) => {
+      console.log(r);
+    });
 
     console.log("提交", body);
   } else {

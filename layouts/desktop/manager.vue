@@ -59,7 +59,7 @@ const naviRouterList: Array<NaviListItem> = reactive([
   },
   {
     preIcon: "mdi-book-edit-outline",
-    name: "撰写文章",
+    name: "文章撰写",
     value: "/manager/write",
   },
   {
@@ -68,13 +68,13 @@ const naviRouterList: Array<NaviListItem> = reactive([
     children: [
       {
         // preIcon: 'mdi-view-dashboard-outline',
-        name: "文章管理",
-        value: "/manager/article",
+        name: "标签",
+        value: "/manager/tag",
       },
       {
         // preIcon: 'mdi-view-dashboard-outline',
-        name: "评论管理",
-        value: "/manager/comment",
+        name: "分类",
+        value: "/manager/category",
       },
     ],
   },
@@ -107,7 +107,9 @@ const drawer = ref(true);
 const siteConfig = useSiteConfig();
 const { managerRouter } = storeToRefs(siteConfig);
 
-watch(openRouter, () => {});
+watch(openRouter, (newValue) => {
+  navigateTo(newValue[0]);
+});
 </script>
 
 <style scoped lang="scss"></style>
