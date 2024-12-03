@@ -100,7 +100,7 @@ if (result) {
     traverse(result[i]);
   }
 }
-console.log(result);
+console.log("获取分类", result);
 content.value = result;
 
 // 取消按钮

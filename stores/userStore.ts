@@ -122,7 +122,7 @@ export const useUserStore = defineStore(
     });
 
     const getUID = (): string => {
-      return user.userInfo?.id || "0";
+      return user.userInfo?.uid || "0";
     };
 
     return {

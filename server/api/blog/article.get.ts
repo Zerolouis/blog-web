@@ -1,35 +1,38 @@
-import type {ArticleGet} from "~/ts/interface/api.interface";
+import type { ArticleGet } from "~/ts/interface/api.interface";
 
 export default defineEventHandler(async () => {
-
   const demo: ArticleGet = {
-    category: [{
-      id: '1',
-      // 类型名称
-      title: '文章',
-      // 是否启用
-      disabled: false,
-      // 链接
-      href: '/'
-    },{
-      id: '2',
-      // 类型名称
-      title: '学习',
-      // 是否启用
-      disabled: false,
-      // 链接
-      href: '/'
-    }],
+    category: [
+      {
+        id: "1",
+        // 类型名称
+        title: "文章",
+        // 是否启用
+        disabled: false,
+        // 链接
+        href: "/",
+      },
+      {
+        id: "2",
+        // 类型名称
+        title: "学习",
+        // 是否启用
+        disabled: false,
+        // 链接
+        href: "/",
+      },
+    ],
     createTime: "2018-04-04T16:00:00.000Z",
     updateTime: "2024-11-15T16:00:00.000Z",
     uploader: {
-      id: '123123',
-      name: 'Zerolouis',
-      nickname: 'Zerolouis',
-      avatar: "https://img.home.zeroh.top:12443/i/2024/11/16/94219763_p0-6738317874562.jpg"
+      uid: "123123",
+      username: "Zerolouis",
+      nickname: "Zerolouis",
+      avatar:
+        "https://img.home.zeroh.top:12443/i/2024/11/16/94219763_p0-6738317874562.jpg",
     },
-    id: '123123' ,
-    title: '测试标题',
+    id: "123123",
+    title: "测试标题",
     description: null,
     content: `## 教程
 
@@ -617,8 +620,8 @@ https://v.qq.com/x/cover/zf2z0xpqcculhcz/y0016tj0qvh.html
 
     还有其他行级排版语法，比如**加粗**和[链接](https://b3log.org)。
 \`\`\`
-`
-  }
+`,
+  };
 
-  return demo
-})
+  return demo;
+});

@@ -29,10 +29,12 @@ export interface ArticleCategoryInfo {
 }
 
 export interface UserInfo {
-  id: string;
-  name: string;
+  uid: string;
+  username: string;
   nickname: string;
   avatar: string;
+  level: string;
+  roleName: string;
 }
 
 // 文章详情

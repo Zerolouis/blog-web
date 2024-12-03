@@ -157,14 +157,15 @@ const getWriterText = (): string => {
 
 // 获取标签列表
 const getTagList = async () => {
-  const { data: res } = await useFetch("/api/manager/tag", {
+  await $fetch("/api/manager/tag", {
     method: "get",
     headers: {
       Authorization: userStore.getToken,
     },
+  }).then(async (res) => {
+    const { data: message } = await checkMessage(res);
+    tagList.value = message?.data;
   });
-  const { data: message } = await checkMessage(res.value);
-  tagList.value = message?.data;
 };
 
 const getTagSelected = () => {

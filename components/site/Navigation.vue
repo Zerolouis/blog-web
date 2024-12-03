@@ -39,7 +39,7 @@
               {{ user.userInfo?.nickname }}
             </div>
             <div class="user-secondary">
-              {{ user.userInfo?.name }}
+              {{ user.userInfo?.username }}
             </div>
           </div>
           <v-list density="compact">

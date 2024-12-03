@@ -53,7 +53,7 @@ async function checkMessage(res: any) {
   const { success, data, error } = await messageSchema.safeParseAsync(res);
   if (data?.code && data?.msg) {
     if (data?.code === "200") {
-      console.log("响应格式校验", data.msg);
+      // console.log("响应格式校验", data.msg);
     }
   }
   return { success, data, error };
