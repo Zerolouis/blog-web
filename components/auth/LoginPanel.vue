@@ -130,9 +130,13 @@ const handleLogin = async () => {
   console.log(loginForm.value);
   const { valid } = await usernameForm.value.validate();
   if (valid) {
-    await userLogin().catch((e) => {
-      toast.error(e);
-    });
+    await userLogin()
+      .then(() => {
+        navigateTo("/");
+      })
+      .catch((e) => {
+        toast.error(e);
+      });
   } else {
     toast.error("请输入正确的登录信息");
   }

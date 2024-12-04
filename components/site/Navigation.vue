@@ -18,8 +18,8 @@
         @click="navigateTo('/auth/login')"
         >登录</v-btn
       >
-      <v-btn id="avatar-menu" icon>
-        <v-avatar v-if="user.isLogin" size="small">
+      <v-btn id="avatar-menu" icon v-if="user.isLogin">
+        <v-avatar size="small">
           <v-img alt="头像" :src="user.userInfo?.avatar" />
         </v-avatar>
       </v-btn>

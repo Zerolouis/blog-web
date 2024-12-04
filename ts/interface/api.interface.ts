@@ -68,8 +68,6 @@ export const shareCategory: Array<FileShareItem> = [
   },
 ];
 
-export type ArticleGet = ArticleDetailInfo;
-
 /**
  * 文章存储请求格式
  */
@@ -85,4 +83,10 @@ export interface ArticleSaveQuery {
   categories: string[];
   share: FileShareListItem[];
   createTime: string;
+}
+
+export interface ArticleShareItem {
+  method: string;
+  url: string;
+  description?: string;
 }

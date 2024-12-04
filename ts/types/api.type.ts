@@ -54,3 +54,66 @@ export const CategoryListSchema = z.lazy(() =>
     .array(),
 );
 export type CategoryList = z.infer<typeof CategoryListSchema>;
+
+export const ArticleQuerySchema = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  creator: z.object({
+    uid: z.string(),
+    username: z.string(),
+    nickname: z.string(),
+    level: z.string(),
+    roleName: z.string(),
+    avatar: z.string().optional(),
+  }),
+  content: z.string(),
+  copyright: z.string(),
+  picture: z.string(),
+  pictureCopyright: z.string().optional(),
+  tags: z
+    .array(
+      z
+        .object({
+          id: z.string(),
+          name: z.string(),
+        })
+        .optional(),
+    )
+    .optional(),
+
+  categories: z
+    .array(
+      z
+        .object({
+          id: z.string(),
+          parentId: z.string(),
+          name: z.string(),
+          children: z.nullable(z.string()).optional(),
+        })
+        .optional(),
+    )
+    .optional(),
+  share: z
+    .array(
+      z.object({
+        method: z.string(),
+        url: z.string(),
+        description: z.string().optional(),
+      }),
+    )
+    .optional(),
+  createTime: z.string(),
+  updateTime: z.string(),
+});
+
+export type ArticleQuery = z.infer<typeof ArticleQuerySchema>;
+
+export const FileShareQuerySchema = z.array(
+  z.object({
+    method: z.string(),
+    url: z.string(),
+    description: z.string().optional(),
+  }),
+);
+
+export type FileShareQuery = z.infer<typeof FileShareQuerySchema>;

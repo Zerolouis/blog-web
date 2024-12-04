@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
   console.log("中间件global");
   console.log("路由 From", from.name, " to ", to.name);
   const { $pinia } = useNuxtApp();
@@ -16,7 +16,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   if (isLogin && token.value.accessToken) {
     toast.info("恢复登录");
-    userStore.getUserInfo();
+    await userStore.getUserInfo();
     // 请求用户信息
     return;
   }

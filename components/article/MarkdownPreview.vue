@@ -11,7 +11,7 @@ import hljs from "highlight.js";
 import { useCustomTheme } from "~/composables/useCustomTheme";
 
 const props = defineProps<{
-  content: string;
+  content: string | undefined;
 }>();
 
 const vditorPreview = ref(null);
