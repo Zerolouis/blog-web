@@ -1,9 +1,11 @@
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
   let demo;
-  await $fetch("http://127.0.0.1:4523/m1/3792059-3424148-default/article").then(
-    (response) => {
-      demo = response;
-    },
-  );
+  const query = getQuery(event);
+  await $fetch(useRuntimeConfig().api + "/article", {
+    method: "GET",
+    query,
+  }).then((response) => {
+    demo = response;
+  });
   return demo;
 });

@@ -45,6 +45,11 @@ function checkEmpty(value: string) {
   } else return "不能为空";
 }
 
+function isAllNumbers(str: string): boolean {
+  const numberRegex = /^\d+$/;
+  return numberRegex.test(str);
+}
+
 /**
  * 响应消息格式验证
  * @param res 响应信息
@@ -85,4 +90,5 @@ export {
   checkEmpty,
   checkHttpsAndHttp,
   checkEmptyName,
+  isAllNumbers,
 };

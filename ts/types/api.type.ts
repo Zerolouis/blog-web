@@ -93,15 +93,13 @@ export const ArticleQuerySchema = z.object({
         .optional(),
     )
     .optional(),
-  share: z
-    .array(
-      z.object({
-        method: z.string(),
-        url: z.string(),
-        description: z.string().optional(),
-      }),
-    )
-    .optional(),
+  share: z.array(
+    z.object({
+      method: z.string(),
+      url: z.string(),
+      description: z.string().optional(),
+    }),
+  ),
   createTime: z.string(),
   updateTime: z.string(),
 });
@@ -117,3 +115,13 @@ export const FileShareQuerySchema = z.array(
 );
 
 export type FileShareQuery = z.infer<typeof FileShareQuerySchema>;
+
+export const TagQuerySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  createTime: z.string(),
+  updateTime: z.string(),
+  idDeleted: z.string(),
+});
+
+export type TagQuery = z.infer<typeof TagQuerySchema>;

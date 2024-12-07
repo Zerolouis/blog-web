@@ -1,48 +1,19 @@
-import type {ArticleCardInfo} from "~/ts/interface/home.interface";
+import type { ArticleCardInfo } from "~/ts/interface/home.interface";
+import { checkMessage } from "~/composables/useVerify";
 
-export default defineEventHandler(async () => {
-
-  const demo: Array<ArticleCardInfo> = [{
-    id: '1',
-    title: '文章标题',
-    description: '文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述',
-    account: 'Zerolouis',
-    image: 'https://img.home.zeroh.top:12443/i/2024/11/15/fog-4436636-673637e8d717a.jpg',
-    upload: '2024-11-15T16:00:00.000Z',
-    comment: 0
-  },{
-    id: '2',
-    title: '文章标题',
-    description: '文章描述',
-    account: 'Zerolouis',
-    image: 'https://img.home.zeroh.top:12443/i/2024/11/15/fog-4436636-673637e8d717a.jpg',
-    upload: '2018-04-04T16:00:00.000Z',
-    comment: 0
-  },{
-    id: '3',
-    title: '文章标题',
-    description: '文章描述',
-    account: 'Zerolouis',
-    image: 'https://img.home.zeroh.top:12443/i/2024/11/15/fog-4436636-673637e8d717a.jpg',
-    upload: '2018-04-04T16:00:00.000Z',
-    comment: 0
-  },{
-    id: '4',
-    title: '文章标题',
-    description: '文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述',
-    account: 'Zerolouis',
-    image: 'https://img.home.zeroh.top:12443/i/2024/11/15/fog-4436636-673637e8d717a.jpg',
-    upload: '2018-04-04T16:00:00.000Z',
-    comment: 0
-  },{
-    id: '5',
-    title: '文章标题',
-    description: '文章描述',
-    account: 'Zerolouis',
-    image: 'https://img.home.zeroh.top:12443/i/2024/11/15/fog-4436636-673637e8d717a.jpg',
-    upload: '2018-04-04T16:00:00.000Z',
-    comment: 0
-  }]
-
-  return demo;
-})
+export default defineEventHandler(async (event) => {
+  let res: any = null;
+  const query = getQuery(event);
+  await $fetch(useRuntimeConfig().api + "/article/page", {
+    method: "GET",
+    query,
+  })
+    .then(async (r) => {
+      const { data } = await checkMessage(r);
+      res = data;
+    })
+    .catch(() => {
+      throw Error("后端连接失败");
+    });
+  return res;
+});

@@ -7,13 +7,13 @@ export interface ArticleCardInfo {
   // 文章描述
   description: string;
   // 头图
-  image: string;
+  picture: string;
   // 发布者
-  account: string;
+  user: string;
   // 上传时间
-  upload: string;
+  createTime: string;
   // 评论数
-  comment: number;
+  commentCount: string | number;
 }
 
 // 文章分类信息

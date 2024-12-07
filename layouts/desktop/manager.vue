@@ -46,6 +46,7 @@
 
 <script setup lang="ts">
 import type { NaviListItem } from "~/ts/interface/manager.interface";
+import { useSiteInfo } from "~/stores/siteInfo";
 
 useHead({
   title: "摸鱼Blog - 后台",
@@ -108,7 +109,7 @@ const naviRouterList: Array<NaviListItem> = reactive([
 
 const openRouter: Ref<string[]> = ref([]);
 const drawer = ref(null);
-const siteConfig = useSiteConfig();
+const siteConfig = useSiteInfo();
 const { managerRouter } = storeToRefs(siteConfig);
 
 if (openRouter.value.length === 0) {

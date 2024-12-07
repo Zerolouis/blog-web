@@ -35,18 +35,14 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
   modules: [
-    //(_options, nuxt) => {
-    //  nuxt.hooks.hook('vite:extendConfig', (config) => {
-    //    // @ts-expect-error 禁用vuetify配置文件报错提示
-    //    config.plugins.push(vuetify({autoImport: true}))
-    //  })
-    //},
     "dayjs-nuxt",
     "vuetify-nuxt-module",
     "@nuxtjs/i18n",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
     "@nuxt/eslint",
+    "@nuxtjs/robots",
+    "@nuxtjs/sitemap",
   ],
   vite: {
     vue: {

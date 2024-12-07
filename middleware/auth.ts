@@ -1,11 +1,13 @@
 // 强制身份验证
+import { useSiteInfo } from "~/stores/siteInfo";
+
 export default defineNuxtRouteMiddleware(async (to, from) => {
   if (import.meta.server) return;
 
   const { $pinia } = useNuxtApp();
   const userStore = useUserStore($pinia);
   const toast = useToastStore($pinia);
-  const siteConfig = useSiteConfig($pinia);
+  const siteConfig = useSiteInfo($pinia);
   const { isLogin } = storeToRefs(siteConfig);
   const { token, user } = storeToRefs(userStore);
 

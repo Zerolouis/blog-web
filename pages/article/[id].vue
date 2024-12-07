@@ -1,7 +1,10 @@
 <template>
   <div>
     <v-parallax
-      src="https://i.imgur.com/xjIZJxs.png"
+      :src="
+        article?.picture ||
+        'https://image.jujuh.top:443/i/2024/12/06/sky-7232494_1920-6752a91e01618.jpg'
+      "
       height="400"
       class="article-title-pic"
     >
@@ -35,7 +38,7 @@
                   <v-icon class="info-icon"> mdi-clock-edit-outline </v-icon>
                   {{ $dayjs(article?.updateTime).format("YYYY-MM-DD HH:mm") }}
                 </div>
-                <div class="info-container" v-tooltip:top="'阅读预计耗时'">
+                <div v-tooltip:top="'阅读预计耗时'" class="info-container">
                   <v-icon class="info-icon">
                     mdi-book-open-variant-outline
                   </v-icon>
@@ -45,10 +48,10 @@
               <div>
                 <template v-for="item in article?.tags" :key="item?.id">
                   <v-chip
-                    @click="chipToLabel"
                     color="primary"
                     size="small"
                     class="info-chip"
+                    @click="chipToLabel"
                   >
                     <v-icon icon="mdi-label" start />
                     {{ item?.name }}
@@ -66,7 +69,7 @@
               <!--</client-only>-->
             </div>
 
-            <div class="article-info">
+            <div class="article-info copyright">
               <div>转载方式</div>
               <div class="info">
                 <ArticleCopyright
@@ -91,7 +94,10 @@
 
       <v-row>
         <v-col cols="12">
-          <ArticleFileShare :share="article?.share" />
+          <ArticleFileShare
+            v-if="article && article.share.length > 0"
+            :share="article?.share"
+          />
         </v-col>
       </v-row>
 
@@ -140,7 +146,11 @@ import { ArticleQuerySchema } from "~/ts/types/api.type";
 import { checkMessage } from "#imports";
 import { CopyrightURLMap } from "~/ts/enum/api.enum";
 import { useMarkdownCount } from "~/composables/useMarkdownCount";
-const siteConfig = useSiteConfig();
+import { useSiteInfo } from "~/stores/siteInfo";
+import { isAllNumbers } from "~/composables/useVerify";
+
+const route = useRoute();
+const siteConfig = useSiteInfo();
 const { currentTheme } = storeToRefs(siteConfig);
 const toast = useToastStore();
 const contentCount = ref(200);
@@ -152,13 +162,40 @@ definePageMeta({
 useHead({
   title: "文章",
 });
-// 获取文章内容
-const { data: res } = await useFetch("/api/blog/article");
+
+const res = ref();
+const paramId = route.params.id.toString();
+console.log("获取文章", paramId);
+// 处理路由参数，
+if (isAllNumbers(paramId)) {
+  // 获取文章内容
+  const { data: result } = await useFetch("/api/blog/article", {
+    method: "get",
+    query: {
+      articleId: paramId,
+    },
+  });
+  res.value = result.value;
+}
+
 const { data: message } = await checkMessage(res.value);
+if (message?.code !== "200") {
+  showError({
+    statusCode: 404,
+    message: "文章不存在",
+  });
+}
 const { data: article } = await ArticleQuerySchema.safeParseAsync(
   message?.data,
 );
-
+useSeoMeta({
+  title: article?.title,
+  ogTitle: article?.title,
+  description: article?.description,
+  ogDescription: article?.description,
+  ogType: "article",
+  googlebotNews: "nosnippet",
+});
 contentCount.value = useMarkdownCount(article?.content || "");
 
 // 侧边工具栏
@@ -193,7 +230,7 @@ const changeShowTools = () => {
 
 @mixin article-info {
   .article-content {
-    padding: 0 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
   }
 
   .article-info {

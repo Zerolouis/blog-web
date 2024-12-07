@@ -1,8 +1,12 @@
 <template>
   <div>
     <v-hover v-slot="{ isHovering, props }">
-      <v-card v-bind="props" :elevation="isHovering ? 12 : 3">
-        <v-img class="article-image" height="200" cover :src="image" />
+      <v-card
+        v-bind="props"
+        :elevation="isHovering ? 12 : 3"
+        @click="openArticleDetail(id)"
+      >
+        <v-img class="article-image" height="200" cover :src="picture" />
         <div class="article-info">
           <div class="title">
             {{ title }}
@@ -16,19 +20,19 @@
             <v-icon class="info-icon" color="info">
               mdi-account-circle-outline
             </v-icon>
-            {{ account }}
+            {{ user }}
           </div>
           <div class="info-container">
             <v-icon class="info-icon" color="info">
               mdi-clock-time-eight-outline
             </v-icon>
-            {{ uploadTime(upload) }}
+            {{ uploadTime(createTime) }}
           </div>
           <div class="info-container">
             <v-icon class="info-icon" color="info">
               mdi-comment-outline
             </v-icon>
-            {{ comment }}
+            {{ commentCount }}
           </div>
         </div>
       </v-card>
@@ -52,6 +56,10 @@ const uploadTime = (time: string) =>
       return dayjs(time).fromNow();
     }
   });
+
+const openArticleDetail = (id: string) => {
+  navigateTo(`/article/${id}`);
+};
 </script>
 
 <style scoped lang="scss">

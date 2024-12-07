@@ -3,6 +3,7 @@ import { stringify, parse } from "zipson";
 import type { LoginResult } from "~/ts/types/api.type";
 import { LoginResultSchema } from "~/ts/types/api.type";
 import { checkMessage } from "~/composables/useVerify";
+import { useSiteInfo } from "~/stores/siteInfo";
 
 export const useUserStore = defineStore(
   "userStore",
@@ -20,7 +21,7 @@ export const useUserStore = defineStore(
       refreshToken: "",
     });
 
-    const siteConfig = useSiteConfig();
+    const siteConfig = useSiteInfo();
     const { isLogin } = storeToRefs(siteConfig);
 
     /**
@@ -64,7 +65,7 @@ export const useUserStore = defineStore(
         },
       })
         .then(async (res) => {
-          console.log("获取用户数据", res);
+          //console.log("获取用户数据", res);
           const { data } = await checkMessage(res);
           if (data?.code !== "200") {
             // 尝试刷新token

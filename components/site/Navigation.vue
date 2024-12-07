@@ -18,7 +18,7 @@
         @click="navigateTo('/auth/login')"
         >登录</v-btn
       >
-      <v-btn id="avatar-menu" icon v-if="user.isLogin">
+      <v-btn v-if="user.isLogin" id="avatar-menu" icon>
         <v-avatar size="small">
           <v-img alt="头像" :src="user.userInfo?.avatar" />
         </v-avatar>
@@ -72,7 +72,8 @@
 <script lang="ts" setup>
 import { useCustomTheme } from "~/composables/useCustomTheme";
 import { useUserStore } from "#imports";
-const siteConfig = useSiteConfig();
+import { useSiteInfo } from "~/stores/siteInfo";
+const siteConfig = useSiteInfo();
 const { darkMode } = storeToRefs(siteConfig);
 const router = useRouter();
 const userStore = useUserStore();

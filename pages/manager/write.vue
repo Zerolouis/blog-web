@@ -94,6 +94,25 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <v-dialog v-model="showPublishDialog" width="30%">
+      <v-card>
+        <v-card-title class="bg-ingo"> 发布 </v-card-title>
+        <v-card-text> 发布成功，是否跳转至文章页面 </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn color="warning" @click="showPublishDialog = false">
+            取消
+          </v-btn>
+          <v-btn
+            color="primary"
+            @click="navigateTo(`/article/${publishedArticleId}`)"
+          >
+            确认
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -149,6 +168,8 @@ const configForm: any = ref(null);
 const toast = useToastStore();
 const { $dayjs } = useNuxtApp();
 const user = useUserStore();
+const showPublishDialog = ref(false);
+const publishedArticleId = ref("");
 
 // 获取Markdown编辑器文本
 const getWriterText = (): string => {
@@ -205,6 +226,13 @@ const submitArticle = async () => {
       body,
     }).then((r) => {
       console.log(r);
+      if (r.code === "200") {
+        toast.success("发布成功");
+        publishedArticleId.value = r.data.articleId;
+        showPublishDialog.value = true;
+      } else {
+        toast.error(r.msg);
+      }
     });
 
     console.log("提交", body);

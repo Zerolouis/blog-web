@@ -1,5 +1,5 @@
 import type { Ref } from "vue";
-import { useSiteConfig } from "~/stores/siteConfig";
+import { useSiteInfo } from "~/stores/siteInfo";
 import { usePinia } from "#build/imports";
 
 export function useCustomTheme() {
@@ -8,7 +8,7 @@ export function useCustomTheme() {
   // cookies 中的主题名称
   const theme: Ref<string> = ref("customLightTheme");
   const cookie = useCookie("color-scheme");
-  const siteConfig = useSiteConfig(useNuxtApp().$pinia);
+  const siteConfig = useSiteInfo(useNuxtApp().$pinia);
   const { darkMode, currentTheme } = storeToRefs(siteConfig);
 
   const { $vuetify } = useNuxtApp();

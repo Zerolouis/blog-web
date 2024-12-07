@@ -23,9 +23,9 @@ export const CopyrightMap = new Map<number, string>([
 ]);
 
 export const CopyrightURLMap = new Map<number, string>([
-  [CopyrightEnum.Deny, "禁止转载"],
-  [CopyrightEnum.CC, "根据CC4.0协议转载"],
-  [CopyrightEnum.Allow, "允许任意转载"],
+  [CopyrightEnum.Deny, "https://creativecommons.org/licenses"],
+  [CopyrightEnum.CC, "https://creativecommons.org/licenses"],
+  [CopyrightEnum.Allow, "https://creativecommons.org/licenses"],
   [
     CopyrightEnum.CC_BY,
     "https://creativecommons.org/licenses/by/4.0/deed.zh-hans",

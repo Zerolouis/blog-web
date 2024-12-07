@@ -1,16 +1,18 @@
+import { useSiteInfo } from "~/stores/siteInfo";
+
 export default defineNuxtRouteMiddleware(async (to, from) => {
   console.log("中间件global");
   console.log("路由 From", from.name, " to ", to.name);
   const { $pinia } = useNuxtApp();
   const userStore = useUserStore($pinia);
   const toast = useToastStore($pinia);
-  const siteConfig = useSiteConfig($pinia);
+  const siteConfig = useSiteInfo($pinia);
   const { isLogin } = storeToRefs(siteConfig);
   const { token, user } = storeToRefs(userStore);
 
   // 如果获取过信息就跳过
   if (isLogin && user.value.isLogin) {
-    toast.info("已经登录");
+    //toast.info("已经登录");
     return;
   }
 

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <ul class="catalog-ul">
+    <ul class="catalog-ul" :style="{ height: height / 2 - 36 + 'px' }">
       <li
         v-for="(item, index) in nodes"
-        :key="index"
+        :key="index + 'catalog'"
         :class="`catalog-li catalog-${item.level} ${catalogActive(item)}`"
         @click="toPosition(item)"
       >
@@ -94,7 +94,7 @@ const calcCatalog = (elements: any) => {
       text: item.outerText,
       element: item,
       // 添加偏移量来适配头图高度
-      offsetTop: item.offsetTop + 250,
+      offsetTop: item.offsetTop + 400,
     });
   }
   //console.log('目录节点',nodes.value)
@@ -111,10 +111,10 @@ const toPosition = (item: CatalogItem) => {
 <style scoped lang="scss">
 .catalog-ul {
   overflow: auto;
-  height: 600px;
+  //height: 500px;
 
   .catalog-li {
-    height: 35px;
+    min-height: 35px;
     line-height: 35px;
     font-size: 1rem;
     cursor: pointer;

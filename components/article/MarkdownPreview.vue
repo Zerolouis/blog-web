@@ -9,6 +9,7 @@ import Vditor from "vditor";
 import "vditor/dist/index.css";
 import hljs from "highlight.js";
 import { useCustomTheme } from "~/composables/useCustomTheme";
+import { useSiteInfo } from "~/stores/siteInfo";
 
 const props = defineProps<{
   content: string | undefined;
@@ -94,7 +95,7 @@ const renderTheme = (isDark: boolean) => {
   }
 };
 
-const siteConfig = useSiteConfig();
+const siteConfig = useSiteInfo();
 const { currentTheme } = storeToRefs(siteConfig);
 
 const { vuetifyTheme, vuetifyDark, theme } = useCustomTheme();
