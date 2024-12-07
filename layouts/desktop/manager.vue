@@ -29,7 +29,7 @@
             <v-list-item
               v-for="child in item.children"
               :key="child.value"
-              :prepend-icon="child.preIcon"
+              :append-icon="child.preIcon"
               :title="child.name"
               :value="child.value"
             />
