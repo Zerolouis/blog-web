@@ -121,7 +121,35 @@ export const TagQuerySchema = z.object({
   name: z.string(),
   createTime: z.string(),
   updateTime: z.string(),
-  idDeleted: z.string(),
+  isDeleted: z.string(),
 });
 
 export type TagQuery = z.infer<typeof TagQuerySchema>;
+
+export const CategoryQuerySchema = z.object({
+  id: z.string(),
+  parentId: z.string(),
+  description: z.string(),
+  name: z.string(),
+  createTime: z.string(),
+  updateTime: z.string(),
+  isDeleted: z.string(),
+});
+
+export type CategoryQuery = z.infer<typeof CategoryQuerySchema>;
+
+export const CategoryQueryArraySchema = z
+  .array(
+    z.object({
+      id: z.string(),
+      parentId: z.string(),
+      description: z.string(),
+      name: z.string(),
+      createTime: z.string(),
+      updateTime: z.string(),
+      isDeleted: z.string(),
+    }),
+  )
+  .optional();
+
+export type CategoryArray = z.infer<typeof CategoryQueryArraySchema>;

@@ -66,7 +66,7 @@ defineExpose({
   categorySelected,
 });
 // 请求分类数据
-const { data } = await useFetch("/api/manager/category", {
+const { data } = await useFetch("/api/manager/category/tree", {
   method: "get",
   headers: {
     Authorization: useStore.getToken,

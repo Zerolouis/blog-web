@@ -29,19 +29,17 @@ import {
   type CategoryList,
   CategoryListSchema,
 } from "~/ts/types/api.type";
-import { SymbolKind } from "vscode-languageserver-types";
-import Array = SymbolKind.Array;
 
 const content = ref();
 const userStore = useUserStore();
 const toast = useToastStore();
 defineProps<{
-  categories: CategoryList;
+  categories?: CategoryList;
 }>();
 
 const getContent = async () => {
   // 请求分类数据
-  const { data } = await useFetch("/api/manager/category", {
+  const { data } = await useFetch("/api/manager/category/tree", {
     method: "get",
     headers: {
       Authorization: userStore.getToken,

@@ -3,13 +3,14 @@ import { checkMessage } from "~/composables/useVerify";
 export default defineEventHandler(async (event) => {
   let data: any = null;
   const body = await readBody(event);
-  await $fetch(useRuntimeConfig().api + "/user/info", {
+  await $fetch(useRuntimeConfig().api + "/category/page", {
     headers: event.headers,
-    method: "POST",
     body,
+    method: "POST",
   })
     .then(async (r) => {
-      data = r;
+      const { data: res } = await checkMessage(r);
+      data = res;
     })
     .catch(() => {
       throw Error("后端连接失败");

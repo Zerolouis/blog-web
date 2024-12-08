@@ -49,6 +49,8 @@ export const useUserStore = defineStore(
           token.refreshToken = loginInfo?.refreshToken;
           token.refreshTime = loginInfo?.refreshTime;
           isLogin.value = true;
+
+          console.log(token);
           await getUserInfo();
         }
       });
@@ -72,6 +74,13 @@ export const useUserStore = defineStore(
             await refreshToken().then(() => {
               if (user.isLogin) {
                 getUserInfo();
+              } else {
+                // user.userInfo = undefined;
+                // token.accessToken = "";
+                // token.refreshToken = "";
+                // token.refreshTime = "";
+                // token.accessTime = "";
+                navigateTo("/auth/login");
               }
             });
           } else {
