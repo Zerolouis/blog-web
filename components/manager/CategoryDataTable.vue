@@ -69,7 +69,7 @@
             v-model="editFormDescription"
           ></v-text-field>
           <v-select
-            :items="serverItems"
+            :items="parentItems"
             item-value="id"
             return-object
             item-title="name"
@@ -109,6 +109,7 @@ import {
   type CommonMessage,
   type TagQuery,
   type CategoryArray,
+  CategoryQuerySchema,
 } from "~/ts/types/api.type";
 
 const user = useUserStore();
@@ -158,12 +159,13 @@ const loading = ref(false);
 const search = ref("");
 const totalItems: Ref<number> = ref(0);
 const serverItems: Ref<Array<CategoryQuery>> = ref([]);
+const parentItems: Ref<Array<CategoryQuery>> = ref([]);
 const itemsPerPage: Ref<number> = ref(10);
 const page: Ref<number> = ref(1);
 
 const editFormId = ref("");
 const editFormParent = ref();
-const editFormDescription = ref("");
+const editFormDescription: Ref<string | null | undefined> = ref("");
 const editFormName = ref("");
 
 const categoryMap: Map<string, CategoryQuery> = reactive(new Map());
@@ -177,7 +179,7 @@ const btnShowAddDialog = () => {
 
 const btnShowEditDialog = (item: CategoryQuery) => {
   editFormParent.value = categoryMap.get(item.parentId);
-  // console.log(editFormParent.value);
+  console.log(item.parentId);
 
   editFormId.value = item.id;
   editFormName.value = item.name;
@@ -211,10 +213,20 @@ const queryCategory = async () => {
   const { data: categoryArray } = await CategoryQueryArraySchema.safeParseAsync(
     data.value?.data,
   );
-  console.log();
-
+  console.log(data.value?.data[0]);
   serverItems.value = categoryArray || [];
-  console.log(serverItems.value);
+  parentItems.value = JSON.parse(JSON.stringify(categoryArray));
+  categoryMap.clear();
+  const root: CategoryQuery = {
+    createTime: "",
+    isDeleted: "",
+    parentId: "",
+    updateTime: "",
+    id: "0",
+    name: "根目录",
+  };
+  categoryMap.set("0", root);
+  parentItems.value.push(root);
   for (const category of serverItems.value) {
     categoryMap.set(category.id, category);
   }

@@ -129,7 +129,7 @@ export type TagQuery = z.infer<typeof TagQuerySchema>;
 export const CategoryQuerySchema = z.object({
   id: z.string(),
   parentId: z.string(),
-  description: z.string(),
+  description: z.nullable(z.string()).optional(),
   name: z.string(),
   createTime: z.string(),
   updateTime: z.string(),
@@ -138,18 +138,6 @@ export const CategoryQuerySchema = z.object({
 
 export type CategoryQuery = z.infer<typeof CategoryQuerySchema>;
 
-export const CategoryQueryArraySchema = z
-  .array(
-    z.object({
-      id: z.string(),
-      parentId: z.string(),
-      description: z.string(),
-      name: z.string(),
-      createTime: z.string(),
-      updateTime: z.string(),
-      isDeleted: z.string(),
-    }),
-  )
-  .optional();
+export const CategoryQueryArraySchema = z.array(CategoryQuerySchema);
 
 export type CategoryArray = z.infer<typeof CategoryQueryArraySchema>;
