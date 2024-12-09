@@ -31,7 +31,8 @@
           false-icon="mdi-checkbox-blank-outline"
           indeterminate-icon="mdi-checkbox-intermediate"
           true-icon="mdi-checkbox-outline"
-          select-strategy="leaf"
+          select-strategy="independent"
+          open-all
         />
         <v-card-actions>
           <v-btn color="warning" @click="cancelBtn"> 清空</v-btn>

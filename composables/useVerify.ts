@@ -61,6 +61,9 @@ async function checkMessage(res: any) {
       // console.log("响应格式校验", data.msg);
     }
   }
+  if (!success) {
+    console.log("校验数据错误", res);
+  }
   return { success, data, error };
 }
 

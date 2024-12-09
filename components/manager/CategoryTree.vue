@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title class="bg-accent card-title">
         <div>分类</div>
-        <v-btn @click="getContent" variant="text">
+        <v-btn variant="text" @click="getContent">
           <v-icon size="large">mdi-refresh</v-icon>
         </v-btn>
       </v-card-title>
@@ -17,8 +17,8 @@
         true-icon="mdi-checkbox-outline"
         select-strategy="leaf"
         density="compact"
-      >
-      </v-treeview>
+        open-all
+      />
     </v-card>
   </div>
 </template>
@@ -33,9 +33,13 @@ import {
 const content = ref();
 const userStore = useUserStore();
 const toast = useToastStore();
-defineProps<{
-  categories?: CategoryList;
+const props = defineProps<{
+  update: boolean;
 }>();
+
+watch(props, () => {
+  getContent();
+});
 
 const getContent = async () => {
   // 请求分类数据

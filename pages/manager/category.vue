@@ -3,10 +3,10 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="4">
-          <ManagerCategoryTree />
+          <ManagerCategoryTree :update="update" />
         </v-col>
         <v-col cols="12" md="8">
-          <ManagerCategoryDataTable />
+          <ManagerCategoryDataTable @update-data="getUpdate" />
         </v-col>
       </v-row>
     </v-container>
@@ -21,8 +21,14 @@ definePageMeta({
   title: "分类",
 });
 
+const update = ref(false);
+
 const userStore = useUserStore();
 const toast = useToastStore();
+
+const getUpdate = (value: boolean) => {
+  update.value = value;
+};
 </script>
 
 <style scoped lang="scss"></style>
