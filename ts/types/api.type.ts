@@ -141,3 +141,28 @@ export type CategoryQuery = z.infer<typeof CategoryQuerySchema>;
 export const CategoryQueryArraySchema = z.array(CategoryQuerySchema);
 
 export type CategoryArray = z.infer<typeof CategoryQueryArraySchema>;
+
+export const ArticleDataSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  title: z.string(),
+  description: z.string(),
+  createTime: z.string(),
+  updateTime: z.string(),
+});
+
+export const ArticleDataArraySchema = z.array(ArticleDataSchema);
+
+export type ArticleData = z.infer<typeof ArticleDataSchema>;
+export type ArticleDataArray = z.infer<typeof ArticleDataArraySchema>;
+
+export const UserSimpleInfoSchema = z.object({
+  uid: z.string(),
+  username: z.string(),
+  nickname: z.string().optional(),
+  level: z.string(),
+  roleName: z.string(),
+  avatar: z.string().optional(),
+});
+
+export type UserSimpleInfo = z.infer<typeof UserSimpleInfoSchema>;

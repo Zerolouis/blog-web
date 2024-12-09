@@ -145,14 +145,14 @@ const isEdit = ref(false);
 
 const tableHeaders = [
   {
-    title: "标签ID",
+    title: "分类ID",
     value: "id",
     align: "start",
     sortable: true,
     key: "id",
     width: 140,
   },
-  { title: "标签名称", value: "name", key: "name", align: "start" },
+  { title: "分类名称", value: "name", key: "name", align: "start" },
   {
     title: "创建时间",
     value: "createTime",

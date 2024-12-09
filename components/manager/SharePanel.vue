@@ -140,10 +140,19 @@
 
 <script setup lang="ts">
 import {
+  type FileShareItem,
   type FileShareListItem,
   shareCategory,
 } from "~/ts/interface/api.interface";
 import type { Ref } from "vue";
+
+const props = defineProps<{
+  value?: Array<{
+    method: string;
+    url: string;
+    description: string;
+  }>;
+}>();
 
 const showDialog = ref(false);
 const shareMethods = reactive(shareCategory);
@@ -155,6 +164,22 @@ const toast = useToastStore();
 const editIndex = ref();
 
 const fileList: Ref<Array<FileShareListItem>> = ref([]);
+
+if (props.value && props.value.length > 0) {
+  const map = new Map<string, FileShareItem>();
+  for (const item of shareCategory) {
+    map.set(item.method, item);
+  }
+
+  for (const item of props.value) {
+    fileList.value.push({
+      method: map.get(item.method) as FileShareItem,
+      url: item.url,
+      description: item.description,
+    });
+  }
+}
+
 const shareListHeaders = [
   {
     title: "分享方式",

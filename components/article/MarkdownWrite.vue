@@ -25,6 +25,9 @@ import "vditor/src/assets/less/index.less";
 const writer = ref(null);
 const imageUploadDialog: Ref<boolean> = ref(false);
 const storeUploadDialog: Ref<boolean> = ref(false);
+const emit = defineEmits<{
+  ready: [ready: boolean];
+}>();
 
 const vditor = ref();
 
@@ -111,6 +114,9 @@ onMounted(() => {
           toolbar: ["fullscreen", "both", "preview", "info", "help"],
         },
       ],
+      after() {
+        emit("ready", true);
+      },
     });
   }
 });
@@ -123,6 +129,7 @@ const getText = () => {
 };
 
 const setText = (text: string) => {
+  console.log(text, vditor.value);
   vditor.value.setValue(text);
 };
 
