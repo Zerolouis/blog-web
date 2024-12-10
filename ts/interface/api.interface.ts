@@ -23,6 +23,7 @@ export interface FileShareItem {
  * 文件分享列表 Item
  */
 export interface FileShareListItem {
+  id?: string;
   method: FileShareItem;
   url: string;
   description: string;
@@ -72,6 +73,7 @@ export const shareCategory: Array<FileShareItem> = [
  * 文章存储请求格式
  */
 export interface ArticleSaveQuery {
+  id?: string;
   title: string;
   description?: string;
   uid: string;

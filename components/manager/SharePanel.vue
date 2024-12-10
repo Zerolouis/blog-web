@@ -148,6 +148,7 @@ import type { Ref } from "vue";
 
 const props = defineProps<{
   value?: Array<{
+    id?: string;
     method: string;
     url: string;
     description: string;
@@ -165,6 +166,7 @@ const editIndex = ref();
 
 const fileList: Ref<Array<FileShareListItem>> = ref([]);
 
+// 处理传递的参数
 if (props.value && props.value.length > 0) {
   const map = new Map<string, FileShareItem>();
   for (const item of shareCategory) {
@@ -173,6 +175,7 @@ if (props.value && props.value.length > 0) {
 
   for (const item of props.value) {
     fileList.value.push({
+      id: item.id,
       method: map.get(item.method) as FileShareItem,
       url: item.url,
       description: item.description,

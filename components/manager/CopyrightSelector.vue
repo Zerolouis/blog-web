@@ -41,10 +41,18 @@
 import { CCMap, CopyrightEnum, CopyrightMap } from "~/ts/enum/api.enum";
 import type { Ref } from "vue";
 
+const props = defineProps<{
+  value?: string;
+}>();
+
 const showDialog = ref(false);
-const A0 = ref(CopyrightEnum.Deny);
+const A0: Ref<CopyrightEnum | number> = ref(CopyrightEnum.Deny);
 const A1: Ref<string> = ref("A");
 const A2: Ref<string> = ref("A");
+
+if (props.value) {
+  A0.value = Number(props.value);
+}
 
 const Q0 = [
   {

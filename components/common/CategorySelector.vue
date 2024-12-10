@@ -51,6 +51,10 @@ import {
   CategoryListSchema,
 } from "~/ts/types/api.type";
 
+const props = defineProps<{
+  value?: CategoryList;
+}>();
+
 // 弹窗控制
 const isShow = ref(false);
 
@@ -59,8 +63,8 @@ const showSelector = () => {
 };
 
 const content: Ref<CategoryList | undefined> = ref();
-const categorySelected = ref();
-const selectShow = ref();
+const categorySelected: Ref<Array<Category>> = ref([]);
+const selectShow: Ref<Array<Category>> = ref([]);
 const toast = useToastStore();
 const useStore = useUserStore();
 defineExpose({
@@ -84,7 +88,7 @@ if (!success) {
   toast.error("数据错误！");
 }
 
-// 遍历并处理所有叶子节点
+// 遍历并处理所有叶子节点的children 为 undefined
 const traverse = (c: Category) => {
   if (!c) return;
   if (!c.children?.length) {
@@ -96,12 +100,45 @@ const traverse = (c: Category) => {
     }
   }
 };
+
 if (result) {
   for (let i = 0; i < result.length; i++) {
     traverse(result[i]);
   }
 }
-// console.log("获取分类", result);
+
+// 恢复树
+if (props.value && props.value.length > 0 && result && result.length > 0) {
+  const ids: string[] = [];
+
+  for (let i = 0; i < props.value.length; i++) {
+    ids.push(props.value[i].id);
+  }
+
+  const findElementsByIdsDeep = (tree: Category, ids: string[]) => {
+    const foundElements: Category[] = [];
+
+    function deepSearch(category: Category) {
+      //console.log(category);
+      if (ids.includes(category.id)) {
+        categorySelected.value.push(category);
+        selectShow.value.push(category);
+      }
+      if (category.children && Array.isArray(category.children)) {
+        category.children.forEach((child) => {
+          deepSearch(child);
+        });
+      }
+    }
+    deepSearch(tree);
+    return foundElements;
+  };
+
+  for (let i = 0; i < result.length; i++) {
+    findElementsByIdsDeep(result[i], ids);
+  }
+}
+
 content.value = result;
 
 // 取消按钮

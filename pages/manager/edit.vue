@@ -14,7 +14,7 @@
             />
           </v-form>
           <v-card>
-            <ArticleMarkdownWrite @ready="setText" ref="writer" />
+            <ArticleMarkdownWrite ref="writer" @ready="setText" />
           </v-card>
         </v-col>
         <v-col cols="12" :xl="3">
@@ -32,7 +32,10 @@
                 @submit.prevent
               >
                 <CommonDatePicker ref="datePicker" label-name="发布时间" />
-                <CommonCategorySelector ref="categorySelector" />
+                <CommonCategorySelector
+                  ref="categorySelector"
+                  :value="articleData?.data.categories"
+                />
                 <v-text-field
                   v-model="picture"
                   append-inner-icon="mdi-panorama-outline"
@@ -65,7 +68,10 @@
                   item-title="name"
                   return-object
                 />
-                <ManagerCopyrightSelector ref="copyrightSelector" />
+                <ManagerCopyrightSelector
+                  ref="copyrightSelector"
+                  :value="articleData?.data?.copyright"
+                />
                 <v-textarea
                   v-model="description"
                   label="手动指定摘要内容"
@@ -86,14 +92,14 @@
             <v-card-actions>
               <v-spacer />
               <v-btn color="primary" type="submit" @click="submitArticle">
-                发布
+                更新
               </v-btn>
             </v-card-actions>
           </v-card>
           <ManagerSharePanel
-            :value="articleData?.data.share"
             v-if="showSharePanel"
             ref="sharePanel"
+            :value="articleData?.data.share"
           />
         </v-col>
       </v-row>
@@ -101,17 +107,14 @@
 
     <v-dialog v-model="showPublishDialog" width="30%">
       <v-card>
-        <v-card-title class="bg-ingo"> 发布 </v-card-title>
-        <v-card-text> 发布成功，是否跳转至文章页面 </v-card-text>
+        <v-card-title class="bg-info"> 提示 </v-card-title>
+        <v-card-text> 更新成功，是否跳转至文章页面 </v-card-text>
         <v-card-actions>
           <v-spacer />
           <v-btn color="warning" @click="showPublishDialog = false">
             取消
           </v-btn>
-          <v-btn
-            color="primary"
-            @click="navigateTo(`/article/${publishedArticleId}`)"
-          >
+          <v-btn color="primary" @click="navigateTo(`/article/${articleId}`)">
             确认
           </v-btn>
         </v-card-actions>
@@ -154,7 +157,6 @@ const { data: articleData } = await useFetch<CommonMessage>(
   },
 );
 
-console.log(articleData.value?.data);
 definePageMeta({
   layout: "desktop-manager",
   middleware: "auth",
@@ -199,6 +201,7 @@ picture.value = articleData.value?.data?.picture || "";
 picCopyright.value = articleData.value?.data?.pictureCopyright || "";
 description.value = articleData.value?.data?.description || "";
 title.value = articleData.value?.data?.title || "";
+
 const setText = () => {
   writer.value?.setText(articleData.value?.data?.content);
 };
@@ -209,6 +212,8 @@ if (
 ) {
   showSharePanel.value = true;
 }
+
+console.log(articleData.value?.data);
 
 // 获取Markdown编辑器文本
 const getWriterText = (): string => {
@@ -245,6 +250,7 @@ const submitArticle = async () => {
   if (titleValid && configValid) {
     //loading.value = true;
     const body: ArticleSaveQuery = {
+      id: articleId.value,
       createTime: datePicker.value?.time || $dayjs(new Date()).toISOString(),
       share: sharePanel.value?.fileList || [],
       categories: getCategoryIds(),
@@ -257,24 +263,20 @@ const submitArticle = async () => {
       title: title.value,
       uid: user.getUID(),
     };
-    await $fetch("/api/manager/article", {
-      method: "post",
+
+    console.log("提交", body);
+
+    await $fetch<CommonMessage>("/api/manager/article", {
+      method: "PUT",
       headers: {
         Authorization: userStore.getToken,
       },
       body,
     }).then((r) => {
-      console.log(r);
       if (r.code === "200") {
-        toast.success("发布成功");
-        publishedArticleId.value = r.data.articleId;
         showPublishDialog.value = true;
-      } else {
-        toast.error(r.msg);
       }
     });
-
-    console.log("提交", body);
   } else {
     toast.error("请填写正确的信息");
   }

@@ -45,6 +45,15 @@ definePageMeta({
   middleware: ["user"],
 });
 
+useSeoMeta({
+  title: "摸鱼Blog",
+  ogTitle: "摸鱼Blog",
+  description: "Zerolouis和tutu147的博客，分享经验、教程、资源的地方",
+  ogDescription: "Zerolouis和tutu147的博客，分享经验、教程、资源的地方",
+  ogType: "website",
+  ogImage: "/images/fog-4436636-673637e8d717a.jpg",
+});
+
 useHead({
   title: "摸鱼Blog - 首页",
 });

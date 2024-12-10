@@ -129,7 +129,6 @@ const getText = () => {
 };
 
 const setText = (text: string) => {
-  console.log(text, vditor.value);
   vditor.value.setValue(text);
 };
 

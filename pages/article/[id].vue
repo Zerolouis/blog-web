@@ -12,6 +12,13 @@
         <div class="article-title-text">
           {{ article?.title }}
         </div>
+        <div class="article-title-category">
+          <template v-for="item in article?.categories" :key="item.id">
+            <v-chip class="category-chip" color="info" variant="elevated">
+              {{ item?.name }}
+            </v-chip>
+          </template>
+        </div>
         <div class="picture-info">
           <v-icon v-tooltip="article?.pictureCopyright"> mdi-copyright </v-icon>
         </div>
@@ -148,6 +155,7 @@ import { CopyrightURLMap } from "~/ts/enum/api.enum";
 import { useMarkdownCount } from "~/composables/useMarkdownCount";
 import { useSiteInfo } from "~/stores/siteInfo";
 import { isAllNumbers } from "~/composables/useVerify";
+import { categories } from "@vueuse/metadata";
 
 const route = useRoute();
 const siteConfig = useSiteInfo();
@@ -281,6 +289,12 @@ const changeShowTools = () => {
     justify-content: center;
     align-items: center;
     color: white;
+  }
+  .article-title-category {
+    text-align: center;
+    .category-chip {
+      margin: 0 5px;
+    }
   }
   .picture-info {
     position: absolute;

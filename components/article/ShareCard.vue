@@ -18,7 +18,7 @@
       </div>
     </v-card>
 
-    <v-dialog width="30%" v-model="showDialog">
+    <v-dialog v-model="showDialog" width="30%">
       <v-card>
         <v-card-title class="bg-info"> 下载提示 </v-card-title>
         <v-card-text>
@@ -36,7 +36,7 @@
             {{ url }}
           </div>
         </v-card-text>
-        <v-divider> </v-divider>
+        <v-divider />
         <v-card-title> 文件说明 </v-card-title>
         <v-card-text>
           {{
@@ -63,49 +63,31 @@ const fileColorMap = new Map<
     {
       name: "百度网盘",
       color: "#359aef",
-      icon: "/_nuxt/assets/icon/baidu.svg",
+      icon: "/icon/baidu.svg",
     },
   ],
-  [
-    "url",
-    { name: "直链", color: "#409991", icon: "/_nuxt/assets/icon/url.svg" },
-  ],
-  [
-    "bt",
-    { name: "Bittorrent", color: "#9daccb", icon: "/_nuxt/assets/icon/bt.svg" },
-  ],
-  [
-    "ali",
-    { name: "阿里网盘", color: "#787efc", icon: "/_nuxt/assets/icon/ali.svg" },
-  ],
+  ["url", { name: "直链", color: "#409991", icon: "/icon/url.svg" }],
+  ["bt", { name: "Bittorrent", color: "#9daccb", icon: "/icon/bt.svg" }],
+  ["ali", { name: "阿里网盘", color: "#787efc", icon: "/icon/ali.svg" }],
   [
     "quark",
     {
       name: "夸克网盘",
       color: "#6658f0",
-      icon: "/_nuxt/assets/icon/quark.svg",
+      icon: "/icon/quark.svg",
     },
   ],
-  [
-    "115",
-    { name: "115网盘", color: "#359aef", icon: "/_nuxt/assets/icon/115.svg" },
-  ],
-  [
-    "lanzou",
-    { name: "蓝奏云", color: "#ee650e", icon: "/_nuxt/assets/icon/lanzou.svg" },
-  ],
+  ["115", { name: "115网盘", color: "#359aef", icon: "/icon/115.svg" }],
+  ["lanzou", { name: "蓝奏云", color: "#ee650e", icon: "/icon/lanzou.svg" }],
   [
     "onedrive",
     {
       name: "Onedrive",
       color: "#8599bd",
-      icon: "/_nuxt/assets/icon/onedrive.svg",
+      icon: "/icon/onedrive.svg",
     },
   ],
-  [
-    "other",
-    { name: "其他", color: "#359aef", icon: "/_nuxt/assets/icon/other.svg" },
-  ],
+  ["other", { name: "其他", color: "#359aef", icon: "/icon/other.svg" }],
 ]);
 
 const bgColor = computed(() => {
