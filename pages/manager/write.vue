@@ -65,6 +65,17 @@
                   item-title="name"
                   return-object
                 />
+                <v-text-field
+                  v-model="keywords"
+                  append-inner-icon="mdi-copyright"
+                  label="文章关键字"
+                  :rules="[
+                    (value: string) =>
+                      checkKeywords(value) ? true : '关键字格式错误',
+                  ]"
+                  hint="用于搜索引擎检索，使用','间隔, 推荐1-3个关键字"
+                  color="info"
+                />
                 <ManagerCopyrightSelector ref="copyrightSelector" />
                 <v-textarea
                   v-model="description"
@@ -76,6 +87,7 @@
                     (value) => (value?.length > 200 ? '字数不能超过200' : true),
                   ]"
                 />
+
                 <v-switch
                   v-model="showSharePanel"
                   label="文件分享功能"
@@ -126,7 +138,7 @@ import {
   ManagerSharePanel,
 } from "#components";
 import { checkMessage, useUserStore } from "#imports";
-import { checkHttpsAndHttp } from "~/composables/useVerify";
+import { checkHttpsAndHttp, checkKeywords } from "~/composables/useVerify";
 import type { VForm } from "vuetify/components";
 import type { ArticleSaveQuery } from "~/ts/interface/api.interface";
 import { CopyrightEnum } from "~/ts/enum/api.enum";
@@ -170,6 +182,7 @@ const { $dayjs } = useNuxtApp();
 const user = useUserStore();
 const showPublishDialog = ref(false);
 const publishedArticleId = ref("");
+const keywords = ref("");
 
 // 获取Markdown编辑器文本
 const getWriterText = (): string => {
@@ -215,6 +228,7 @@ const submitArticle = async () => {
       picture: picture.value || "",
       pictureCopyright: picCopyright.value || "",
       tags: getTagSelected() || [],
+      keywords: keywords.value || "",
       title: title.value,
       uid: user.getUID(),
     };

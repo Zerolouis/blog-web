@@ -54,7 +54,7 @@ onMounted(() => {
   if (import.meta.client) {
     window.addEventListener("scroll", handleScroll, true);
     height.value = window.innerHeight;
-    console.log("窗口高度:", height.value);
+    // console.log("窗口高度:", height.value);
     emits("catalogHeight", height.value);
   }
 });

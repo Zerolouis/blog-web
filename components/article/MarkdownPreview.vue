@@ -101,7 +101,6 @@ const { currentTheme } = storeToRefs(siteConfig);
 const { vuetifyTheme, vuetifyDark, theme } = useCustomTheme();
 
 onMounted(() => {
-  console.log(vuetifyDark);
   renderTheme(vuetifyDark);
 });
 

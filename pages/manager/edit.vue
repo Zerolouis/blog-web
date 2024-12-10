@@ -56,6 +56,17 @@
                   messages="将显示在头图下方"
                   color="info"
                 />
+                <v-text-field
+                  v-model="keywords"
+                  append-inner-icon="mdi-copyright"
+                  label="文章关键字"
+                  :rules="[
+                    (value: string) =>
+                      checkKeywords(value) ? true : '关键字格式错误',
+                  ]"
+                  hint="用于搜索引擎检索，使用','间隔, 推荐1-3个关键字"
+                  color="info"
+                />
                 <v-select
                   v-model="tagSelected"
                   multiple
@@ -133,7 +144,7 @@ import {
   ManagerSharePanel,
 } from "#components";
 import { checkMessage, useUserStore } from "#imports";
-import { checkHttpsAndHttp } from "~/composables/useVerify";
+import { checkHttpsAndHttp, checkKeywords } from "~/composables/useVerify";
 import type { VForm } from "vuetify/components";
 import type { ArticleSaveQuery } from "~/ts/interface/api.interface";
 import { CopyrightEnum } from "~/ts/enum/api.enum";
@@ -194,6 +205,7 @@ const { $dayjs } = useNuxtApp();
 const user = useUserStore();
 const showPublishDialog = ref(false);
 const publishedArticleId = ref("");
+const keywords: Ref<string> = ref("");
 
 // 处理数据
 tagSelected.value = articleData.value?.data?.tags || [];
@@ -201,6 +213,7 @@ picture.value = articleData.value?.data?.picture || "";
 picCopyright.value = articleData.value?.data?.pictureCopyright || "";
 description.value = articleData.value?.data?.description || "";
 title.value = articleData.value?.data?.title || "";
+keywords.value = articleData.value?.data?.keywords || "";
 
 const setText = () => {
   writer.value?.setText(articleData.value?.data?.content);
@@ -260,6 +273,7 @@ const submitArticle = async () => {
       picture: picture.value || "",
       pictureCopyright: picCopyright.value || "",
       tags: getTagSelected() || [],
+      keywords: keywords.value || "",
       title: title.value,
       uid: user.getUID(),
     };

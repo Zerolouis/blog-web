@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { transformAssetUrls } from "vite-plugin-vuetify";
+import type { CommonMessage } from "~/ts/types/api.type";
+import { $fetch } from "ofetch";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
@@ -41,8 +43,13 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
     "@nuxt/eslint",
-    "@nuxtjs/robots",
-    "@nuxtjs/sitemap",
+    // "@nuxtjs/robots",
+    // "@nuxtjs/sitemap",
+    // "nuxt-og-image",
+    // "nuxt-schema-org",
+    // "nuxt-link-checker",
+    "@nuxtjs/seo",
+    // "nuxt-site-config",
   ],
   vite: {
     vue: {
@@ -61,6 +68,7 @@ export default defineNuxtConfig({
   css: ["~/assets/scss/_variable.scss", "animate.css"],
   runtimeConfig: {
     api: "http://localhost:9001/v1",
+    publishUrl: "https://blog.jujuh.top",
   },
   i18n: {
     // if not using RTL, you can replace locales with codes only
@@ -100,6 +108,25 @@ export default defineNuxtConfig({
   routeRules: {
     "/": { prerender: true },
     "/auth/**": { ssr: false },
-    "/manager/**": { ssr: false },
+    "/manager/**": { ssr: false, robots: false },
+  },
+  site: {
+    url: "https://blog.jujuh.top",
+    name: "摸鱼Blog",
+  },
+  sitemap: {
+    urls: async () => {
+      const sitemap: string[] = [];
+      await $fetch("http://localhost:9001/v1/article/map").then(
+        (res: CommonMessage) => {
+          res?.data.map((item: string) => {
+            sitemap.push("/article/" + item);
+          });
+          console.log(sitemap);
+          return sitemap;
+        },
+      );
+      return sitemap;
+    },
   },
 });

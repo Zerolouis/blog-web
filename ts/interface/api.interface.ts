@@ -85,6 +85,7 @@ export interface ArticleSaveQuery {
   categories: string[];
   share: FileShareListItem[];
   createTime: string;
+  keywords: string;
 }
 
 export interface ArticleShareItem {

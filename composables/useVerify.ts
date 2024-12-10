@@ -6,7 +6,7 @@ const passReg = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).*$/;
 const userReg = /^[\u4E00-\u9FA5a-zA-Z0-9]{6,15}$/;
 const urlReg =
   /\b(?:https?|http):\/\/(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}|\b(?:https?|http):\/\/(?:\d{1,3}\.){3}\d{1,3}|\b(?:https?|http):\/\/localhost(?::\d+)?(?:\/[^\s]*)?\b/;
-
+const keywordsReg = /[a-zA-Z0-9_]+(,[a-zA-Z0-9_]+)*/g;
 /**
  * 验证手机号码
  * @param tel 电话号码
@@ -67,6 +67,11 @@ async function checkMessage(res: any) {
   return { success, data, error };
 }
 
+async function checkKeywords(str: string) {
+  console.log(!str || keywordsReg.test(str), str);
+  return !str || keywordsReg.test(str);
+}
+
 /**
  * 验证http和https
  * @param url
@@ -94,4 +99,5 @@ export {
   checkHttpsAndHttp,
   checkEmptyName,
   isAllNumbers,
+  checkKeywords,
 };

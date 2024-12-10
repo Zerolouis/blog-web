@@ -56,6 +56,9 @@ useSeoMeta({
 
 useHead({
   title: "摸鱼Blog - 首页",
+  htmlAttrs: {
+    lang: "zh-CN",
+  },
 });
 
 const { data } = await useFetch<CommonMessage>("/api/config/site", {

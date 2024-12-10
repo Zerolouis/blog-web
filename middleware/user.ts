@@ -1,7 +1,7 @@
 import { useSiteInfo } from "~/stores/siteInfo";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  console.log("中间件global");
+  // console.log("中间件global");
   console.log("路由 From", from.name, " to ", to.name);
   const { $pinia } = useNuxtApp();
   const userStore = useUserStore($pinia);

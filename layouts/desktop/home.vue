@@ -1,22 +1,27 @@
 <template>
-  <v-app
-    :theme="theme"
-    :class="{
-      'bar-transparent': offsetHeight <= 180,
-      'bar-color': offsetHeight > 180,
-    }"
-  >
-    <v-app-bar density="compact" elevation="0" class="bar text-white">
-      <SiteNavigation />
-    </v-app-bar>
-    <v-main v-scroll="onScroll">
-      <slot />
-    </v-main>
-    <client-only>
-      <SiteMessage />
-    </client-only>
-    <SiteFooter />
-  </v-app>
+  <div>
+    <Head>
+      <Link rel="icon" href="/favicon.ico"></Link>
+    </Head>
+    <v-app
+      :theme="theme"
+      :class="{
+        'bar-transparent': offsetHeight <= 180,
+        'bar-color': offsetHeight > 180,
+      }"
+    >
+      <v-app-bar density="compact" elevation="0" class="bar text-white">
+        <SiteNavigation />
+      </v-app-bar>
+      <v-main v-scroll="onScroll">
+        <slot />
+      </v-main>
+      <client-only>
+        <SiteMessage />
+      </client-only>
+      <SiteFooter />
+    </v-app>
+  </div>
 </template>
 
 <script lang="ts" setup>

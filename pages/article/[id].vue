@@ -184,6 +184,7 @@ if (isAllNumbers(paramId)) {
     },
   });
   res.value = result.value;
+  console.log("文章数据", result.value.data);
 }
 
 const { data: message } = await checkMessage(res.value);
@@ -203,6 +204,7 @@ useSeoMeta({
   ogDescription: article?.description,
   ogType: "article",
   googlebotNews: "nosnippet",
+  ogImage: article?.picture,
 });
 contentCount.value = useMarkdownCount(article?.content || "");
 
