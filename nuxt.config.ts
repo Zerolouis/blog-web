@@ -102,6 +102,8 @@ export default defineNuxtConfig({
           darkThemeName: "customDarkTheme",
           lightThemeName: "customLightTheme",
         },
+        reloadOnFirstRequest: true,
+        viewportSize: true,
       },
     },
     vuetifyOptions: "./vuetify.config.ts",
