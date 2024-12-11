@@ -2,8 +2,10 @@ import { checkMessage } from "~/composables/useVerify";
 
 export default defineEventHandler(async (event) => {
   let data: any = null;
-  await $fetch(useRuntimeConfig().api + "/category/tree", {
-    method: "GET",
+  const body = await readBody(event);
+  await $fetch(useRuntimeConfig().api + "/article/page", {
+    body,
+    method: "POST",
   })
     .then(async (r) => {
       const { data: res } = await checkMessage(r);

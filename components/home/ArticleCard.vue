@@ -32,7 +32,7 @@
             <v-icon class="info-icon" color="info">
               mdi-comment-outline
             </v-icon>
-            {{ commentCount }}
+            {{ commentCount ? commentCount : "暂无评论" }}
           </div>
         </div>
       </v-card>

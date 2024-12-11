@@ -1,5 +1,5 @@
 <template>
-  <div id="logo-text">
+  <div id="logo-text" @click="navigateTo('/')">
     <span id="logo-text-pre"> 摸鱼 </span>
     <span id="logo-text-suf"> Blog </span>
   </div>
@@ -10,7 +10,7 @@
 <style scoped lang="scss">
 #logo-text {
   will-change: font-family;
-
+  cursor: pointer;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 

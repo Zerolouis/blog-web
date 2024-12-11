@@ -1,14 +1,18 @@
 <template>
-<div>
-  <AuthLoginPanel class="login-panel" />
-</div>
+  <div>
+    <AuthLoginPanel class="login-panel" />
+  </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
   layout: "desktop-home",
-  middleware: ['user']
-})
+  middleware: ["user"],
+});
+
+useSeoMeta({
+  title: "登录",
+});
 </script>
 
 <style scoped lang="scss">

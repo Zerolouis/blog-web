@@ -13,7 +13,7 @@ export interface ArticleCardInfo {
   // 上传时间
   createTime: string;
   // 评论数
-  commentCount: string | number;
+  commentCount: string | number | undefined | null;
 }
 
 // 文章分类信息

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head>
-      <Link rel="icon" href="/favicon.ico"></Link>
+      <Link rel="icon" href="/favicon.ico" />
     </Head>
     <v-app
       :theme="theme"

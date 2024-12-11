@@ -66,6 +66,7 @@ export const ArticleQuerySchema = z.object({
     roleName: z.string(),
     avatar: z.string().optional(),
   }),
+  //keywords: z.string().optional(),
   content: z.string(),
   copyright: z.string(),
   picture: z.string(),

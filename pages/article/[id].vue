@@ -26,8 +26,8 @@
     </v-parallax>
 
     <v-container>
-      <v-row>
-        <v-col cols="12">
+      <v-row justify="center">
+        <v-col cols="12" xl="8" xxl="6">
           <v-card :class="'article-container-' + currentTheme" elevation="12">
             <div class="article-info">
               <div class="info">
@@ -99,8 +99,8 @@
         </v-col>
       </v-row>
 
-      <v-row>
-        <v-col cols="12">
+      <v-row justify="center">
+        <v-col cols="12" xl="8" xxl="6">
           <ArticleFileShare
             v-if="article && article.share.length > 0"
             :share="article?.share"
@@ -205,6 +205,9 @@ useSeoMeta({
   ogType: "article",
   googlebotNews: "nosnippet",
   ogImage: article?.picture,
+  twitterTitle: article?.title,
+  twitterDescription: article?.description,
+  twitterImage: article?.picture,
 });
 contentCount.value = useMarkdownCount(article?.content || "");
 
