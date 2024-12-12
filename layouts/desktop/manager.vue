@@ -8,9 +8,17 @@
       <v-app-bar-title>
         {{ route?.meta.title }}
       </v-app-bar-title>
+
+      <v-btn icon @click="changeTheme">
+        <v-icon :icon="themeIcon" />
+      </v-btn>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" elevation="1">
       <v-list v-model:selected="openRouter" density="comfortable">
+        <v-list-item @click="navigateTo('/')" link prepend-icon="mdi-home"
+          >返回主页</v-list-item
+        >
+        <v-divider />
         <template v-for="item in naviRouterList" :key="item.name">
           <v-list-item
             v-if="!item.children"
@@ -47,10 +55,18 @@
 <script setup lang="ts">
 import type { NaviListItem } from "~/ts/interface/manager.interface";
 import { useSiteInfo } from "~/stores/siteInfo";
+import { useCustomTheme } from "~/composables/useCustomTheme";
 
 useHead({
-  title: "摸鱼Blog - 后台",
+  title: "后台",
 });
+const siteConfig = useSiteInfo();
+const { darkMode } = storeToRefs(siteConfig);
+const { changeTheme } = useCustomTheme();
+const themeIcon = computed(() => {
+  return darkMode.value ? "mdi-white-balance-sunny" : "mdi-weather-night";
+});
+
 const route = useRoute();
 const naviRouterList: Array<NaviListItem> = reactive([
   {
@@ -108,8 +124,7 @@ const naviRouterList: Array<NaviListItem> = reactive([
 ]);
 
 const openRouter: Ref<string[]> = ref([]);
-const drawer = ref(null);
-const siteConfig = useSiteInfo();
+const drawer = ref<boolean | null>(null);
 const { managerRouter } = storeToRefs(siteConfig);
 
 if (openRouter.value.length === 0) {

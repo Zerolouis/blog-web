@@ -200,13 +200,8 @@
 
 <script setup lang="ts">
 import type { Category, CommonMessage } from "~/ts/types/api.type";
-import type { Tag } from "~/ts/interface/manager.interface";
 
-const { mdAndDown, xxl, lgAndDown, mobile } = useDisplay();
-const toast = useToastStore();
-if (mobile.value) {
-  toast.info("正在使用手机视图");
-}
+const { mdAndDown, xxl, lgAndDown } = useDisplay();
 
 definePageMeta({
   layout: "desktop-home",

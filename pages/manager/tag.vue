@@ -28,7 +28,7 @@
               </template>
 
               <template #[`item.name`]="{ item }">
-                <v-chip color="accent" prepend-icon="mdi-label">
+                <v-chip color="primary" variant="flat" prepend-icon="mdi-label">
                   {{ item.name }}
                 </v-chip>
               </template>

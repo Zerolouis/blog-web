@@ -69,6 +69,7 @@ onUnmounted(() => {
 watch(
   () => props.ready,
   () => {
+    console.log("重新计算目录");
     // 仅需要本地运算
     if (import.meta.client) {
       const elements: any = document
@@ -83,6 +84,9 @@ const calcCatalog = (elements: any) => {
   nodes.value = [];
   const HList = ["H1", "H2", "H3", "H4", "H5", "H6"];
   // console.log(elements)
+  if (!elements) {
+    return;
+  }
   for (const item of elements) {
     // 排除引用中的标题
     if (item.offsetParent.nodeName === "BLOCKQUOTE") {

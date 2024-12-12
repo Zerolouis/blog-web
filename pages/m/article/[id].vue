@@ -96,17 +96,30 @@
     <v-container>
       <div class="side-tools" :style="{ right: right + 'px' }">
         <div>
-          <v-btn
-            color="background-secondary"
-            elevation="2"
-            size="default"
-            class="tool-switch"
-            @click="changeShowTools"
-          >
-            <v-icon size="24">
-              {{ showTools ? "mdi-menu-close" : "mdi-menu-open" }}
-            </v-icon>
-          </v-btn>
+          <div class="tool-switch">
+            <v-btn
+              color="background-secondary"
+              elevation="2"
+              size="default"
+              @click="changeShowTools"
+              v-tooltip="'目录'"
+            >
+              <v-icon size="24">
+                {{ showTools ? "mdi-menu-close" : "mdi-menu-open" }}
+              </v-icon>
+            </v-btn>
+          </div>
+          <div class="tool-edit">
+            <v-btn
+              color="background-secondary"
+              elevation="2"
+              size="default"
+              v-tooltip="'编辑文章'"
+              @click="navigateTo('/manager/edit?id=' + route.params.id)"
+            >
+              <v-icon size="24"> mdi-pencil </v-icon>
+            </v-btn>
+          </div>
         </div>
         <div>
           <div>
@@ -148,6 +161,10 @@ const siteConfig = useSiteInfo();
 const { currentTheme } = storeToRefs(siteConfig);
 const toast = useToastStore();
 const contentCount = ref(200);
+const { isMobileOrTablet } = useDevice();
+if (!isMobileOrTablet) {
+  navigateTo("/article/" + route.params.id);
+}
 definePageMeta({
   layout: "mobile-home",
   middleware: ["user"],
@@ -159,6 +176,7 @@ useHead({
 
 const res = ref();
 const paramId = route.params.id.toString();
+const goTo = useGoTo();
 console.log("获取文章", paramId);
 // 处理路由参数，
 if (isAllNumbers(paramId)) {
@@ -170,7 +188,7 @@ if (isAllNumbers(paramId)) {
     },
   });
   res.value = result.value;
-  console.log("文章数据", result.value.data);
+  // console.log("文章数据", result.value.data);
 }
 
 const { data: message } = await checkMessage(res.value);
@@ -219,9 +237,11 @@ function getReady(show: boolean) {
 const chipToLabel = () => {};
 
 const changeShowTools = () => {
+  showCatalog.value = !showCatalog.value;
   showTools.value = !showTools.value;
   right.value = showTools.value ? 0 : -300;
 };
+goTo(0);
 </script>
 
 <style scoped lang="scss">
@@ -229,7 +249,7 @@ const changeShowTools = () => {
 
 @mixin article-info {
   .article-content {
-    padding: 0px 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
   }
 
   .article-info {
@@ -277,7 +297,9 @@ const changeShowTools = () => {
     filter: brightness(60%);
   }
   .article-title-text {
-    font-size: 3.5rem;
+    text-align: center;
+    padding: 0 10px;
+    font-size: 2rem;
     font-family: 临海隶书, sans-serif;
     margin-top: 120px;
     display: flex;
@@ -324,8 +346,17 @@ const changeShowTools = () => {
   transition: all 0.5s ease-in-out;
   display: flex;
 
-  :deep(.v-btn) {
-    border-radius: 4px 0 0 4px;
+  .tool-switch {
+    :deep(.v-btn) {
+      border-radius: 4px 0 0 4px;
+    }
+  }
+
+  .tool-edit {
+    margin-top: 5px;
+    :deep(.v-btn) {
+      border-radius: 4px 0 0 4px;
+    }
   }
 
   .catalog {

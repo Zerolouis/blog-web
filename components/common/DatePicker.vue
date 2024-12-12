@@ -38,13 +38,15 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(
+const props = withDefaults(
   defineProps<{
     // 标签名称
     labelName: string;
+    value?: string | Date;
   }>(),
   {
     labelName: "时间",
+    value: new Date(),
   },
 );
 
@@ -52,8 +54,9 @@ const { $dayjs } = useNuxtApp();
 
 const date = useDate();
 const isShowPicker = ref(false);
-const dateSelected = ref(new Date());
-const timeSelected = ref(date.format(new Date(), "fullTime24h"));
+const dateSelected = ref(props.value);
+const timeSelected = ref(date.format(props.value, "fullTime24h"));
+
 const time = ref("");
 
 const dateTotal = computed(() => {
@@ -65,7 +68,7 @@ const dateTotal = computed(() => {
 watch(
   dateTotal,
   (newValue) => {
-    console.log(newValue);
+    // console.log(newValue);
     time.value = $dayjs(newValue).toISOString();
   },
   { immediate: true },

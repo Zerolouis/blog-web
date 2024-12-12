@@ -6,7 +6,6 @@
       <v-btn variant="text" class="btn" disabled>游记</v-btn>
       <v-btn variant="text" class="btn" disabled>简历</v-btn>
       <v-btn variant="text" class="btn" disabled>工具站</v-btn>
-      <!--      <v-btn variant="text" class="btn">管理</v-btn>-->
       <v-btn icon @click="changeTheme">
         <v-icon :icon="themeIcon" />
       </v-btn>

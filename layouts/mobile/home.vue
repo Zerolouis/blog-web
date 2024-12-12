@@ -50,7 +50,13 @@
             >
               退出登录
             </v-list-item>
-            <v-list-item link prepend-icon="mdi-cog"> 管理 </v-list-item>
+            <v-list-item
+              link
+              prepend-icon="mdi-cog"
+              @click="navigateTo('/manager')"
+            >
+              管理
+            </v-list-item>
           </v-list>
         </div>
 
@@ -67,7 +73,7 @@
             link
             title="博客主页"
             prepend-icon="mdi-home"
-            @click="navigateTo('/m')"
+            @click="navigateTo('/')"
           />
           <v-list-item
             v-tooltip="'正在施工'"
@@ -91,6 +97,7 @@
       <client-only>
         <SiteMessage />
       </client-only>
+      <CommonFabUp :offset-height="offsetHeight" />
       <SiteFooter />
     </v-app>
   </div>

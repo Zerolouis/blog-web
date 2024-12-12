@@ -212,7 +212,7 @@ const getTagSelected = () => {
 
 // 发布文章
 const submitArticle = async () => {
-  console.log(getCategoryIds());
+  // console.log(getCategoryIds());
 
   const { valid: titleValid } = await titleForm.value.validate();
   const { valid: configValid } = await configForm.value.validate();
@@ -249,7 +249,7 @@ const submitArticle = async () => {
       }
     });
 
-    console.log("提交", body);
+    // console.log("提交", body);
   } else {
     toast.error("请填写正确的信息");
   }

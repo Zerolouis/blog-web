@@ -31,7 +31,11 @@
                 fast-fail
                 @submit.prevent
               >
-                <CommonDatePicker ref="datePicker" label-name="发布时间" />
+                <CommonDatePicker
+                  :value="new Date(articleData?.data.createTime)"
+                  ref="datePicker"
+                  label-name="发布时间"
+                />
                 <CommonCategorySelector
                   ref="categorySelector"
                   :value="articleData?.data.categories"
@@ -226,7 +230,7 @@ if (
   showSharePanel.value = true;
 }
 
-console.log(articleData.value?.data);
+// console.log(articleData.value?.data);
 
 // 获取Markdown编辑器文本
 const getWriterText = (): string => {
@@ -275,7 +279,7 @@ const submitArticle = async () => {
       tags: getTagSelected() || [],
       keywords: keywords.value || "",
       title: title.value,
-      uid: user.getUID(),
+      uid: articleData.value?.data.creator.uid,
     };
 
     console.log("提交", body);

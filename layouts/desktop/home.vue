@@ -19,6 +19,7 @@
       <client-only>
         <SiteMessage />
       </client-only>
+      <CommonFabUp :offset-height="offsetHeight" />
       <SiteFooter />
     </v-app>
   </div>
@@ -31,6 +32,7 @@ import { useUserStore } from "~/stores/userStore";
 const offsetHeight = ref(0); // 页面偏移高度
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
+const goTo = useGoTo();
 //console.log(user)
 const { theme, vuetifyTheme } = useCustomTheme();
 

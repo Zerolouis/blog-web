@@ -245,7 +245,7 @@ const btnConfirmEdit = async () => {
 };
 
 const btnEdit = (item: FileShareListItem, index: number) => {
-  console.log(item, index);
+  // console.log(item, index);
   editIndex.value = index;
   method.value = item.method;
   url.value = item.url;

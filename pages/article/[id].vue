@@ -69,12 +69,16 @@
       <v-row justify="center">
         <v-col cols="12" xl="8" xxl="6">
           <v-card :class="'article-container-' + currentTheme" elevation="12">
-            <div class="article-info">
+            <div
+              class="article-info"
+              v-if="article?.tags && article?.tags.length > 0"
+            >
               <div />
               <div>
                 <template v-for="item in article?.tags" :key="item?.id">
                   <v-chip
                     color="primary"
+                    variant="flat"
                     size="small"
                     class="info-chip"
                     @click="chipToLabel"
@@ -129,17 +133,30 @@
 
       <div class="side-tools" :style="{ right: right + 'px' }">
         <div>
-          <v-btn
-            color="background-secondary"
-            elevation="2"
-            size="default"
-            class="tool-switch"
-            @click="changeShowTools"
-          >
-            <v-icon size="24">
-              {{ showTools ? "mdi-menu-close" : "mdi-menu-open" }}
-            </v-icon>
-          </v-btn>
+          <div class="tool-switch">
+            <v-btn
+              color="background-secondary"
+              elevation="2"
+              size="default"
+              @click="changeShowTools"
+              v-tooltip="'目录'"
+            >
+              <v-icon size="24">
+                {{ showTools ? "mdi-menu-close" : "mdi-menu-open" }}
+              </v-icon>
+            </v-btn>
+          </div>
+          <div class="tool-edit">
+            <v-btn
+              color="background-secondary"
+              elevation="2"
+              size="default"
+              v-tooltip="'编辑文章'"
+              @click="navigateTo('/manager/edit?id=' + route.params.id)"
+            >
+              <v-icon size="24"> mdi-pencil </v-icon>
+            </v-btn>
+          </div>
         </div>
         <div>
           <div>
@@ -258,6 +275,7 @@ function getReady(show: boolean) {
 const chipToLabel = () => {};
 
 const changeShowTools = () => {
+  showCatalog.value = !showCatalog.value;
   showTools.value = !showTools.value;
   right.value = showTools.value ? 0 : -300;
 };
@@ -358,13 +376,21 @@ const changeShowTools = () => {
   transition: all 0.5s ease-in-out;
   display: flex;
 
-  :deep(.v-btn) {
-    border-radius: 4px 0 0 4px;
+  .tool-switch {
+    :deep(.v-btn) {
+      border-radius: 4px 0 0 4px;
+    }
   }
 
+  .tool-edit {
+    margin-top: 5px;
+    :deep(.v-btn) {
+      border-radius: 4px 0 0 4px;
+    }
+  }
   .catalog {
     width: 300px;
-    border-radius: 0 4px 4px 4px;
+    border-radius: 0 0 0 0;
 
     .title {
       font-size: 1.2rem;

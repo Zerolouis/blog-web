@@ -127,7 +127,7 @@ const loading = ref(false);
  */
 const handleLogin = async () => {
   loading.value = true;
-  console.log(loginForm.value);
+  // console.log(loginForm.value);
   const { valid } = await usernameForm.value.validate();
   if (valid) {
     await userLogin()

@@ -30,7 +30,7 @@ export const useUserStore = defineStore(
      * @param password 密码
      */
     const userLogin = async (username: string, password: string) => {
-      console.log(username, password);
+      // console.log(username, password);
       await $fetch("/api/auth/login", {
         method: "POST",
         body: {
@@ -39,7 +39,7 @@ export const useUserStore = defineStore(
         },
       }).then(async (res) => {
         const { data } = await checkMessage(res);
-        console.log("获取登录数据", data);
+        // console.log("获取登录数据", data);
         const { data: loginInfo, success } =
           await LoginResultSchema.safeParseAsync(data?.data);
         console.log("登录数据校验", success);
@@ -50,7 +50,7 @@ export const useUserStore = defineStore(
           token.refreshTime = loginInfo?.refreshTime;
           isLogin.value = true;
 
-          console.log(token);
+          // console.log(token);
           await getUserInfo().then(() => {
             navigateTo("/");
           });

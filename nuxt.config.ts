@@ -111,7 +111,7 @@ export default defineNuxtConfig({
     vuetifyOptions: "./vuetify.config.ts",
   },
   routeRules: {
-    "/": { prerender: true },
+    "/": { prerender: false },
     "/auth/**": { ssr: false },
     "/manager/**": { ssr: false, robots: false },
   },
@@ -127,7 +127,7 @@ export default defineNuxtConfig({
           res?.data.map((item: string) => {
             sitemap.push("/article/" + item);
           });
-          console.log(sitemap);
+          console.log("获取sitemap", sitemap);
           return sitemap;
         },
       );

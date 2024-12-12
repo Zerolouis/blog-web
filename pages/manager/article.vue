@@ -3,7 +3,7 @@
     <v-container>
       <v-card>
         <v-card-title class="bg-accent table-title">
-          <div>分类</div>
+          <div>文章管理</div>
           <div>
             <v-btn variant="tonal" @click="navigateTo('/manager/write')">
               添加文章
@@ -11,7 +11,7 @@
           </div>
         </v-card-title>
 
-        <v-data-table
+        <v-data-table-server
           v-model:items-per-page="itemsPerPage"
           v-model:page="page"
           :headers="tableHeaders"
@@ -23,8 +23,22 @@
           @update:options="loadItems"
         >
           <template #[`item.title`]="{ item }">
-            <div v-tooltip:top="item?.description">
-              {{ item?.title }}
+            <div>
+              <span v-tooltip:top="item?.description">
+                {{ item?.title }}
+              </span>
+              <v-btn
+                class="title-icon"
+                size="small"
+                icon
+                variant="flat"
+                @click="navigateTo('/article/' + item.id)"
+                density="compact"
+              >
+                <v-icon color="info">
+                  mdi-arrow-top-right-bold-box-outline
+                </v-icon>
+              </v-btn>
             </div>
           </template>
 
@@ -68,7 +82,7 @@
               @click="btnShowDeleteDialog(item)"
             />
           </template>
-        </v-data-table>
+        </v-data-table-server>
       </v-card>
     </v-container>
 
@@ -175,10 +189,11 @@ const loadItems = async (item: {
 const queryArticles = async (item: {
   page: number;
   itemsPerPage: number;
-  sortBy: string[];
-  groupBy: string[];
-  search: string;
+  sortBy?: string[];
+  groupBy?: string[];
+  search?: string;
 }) => {
+  // console.log(item);
   loading.value = true;
   await $fetch<CommonMessage>("/api/manager/article/page", {
     method: "POST",
@@ -192,10 +207,11 @@ const queryArticles = async (item: {
         res.data.records,
       );
       if (success) {
-        //console.log(data);
+        // console.log(res);
         serverItems.value = data || [];
         await queryUsers();
-        totalItems.value = res.data.total;
+
+        totalItems.value = Number(res.data.total);
       }
     })
     .finally(() => {
@@ -251,6 +267,10 @@ const btnConfirmDelete = () => {
       }
     })
     .finally(() => {
+      queryArticles({
+        page: page.value,
+        itemsPerPage: itemsPerPage.value,
+      });
       dialogLoading.value = false;
       showDeleteDialog.value = false;
       queryUsers();
@@ -263,5 +283,9 @@ const btnConfirmDelete = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.title-icon {
+  margin-left: 5px;
 }
 </style>
