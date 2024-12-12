@@ -19,7 +19,6 @@
             </v-chip>
           </template>
         </div>
-
         <div class="article-title-category">
           <v-chip
             v-tooltip:top="'作者'"
@@ -58,75 +57,43 @@
             {{ $dayjs(article?.createTime).format("YYYY-MM-DD HH:mm") }}
           </v-chip>
         </div>
-
         <div class="picture-info">
           <v-icon v-tooltip="article?.pictureCopyright"> mdi-copyright </v-icon>
         </div>
       </template>
     </v-parallax>
 
-    <v-container>
-      <v-row justify="center">
-        <v-col cols="12" xl="8" xxl="6">
-          <v-card :class="'article-container-' + currentTheme" elevation="12">
-            <div class="article-info">
-              <div />
-              <div>
-                <template v-for="item in article?.tags" :key="item?.id">
-                  <v-chip
-                    color="primary"
-                    size="small"
-                    class="info-chip"
-                    @click="chipToLabel"
-                  >
-                    <v-icon icon="mdi-label" start />
-                    {{ item?.name }}
-                  </v-chip>
-                </template>
-              </div>
-            </div>
+    <v-card :class="'article-container-' + currentTheme" variant="flat">
+      <div class="article-content">
+        <!--<client-only>-->
+        <ArticleMarkdownPreview :content="article?.content" @ready="getReady" />
+        <!--</client-only>-->
+      </div>
 
-            <div class="article-content">
-              <!--<client-only>-->
-              <ArticleMarkdownPreview
-                :content="article?.content"
-                @ready="getReady"
-              />
-              <!--</client-only>-->
-            </div>
-
-            <div class="article-info copyright">
-              <div>转载方式</div>
-              <div class="info">
-                <ArticleCopyright
-                  v-tooltip:top="{ text: '点击查看CC4.0' }"
-                  :copyright="Number(article?.copyright)"
-                  @click="
-                    navigateTo(
-                      CopyrightURLMap.get(Number(article?.copyright)),
-                      {
-                        open: {
-                          target: '_blank',
-                        },
-                      },
-                    )
-                  "
-                />
-              </div>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-
-      <v-row justify="center">
-        <v-col cols="12" xl="8" xxl="6">
-          <ArticleFileShare
-            v-if="article && article.share.length > 0"
-            :share="article?.share"
+      <div class="article-info copyright">
+        <div>转载方式</div>
+        <div class="info">
+          <ArticleCopyright
+            v-tooltip:top="{ text: '点击查看CC4.0' }"
+            :copyright="Number(article?.copyright)"
+            @click="
+              navigateTo(CopyrightURLMap.get(Number(article?.copyright)), {
+                open: {
+                  target: '_blank',
+                },
+              })
+            "
           />
-        </v-col>
-      </v-row>
+        </div>
+      </div>
+    </v-card>
 
+    <ArticleFileShare
+      v-if="article && article.share.length > 0"
+      :share="article?.share"
+      class="article-share-card"
+    />
+    <v-container>
       <div class="side-tools" :style="{ right: right + 'px' }">
         <div>
           <v-btn
@@ -182,15 +149,9 @@ const { currentTheme } = storeToRefs(siteConfig);
 const toast = useToastStore();
 const contentCount = ref(200);
 definePageMeta({
-  layout: "desktop-home",
+  layout: "mobile-home",
   middleware: ["user"],
 });
-
-const { isMobileOrTablet } = useDevice();
-
-if (isMobileOrTablet) {
-  navigateTo("/m/article/" + route.params.id);
-}
 
 useHead({
   title: "文章",
@@ -209,7 +170,7 @@ if (isAllNumbers(paramId)) {
     },
   });
   res.value = result.value;
-  //console.log("文章数据", result.value.data);
+  console.log("文章数据", result.value.data);
 }
 
 const { data: message } = await checkMessage(res.value);
@@ -268,7 +229,7 @@ const changeShowTools = () => {
 
 @mixin article-info {
   .article-content {
-    padding: 20px 20px 20px 20px;
+    padding: 0px 20px 20px 20px;
   }
 
   .article-info {
@@ -305,6 +266,10 @@ const changeShowTools = () => {
   }
 }
 
+.article-share-card {
+  margin: 20px 0 0 0;
+}
+
 .article-title-pic {
   margin-top: -60px;
   :deep(.v-img__img) {
@@ -314,7 +279,7 @@ const changeShowTools = () => {
   .article-title-text {
     font-size: 3.5rem;
     font-family: 临海隶书, sans-serif;
-    margin-top: 150px;
+    margin-top: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -322,6 +287,7 @@ const changeShowTools = () => {
   }
   .article-title-category {
     text-align: center;
+    padding: 0 50px;
     .category-chip {
       margin: 5px 5px;
     }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card>
+    <v-card :variant="isMobile ? 'flat' : 'elevated'">
       <v-card-title class="bg-primary"> 文件 </v-card-title>
       <v-container>
         <v-row>
@@ -17,6 +17,8 @@
 
 <script setup lang="ts">
 import type { FileShareQuery } from "~/ts/types/api.type";
+
+const { isMobile } = useDevice();
 
 defineProps<{
   share: FileShareQuery;

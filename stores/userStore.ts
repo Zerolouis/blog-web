@@ -1,6 +1,6 @@
 import type { UserState } from "~/ts/interface/stores.interface";
 import { stringify, parse } from "zipson";
-import type { LoginResult } from "~/ts/types/api.type";
+import type { CommonMessage, LoginResult } from "~/ts/types/api.type";
 import { LoginResultSchema } from "~/ts/types/api.type";
 import { checkMessage } from "~/composables/useVerify";
 import { useSiteInfo } from "~/stores/siteInfo";
@@ -51,7 +51,11 @@ export const useUserStore = defineStore(
           isLogin.value = true;
 
           console.log(token);
-          await getUserInfo();
+          await getUserInfo().then(() => {
+            navigateTo("/");
+          });
+        } else {
+          toast.error(data?.msg);
         }
       });
     };
@@ -75,11 +79,11 @@ export const useUserStore = defineStore(
               if (user.isLogin) {
                 getUserInfo();
               } else {
-                // user.userInfo = undefined;
-                // token.accessToken = "";
-                // token.refreshToken = "";
-                // token.refreshTime = "";
-                // token.accessTime = "";
+                //user.userInfo = undefined;
+                //token.accessToken = "";
+                //token.refreshToken = "";
+                //token.refreshTime = "";
+                //token.accessTime = "";
                 navigateTo("/auth/login");
               }
             });
@@ -127,6 +131,30 @@ export const useUserStore = defineStore(
       });
     };
 
+    /**
+     * 退出登录
+     */
+    const logout = () => {
+      $fetch<CommonMessage>("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          Authorization: token.accessToken,
+        },
+      }).then((res) => {
+        if (res.code === "200") {
+          toast.warning("用户已退出登录");
+          user.isLogin = false;
+          user.userInfo = undefined;
+          token.accessToken = "";
+          token.refreshToken = "";
+          token.refreshTime = "";
+          token.accessTime = "";
+        } else {
+          toast.error(res.msg);
+        }
+      });
+    };
+
     const getToken = computed(() => {
       return token.accessToken;
     });
@@ -144,6 +172,7 @@ export const useUserStore = defineStore(
       refreshToken,
       getToken,
       getUID,
+      logout,
     };
   },
   {

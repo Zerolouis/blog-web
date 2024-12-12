@@ -131,9 +131,7 @@ const handleLogin = async () => {
   const { valid } = await usernameForm.value.validate();
   if (valid) {
     await userLogin()
-      .then(() => {
-        navigateTo("/");
-      })
+      .then(() => {})
       .catch((e) => {
         toast.error(e);
       });

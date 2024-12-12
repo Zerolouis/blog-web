@@ -18,7 +18,7 @@
       </div>
     </v-card>
 
-    <v-dialog v-model="showDialog" width="30%">
+    <v-dialog v-model="showDialog" :width="isMobileOrTablet ? '70%' : '50%'">
       <v-card>
         <v-card-title class="bg-info"> 下载提示 </v-card-title>
         <v-card-text>
@@ -43,6 +43,21 @@
             description && description?.length > 0 ? description : "暂无说明"
           }}
         </v-card-text>
+        <v-card-actions>
+          <v-btn color="info" @click="showDialog = false"> 关闭 </v-btn>
+          <v-btn
+            color="primary"
+            @click="
+              navigateTo(url, {
+                open: {
+                  target: '_blank',
+                },
+              })
+            "
+          >
+            跳转
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -51,7 +66,7 @@
 <script setup lang="ts">
 import type { ArticleShareItem } from "~/ts/interface/api.interface";
 const showDialog = ref(false);
-
+const { isMobileOrTablet } = useDevice();
 const props = defineProps<ArticleShareItem>();
 
 const fileColorMap = new Map<

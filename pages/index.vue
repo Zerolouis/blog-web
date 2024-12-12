@@ -202,9 +202,15 @@
 import type { Category, CommonMessage } from "~/ts/types/api.type";
 import type { Tag } from "~/ts/interface/manager.interface";
 
+const { mdAndDown, xxl, lgAndDown, mobile } = useDisplay();
+const toast = useToastStore();
+if (mobile.value) {
+  toast.info("正在使用手机视图");
+}
+
 definePageMeta({
   layout: "desktop-home",
-  middleware: ["user"],
+  middleware: ["user", "check-layout"],
 });
 
 useSeoMeta({
@@ -228,10 +234,9 @@ const showXL = ref(false);
 const showLG = ref(false);
 const showMD = ref(false);
 const showXXL = ref(false);
-const { mdAndDown, xxl, lgAndDown } = useDisplay();
 
 const ssrClientHints = useNuxtApp().$ssrClientHints;
-console.log("$ssrClientHints", ssrClientHints);
+//console.log("$ssrClientHints", ssrClientHints);
 
 const restoreWidth = (width: number) => {
   if (width < 1280) {
@@ -254,7 +259,7 @@ watch(
   () => {
     showMD.value = mdAndDown.value;
     showLG.value = !mdAndDown.value && lgAndDown.value;
-    console.log(showMD.value, showLG.value, showXL.value, showXXL.value);
+    //console.log(showMD.value, showLG.value, showXL.value, showXXL.value);
   },
   { immediate: true },
 );
@@ -264,7 +269,7 @@ watch(
   () => {
     showXL.value = !lgAndDown.value;
     showLG.value = !mdAndDown.value && lgAndDown.value;
-    console.log(showMD.value, showLG.value, showXL.value, showXXL.value);
+    //console.log(showMD.value, showLG.value, showXL.value, showXXL.value);
   },
   { immediate: true },
 );
@@ -272,7 +277,7 @@ watch(
 watch(xxl, () => {
   showXL.value = !xxl.value;
   showXXL.value = xxl.value;
-  console.log(showMD.value, showLG.value, showXL.value, showXXL.value);
+  //console.log(showMD.value, showLG.value, showXL.value, showXXL.value);
 });
 
 useHead({

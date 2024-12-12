@@ -31,7 +31,7 @@
           <template #[`item.userId`]="{ item }">
             <v-chip size="small" color="info" pill>
               <v-avatar start>
-                <v-img :src="userInfoMap.get(item.userId)?.avatar"> </v-img>
+                <v-img :src="userInfoMap.get(item.userId)?.avatar" />
               </v-avatar>
               {{ userInfoMap.get(item.userId)?.nickname }}
             </v-chip>
@@ -192,7 +192,7 @@ const queryArticles = async (item: {
         res.data.records,
       );
       if (success) {
-        console.log(data);
+        //console.log(data);
         serverItems.value = data || [];
         await queryUsers();
         totalItems.value = res.data.total;

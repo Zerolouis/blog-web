@@ -32,6 +32,7 @@ export default defineNuxtConfig({
       ],
     },
     pageTransition: { name: "page", mode: "out-in" },
+    layoutTransition: { name: "page", mode: "out-in" },
   },
   devtools: { enabled: true },
   build: {
@@ -49,6 +50,7 @@ export default defineNuxtConfig({
     // "nuxt-og-image",
     // "nuxt-schema-org",
     // "nuxt-link-checker",
+    "@nuxtjs/device",
     "@nuxtjs/seo",
     // "nuxt-site-config",
   ],

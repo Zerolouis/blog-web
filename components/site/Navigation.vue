@@ -3,9 +3,9 @@
     <SiteLogo class="bar-logo" />
     <div class="btn-container">
       <v-btn variant="text" class="btn" @click="router.push('/')">博客</v-btn>
-      <v-btn variant="text" class="btn">游记</v-btn>
-      <v-btn variant="text" class="btn">简历</v-btn>
-      <v-btn variant="text" class="btn">工具站</v-btn>
+      <v-btn variant="text" class="btn" disabled>游记</v-btn>
+      <v-btn variant="text" class="btn" disabled>简历</v-btn>
+      <v-btn variant="text" class="btn" disabled>工具站</v-btn>
       <!--      <v-btn variant="text" class="btn">管理</v-btn>-->
       <v-btn icon @click="changeTheme">
         <v-icon :icon="themeIcon" />
@@ -26,8 +26,8 @@
 
       <v-menu activator="#avatar-menu">
         <v-card class="user-card">
-          <div class="user-info">
-            <v-avatar size="48">
+          <div class="user-info bg-info">
+            <v-avatar size="60">
               <v-img
                 v-if="user.userInfo?.avatar"
                 :src="user.userInfo?.avatar"
@@ -55,7 +55,10 @@
                 <v-icon :icon="item.icon" />
               </template>
 
-              <v-list-item-title v-if="item.text == '退出登录'">
+              <v-list-item-title
+                v-if="item.text == '退出登录'"
+                @click="userStore.logout"
+              >
                 {{ item.text }}
               </v-list-item-title>
               <v-list-item-title v-else @click="navigateTo(item.path)">
@@ -131,7 +134,7 @@ const userItems = reactive([
     width: 100%;
     text-align: center;
     padding: 10px;
-    background-color: aliceblue;
+    //background-color: aliceblue;
   }
 
   .user-avatar {
@@ -145,7 +148,7 @@ const userItems = reactive([
 
   .user-secondary {
     font-size: 0.8em;
-    color: #949494;
+    //color: #949494;
   }
 }
 </style>
