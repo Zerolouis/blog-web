@@ -1,5 +1,5 @@
 @mixin scrollbar {
-  :deep(::-webkit-scrollbar-thumb:hover ) {
+  :deep(::-webkit-scrollbar-thumb:hover) {
     background: rgb(0, 143, 130);
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   }
@@ -25,7 +25,6 @@
 }
 
 @mixin scrollbar_hover {
-
   // background-color: red;
   /* width */
   ::-webkit-scrollbar {
@@ -43,7 +42,7 @@
   /* Handle */
   ::-webkit-scrollbar-thumb {
     border-radius: 6px;
-    background: #D3D2D6;
+    background: #d3d2d6;
   }
 
   /* Handle on hover */
