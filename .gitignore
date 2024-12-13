@@ -128,4 +128,4 @@ yarn-error.log
 .nuxt-*
 .gen
 
-
+ecosystem.config.cjs
