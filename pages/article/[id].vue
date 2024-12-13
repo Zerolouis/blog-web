@@ -26,8 +26,11 @@
             class="category-chip"
             color="accent"
             variant="elevated"
-            prepend-icon="mdi-account-circle-outline"
+            pill
           >
+            <v-avatar start>
+              <v-img :src="article?.creator.avatar" />
+            </v-avatar>
             {{ article?.creator.nickname }}
           </v-chip>
           <v-chip
@@ -55,7 +58,7 @@
             variant="elevated"
             prepend-icon="mdi-clock-edit-outline"
           >
-            {{ $dayjs(article?.createTime).format("YYYY-MM-DD HH:mm") }}
+            {{ $dayjs(article?.updateTime).format("YYYY-MM-DD HH:mm") }}
           </v-chip>
         </div>
 
@@ -330,7 +333,8 @@ const changeShowTools = () => {
     filter: brightness(60%);
   }
   .article-title-text {
-    font-size: 3.5rem;
+    font-size: 3rem;
+    padding: 10px 10px 0 10px;
     font-family: 临海隶书, sans-serif;
     margin-top: 150px;
     display: flex;

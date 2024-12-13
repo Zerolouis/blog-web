@@ -25,8 +25,11 @@
             class="category-chip"
             color="accent"
             variant="elevated"
-            prepend-icon="mdi-account-circle-outline"
+            pill
           >
+            <v-avatar start>
+              <v-img :src="article?.creator.avatar" />
+            </v-avatar>
             {{ article?.creator.nickname }}
           </v-chip>
           <v-chip
@@ -54,7 +57,7 @@
             variant="elevated"
             prepend-icon="mdi-clock-edit-outline"
           >
-            {{ $dayjs(article?.createTime).format("YYYY-MM-DD HH:mm") }}
+            {{ $dayjs(article?.updateTime).format("YYYY-MM-DD HH:mm") }}
           </v-chip>
         </div>
         <div class="picture-info">
