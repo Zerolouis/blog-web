@@ -152,7 +152,7 @@
 
         <v-col cols="12" sm="4" md="4" lg="3" xl="2">
           <v-card class="category-container">
-            <v-card-title class="bg-info"> 分类 </v-card-title>
+            <v-card-title class="bg-info"> 分类</v-card-title>
             <v-treeview
               v-model:selected="categorySelected"
               :items="categories"
@@ -169,7 +169,7 @@
           </v-card>
 
           <v-card class="tag-container">
-            <v-card-title class="bg-info"> 标签 </v-card-title>
+            <v-card-title class="bg-info"> 标签</v-card-title>
             <v-container>
               <v-chip-group v-model="tagSelected" multiple column>
                 <template v-for="(item, index) in tagData?.data" :key="item.id">
@@ -214,7 +214,10 @@ useSeoMeta({
   description: "Zerolouis和tutu147的博客，分享经验、教程、资源的地方",
   ogDescription: "Zerolouis和tutu147的博客，分享经验、教程、资源的地方",
   ogType: "website",
-  ogImage: "/images/fog-4436636-673637e8d717a.jpg",
+  ogImage: "https://blog.jujuh.top/images/fog-4436636-673637e8d717a.jpg",
+  twitterImage: "https://blog.jujuh.top/images/fog-4436636-673637e8d717a.jpg",
+  twitterTitle: "摸鱼Blog",
+  twitterDescription: "Zerolouis和tutu147的博客，分享经验、教程、资源的地方",
 });
 
 const paginationCurrent = ref(1);
@@ -376,6 +379,7 @@ const updateData = () => {
 .blog-intro-pic {
   margin-top: -100px;
 }
+
 //.article-card-container {
 //  animation: fadeIn;
 //  animation-duration: 0.5s;
@@ -383,11 +387,13 @@ const updateData = () => {
 .tag-container {
   margin-top: 20px;
 }
+
 .no-article-tips {
   text-align: center;
   font-size: 1.2rem;
   animation: fadeIn 1s;
 }
+
 .blog-logo {
   font-size: 4rem;
 }

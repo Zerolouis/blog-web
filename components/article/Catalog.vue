@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="catalog-ul" :style="{ height: height / 2 - 36 + 'px' }">
+    <ul class="catalog-ul" :style="{ height: catalogHeight / 2 - 36 + 'px' }">
       <li
         v-for="(item, index) in nodes"
         :key="index + 'catalog'"
@@ -34,7 +34,7 @@ const props = defineProps<{
 const emits = defineEmits<{
   (e: "catalogHeight", height: number): void;
 }>();
-const height = ref(300);
+const catalogHeight = ref(300);
 
 const handleScroll = () => {
   scrollTop.value = document.documentElement.scrollTop;
@@ -49,13 +49,20 @@ const catalogActive = (item: CatalogItem): string => {
   }
 };
 
+const ssrClientHints = useNuxtApp().$ssrClientHints;
+const { height } = useDisplay();
+
 // 监听滚动事件
 onMounted(() => {
   if (import.meta.client) {
     window.addEventListener("scroll", handleScroll, true);
-    height.value = window.innerHeight;
+
+    // 首屏加载时 由于ssr获取不到 useDisplay()，改用window.innerHeight
+    // 参考文档 https://vuetify-nuxt-module.netlify.app/guide/server-side-rendering.html#vuetify-display
+    catalogHeight.value = height.value || window.innerHeight;
+    // console.log(height.value, ssrClientHints.viewportHeight);
     // console.log("窗口高度:", height.value);
-    emits("catalogHeight", height.value);
+    emits("catalogHeight", catalogHeight.value);
   }
 });
 

@@ -120,7 +120,7 @@
       </v-row>
     </v-container>
 
-    <v-dialog v-model="showPublishDialog" width="30%">
+    <v-dialog v-model="showPublishDialog" :width="smAndDown ? '70%' : '40%'">
       <v-card>
         <v-card-title class="bg-info"> 提示 </v-card-title>
         <v-card-text> 更新成功，是否跳转至文章页面 </v-card-text>
@@ -210,6 +210,7 @@ const user = useUserStore();
 const showPublishDialog = ref(false);
 const publishedArticleId = ref("");
 const keywords: Ref<string> = ref("");
+const { smAndDown } = useDisplay();
 
 // 处理数据
 tagSelected.value = articleData.value?.data?.tags || [];

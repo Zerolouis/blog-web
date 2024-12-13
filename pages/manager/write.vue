@@ -107,7 +107,7 @@
       </v-row>
     </v-container>
 
-    <v-dialog v-model="showPublishDialog" width="30%">
+    <v-dialog v-model="showPublishDialog" :width="smAndDown ? '70%' : '40%'">
       <v-card>
         <v-card-title class="bg-ingo"> 发布 </v-card-title>
         <v-card-text> 发布成功，是否跳转至文章页面 </v-card-text>
@@ -183,6 +183,7 @@ const user = useUserStore();
 const showPublishDialog = ref(false);
 const publishedArticleId = ref("");
 const keywords = ref("");
+const { mdAndDown } = useDisplay();
 
 // 获取Markdown编辑器文本
 const getWriterText = (): string => {
