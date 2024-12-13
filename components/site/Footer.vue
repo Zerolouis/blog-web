@@ -5,14 +5,11 @@
         摸鱼 Blog 2024 @ Zerolouis
         <v-icon
           @click="
-            navigateTo(
-              'https://git.jujuh.top:10443/Zerolouis/loaf-fish-next-web/src/branch/graduation-dev',
-              {
-                open: {
-                  target: '_blank',
-                },
+            navigateTo('https://github.com/Zerolouis/blog-web', {
+              open: {
+                target: '_blank',
               },
-            )
+            })
           "
         >
           mdi-github

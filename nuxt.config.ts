@@ -70,8 +70,7 @@ export default defineNuxtConfig({
   },
   css: ["~/assets/scss/_variable.scss", "animate.css"],
   runtimeConfig: {
-    api: "http://localhost:9001/v1",
-    publishUrl: "https://blog.jujuh.top",
+    api: "http://localhost:9002/v1",
   },
   i18n: {
     // if not using RTL, you can replace locales with codes only
@@ -122,12 +121,12 @@ export default defineNuxtConfig({
   sitemap: {
     urls: async () => {
       const sitemap: string[] = [];
-      await $fetch("http://localhost:9001/v1/article/map").then(
+      await $fetch("http://localhost:9002/v1/article/map").then(
         (res: CommonMessage) => {
           res?.data.map((item: string) => {
             sitemap.push("/article/" + item);
           });
-          console.log("获取sitemap", sitemap);
+          // console.log("获取sitemap", sitemap);
           return sitemap;
         },
       );
