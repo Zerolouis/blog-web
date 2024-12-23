@@ -121,15 +121,17 @@ export default defineNuxtConfig({
   sitemap: {
     urls: async () => {
       const sitemap: string[] = [];
-      await $fetch("http://localhost:9002/v1/article/map").then(
-        (res: CommonMessage) => {
+      await $fetch("http://localhost:9002/v1/article/map")
+        .then((res: CommonMessage) => {
           res?.data.map((item: string) => {
             sitemap.push("/article/" + item);
           });
           // console.log("获取sitemap", sitemap);
           return sitemap;
-        },
-      );
+        })
+        .catch((e) => {
+          console.error("未获取到sitemap");
+        });
       return sitemap;
     },
   },
