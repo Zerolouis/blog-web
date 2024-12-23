@@ -1,4 +1,5 @@
 import type { UserInfo } from "~/ts/interface/home.interface";
+import type { DeviceType, DIYItem } from "~/ts/interface/tools.interface";
 
 export interface ToastState {
   /** 通知内容 */
@@ -25,4 +26,27 @@ export interface UserState {
   userInfo?: UserInfo;
   // 是否登录
   isLogin: boolean;
+}
+
+interface SourceState {
+  /**
+   * 配件列表
+   */
+  devicesList: Array<DIYItem>;
+  /**
+   * 源
+   */
+  sourcesList: Array<DIYItem>;
+  /**
+   * 配件种类
+   */
+  devicesTypeName: Array<DeviceType>;
+  /**
+   * 总价格
+   */
+  totalPrice: number;
+  /**
+   * 配置单名称
+   */
+  listName: string;
 }

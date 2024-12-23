@@ -24,6 +24,7 @@
     "dayjs-nuxt": "^2.1.11",
     "highlight.js": "^11.10.0",
     "jsencrypt": "^3.3.2",
+    "monaco-editor": "0.52.2",
     "nuxt": "^3.14.159",
     "nuxt-link-checker": "^4.0.2",
     "nuxt-og-image": "^4.0.1",
