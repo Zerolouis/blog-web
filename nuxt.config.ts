@@ -113,6 +113,7 @@ export default defineNuxtConfig({
     "/": { prerender: false },
     "/auth/**": { ssr: false },
     "/manager/**": { ssr: false, robots: false },
+    "/tools/pc/**": { ssr: false },
   },
   site: {
     url: "https://blog.jujuh.top",
