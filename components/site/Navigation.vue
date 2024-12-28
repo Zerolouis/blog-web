@@ -40,5 +40,9 @@ const themeIcon = computed(() => {
   .bar-logo {
     font-size: 1.2rem;
   }
+  .btn-container {
+    display: flex;
+    align-items: center;
+  }
 }
 </style>
